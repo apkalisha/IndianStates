@@ -16,8 +16,6 @@ public class DetailActivity extends AppCompatActivity {
 
         mTextView = findViewById(R.id.tv_detail);
 
-
-        //intent from Main Activity
         Intent intent = getIntent();
         if(intent.hasExtra("State")) {
             mTextView.setText(intent.getStringExtra("State"));
