@@ -22,6 +22,9 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".DetailActivity"></activity>
+        <activity
+            android:name=".AppIntro"
+            android:label="Intro Slider" />
     </application>
 
 </manifest>

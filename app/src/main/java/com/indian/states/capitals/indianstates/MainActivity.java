@@ -1,16 +1,24 @@
 package com.indian.states.capitals.indianstates;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -27,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements StateAdapter.Stat
     private List<String> states;
 
     private MaterialSearchView materialSearchView;
+    private boolean doubleBackToExitPressedOnce = false;
+
+    private ScrollView mScrollView;
 
 
     @Override
@@ -35,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements StateAdapter.Stat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_states);
+        recyclerView = findViewById(R.id.recyclerview_states);
         states = Arrays.asList(getResources().getStringArray(R.array.india_states));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
@@ -52,7 +63,45 @@ public class MainActivity extends AppCompatActivity implements StateAdapter.Stat
         recyclerView.setAdapter(stateAdapter);
 
 
-        materialSearchView = (MaterialSearchView) findViewById(R.id.search_view);
+        materialSearchView = findViewById(R.id.search_view);
+        mScrollView = findViewById(R.id.scrollview_states);
+
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //  Initialize SharedPreferences
+                SharedPreferences getPrefs = PreferenceManager
+                        .getDefaultSharedPreferences(getBaseContext());
+
+                //  Create a new boolean and preference and set it to true
+                boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
+
+                //  If the activity has never started before...
+                if (isFirstStart) {
+
+                    //  Launch app intro
+                    final Intent i = new Intent(MainActivity.this, AppIntro.class);
+
+                    runOnUiThread(new Runnable() {
+                        @Override public void run() {
+                            startActivity(i);
+                        }
+                    });
+
+                    //  Make a new preferences editor
+                    SharedPreferences.Editor e = getPrefs.edit();
+
+                    //  Edit preference to make it false because we don't want this to run again
+                    e.putBoolean("firstStart", false);
+
+                    //  Apply changes
+                    e.apply();
+                }
+            }
+        });
+
+        // Start the thread
+        t.start();
 
         materialSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
@@ -106,6 +155,32 @@ public class MainActivity extends AppCompatActivity implements StateAdapter.Stat
         MenuItem menuItem = menu.findItem(R.id.action_search);
         materialSearchView.setMenuItem(menuItem);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        setSnackBar(mScrollView,"Press back again to exit");
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
+    public static void setSnackBar(View coordinatorLayout, String snackTitle) {
+        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackTitle, Snackbar.LENGTH_SHORT);
+        snackbar.show();
+        View view = snackbar.getView();
+        TextView txtv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        txtv.setGravity(Gravity.CENTER_HORIZONTAL);
     }
 }
 
