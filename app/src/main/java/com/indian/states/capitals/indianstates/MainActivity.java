@@ -3,6 +3,7 @@ package com.indian.states.capitals.indianstates;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -21,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -144,7 +146,6 @@ public class MainActivity extends AppCompatActivity implements StateAdapter.Stat
 
 
         //Init Bottom Navigation Bar
-        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
@@ -196,8 +197,6 @@ public class MainActivity extends AppCompatActivity implements StateAdapter.Stat
 
     //Bottom Navigation Bar
 
-    private TextView mTextMessage;
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -205,22 +204,20 @@ public class MainActivity extends AppCompatActivity implements StateAdapter.Stat
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    Toast.makeText(MainActivity.this,R.string.title_home,Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.navigation_bookmarks:
-                    mTextMessage.setText(R.string.title_bookmarks);
+                    Toast.makeText(MainActivity.this,R.string.title_bookmarks,Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.navigation_settings:
-                    mTextMessage.setText(R.string.title_settings);
+                    Toast.makeText(MainActivity.this,R.string.title_settings,Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.navigation_profile:
-                    mTextMessage.setText(R.string.title_profile);
+                    Toast.makeText(MainActivity.this,R.string.title_profile,Toast.LENGTH_SHORT).show();
                     return true;
             }
-            return false;
+            return true;
         }
     };
-
-
 }
 
