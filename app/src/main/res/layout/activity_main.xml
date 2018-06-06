@@ -27,6 +27,7 @@
 
     <ScrollView
         android:id="@+id/scrollview_states"
+        android:background="#1abc9c"
         android:layout_marginBottom="55dp"
         android:layout_marginTop="55dp"
         android:layout_width="match_parent"
