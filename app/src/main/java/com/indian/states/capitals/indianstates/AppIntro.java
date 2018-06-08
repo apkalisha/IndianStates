@@ -22,7 +22,7 @@ public class AppIntro extends com.github.paolorotolo.appintro.AppIntro {
 
         showSkipButton(true);
 
-        setFadeAnimation();
+        setDepthAnimation();
     }
 
     @Override
