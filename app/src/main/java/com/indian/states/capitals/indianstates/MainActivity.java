@@ -2,71 +2,25 @@ package com.indian.states.capitals.indianstates;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
+public class MainActivity extends AppCompatActivity {
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements StateAdapter.StateAdapterOnClickHandler{
-
-    private RecyclerView recyclerView;
-
-    private StateAdapter stateAdapter;
-
-    private List<String> states;
-
-    private MaterialSearchView materialSearchView;
-    private boolean doubleBackToExitPressedOnce = false;
-
-    private ScrollView mScrollView;
-
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
-
-        recyclerView = findViewById(R.id.recyclerview_states);
-        states = Arrays.asList(getResources().getStringArray(R.array.india_states));
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-
-        stateAdapter = new StateAdapter(this);
-        stateAdapter.setStateNames(states);
-        recyclerView.setAdapter(stateAdapter);
-
-
-        materialSearchView = findViewById(R.id.search_view);
-        mScrollView = findViewById(R.id.scrollview_states);
 
         Thread t = new Thread(new Runnable() {
             @Override
@@ -104,65 +58,42 @@ public class MainActivity extends AppCompatActivity implements StateAdapter.Stat
 
         // Start the thread
         t.start();
-
-        materialSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onSearchViewShown() {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+                switch (item.getItemId()) {
+                    case R.id.navigation_home:
+                        selectedFragment = HomeFragment.newInstance();
+                        break;
+                    case R.id.navigation_bookmarks:
+                        selectedFragment = BookmarkFragment.newInstance();
+                        break;
+                    case R.id.navigation_profile:
+                        selectedFragment = ProfileFragment.newInstance();
+                        break;
+                    case R.id.navigation_settings:
+                        selectedFragment = SettingsFragment.newInstance();
+                        break;
 
-            }
-
-            @Override
-            public void onSearchViewClosed() {
-
-            }
-        });
-
-        materialSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if(newText != null && !newText.isEmpty()) {
-                    List<String> listFound = new ArrayList<>();
-                    for(String item : states){
-                        if(item.toLowerCase().contains(newText.toLowerCase())){
-                            listFound.add(item);
-                        }
-                    }
-                    stateAdapter.setStateNames(listFound);
-                    recyclerView.setAdapter(stateAdapter);
-                } else {
-                    stateAdapter.setStateNames(states);
-                    recyclerView.setAdapter(stateAdapter);
                 }
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frame_layout,selectedFragment);
+                fragmentTransaction.commit();
                 return true;
             }
         });
 
+        setDefaultFragment();
 
-        //Init Bottom Navigation Bar
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
-    @Override
-    public void onItemClick(String state) {
-        Intent intent = new Intent(this,DetailActivity.class);
-        intent.putExtra("State",state);
-        startActivity(intent);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main,menu);
-        MenuItem menuItem = menu.findItem(R.id.action_search);
-        materialSearchView.setMenuItem(menuItem);
-        return true;
+    private void setDefaultFragment() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,HomeFragment.newInstance());
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -173,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements StateAdapter.Stat
         }
 
         this.doubleBackToExitPressedOnce = true;
-        setSnackBar(mScrollView,"Press back again to exit");
+        Snackbar.make(findViewById(R.id.snackbar_container),"Press back again to exit",Snackbar.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
 
@@ -183,44 +114,4 @@ public class MainActivity extends AppCompatActivity implements StateAdapter.Stat
             }
         }, 2000);
     }
-    public static void setSnackBar(View coordinatorLayout, String snackTitle) {
-        Snackbar snackbar = Snackbar.make(coordinatorLayout, snackTitle, Snackbar.LENGTH_SHORT);
-        snackbar.show();
-        View view = snackbar.getView();
-        TextView txtv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-        txtv.setGravity(Gravity.CENTER_HORIZONTAL);
-    }
-
-
-
-
-    //Bottom Navigation Bar
-
-    private TextView mTextMessage;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_bookmarks:
-                    mTextMessage.setText(R.string.title_bookmarks);
-                    return true;
-                case R.id.navigation_settings:
-                    mTextMessage.setText(R.string.title_settings);
-                    return true;
-                case R.id.navigation_profile:
-                    mTextMessage.setText(R.string.title_profile);
-                    return true;
-            }
-            return false;
-        }
-    };
-
-
 }
-
