@@ -1,25 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
 
+  <android.support.design.widget.AppBarLayout
+      android:id="@+id/detail_app_bar_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+      android:fitsSystemWindows="true"
+
+      >
+<android.support.design.widget.CollapsingToolbarLayout
+    android:layout_width="match_parent"
+    android:layout_height="350dp"
+    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+    app:contentScrim="?attr/colorPrimary"
+    app:expandedTitleTextAppearance="@android:color/transparent"
+    android:fitsSystemWindows="true"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:contentDescription="Allahabad"
+        android:scaleType="centerCrop"
+        android:src="@drawable/alld"
+        />
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/detail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/white"
+        app:title="Allahabad"
+        app:layout_collapseMode="pin"
+        />
+
+</android.support.design.widget.CollapsingToolbarLayout>
+  </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp">
     <TextView
-        android:id="@+id/tv_detail"
+        android:id="@+id/detail_capital"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="hello world"
+        android:text="Capital City: "
+        android:textColor="@android:color/black"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        android:layout_margin="6dp"
+        android:fontFamily="serif-monospace"
+        />
+        <TextView
+            android:id="@+id/detail_language"
+            android:layout_below="@id/detail_capital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Language: "
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:layout_margin="6dp"
+            android:fontFamily="serif-monospace"
+            />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/detail_area"
+        android:layout_below="@id/detail_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Area: "
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:layout_margin="6dp"
+        android:fontFamily="serif-monospace"
+        />
+    <TextView
+        android:id="@+id/detail_population"
+        android:layout_below="@id/detail_area"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Population: "
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:layout_margin="6dp"
+        android:fontFamily="serif-monospace"
+        />
+    <TextView
+        android:id="@+id/detail_sex_ratio"
+        android:layout_below="@id/detail_population"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sex ratio: "
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:layout_margin="6dp"
+        android:fontFamily="serif-monospace"
+        />
+    <TextView
+        android:id="@+id/detail_history"
+        android:layout_below="@id/detail_sex_ratio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="History: "
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:layout_margin="6dp"
+        android:fontFamily="serif-monospace"
+        />
+
+    <TextView
+        android:id="@+id/detail_dance"
+        android:layout_below="@id/detail_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dance: "
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:layout_margin="6dp"
+        android:fontFamily="serif-monospace"
+        />
+    <TextView
+        android:id="@+id/detail_song"
+        android:layout_below="@id/detail_dance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Song: "
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:layout_margin="6dp"
+        android:fontFamily="serif-monospace"
+        />
+    <TextView
+        android:id="@+id/detail_place_visit"
+        android:layout_below="@id/detail_song"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Places to visit: "
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:layout_margin="6dp"
+        android:fontFamily="serif-monospace"
+        />
+    <TextView
+        android:id="@+id/detail_why_here"
+        android:layout_below="@id/detail_place_visit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Why visit here ? "
+        android:textColor="@android:color/black"
+        android:textSize="22sp"
+        android:layout_margin="6dp"
+        android:fontFamily="cursive"
+        />
+
+
+
+</RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+<android.support.design.widget.FloatingActionButton
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/ic_fav"
+    android:elevation="6dp"
+    app:pressedTranslationZ="12dp"
+    app:layout_anchor="@id/detail_app_bar_layout"
+    app:layout_anchorGravity="bottom|right|end"
+    />
+</android.support.design.widget.CoordinatorLayout>
