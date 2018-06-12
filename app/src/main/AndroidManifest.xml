@@ -26,6 +26,7 @@
         <activity
             android:name=".AppIntro"
             android:label="Intro Slider" />
+        <activity android:name=".BookmarksActivity"></activity>
     </application>
 
 </manifest>
