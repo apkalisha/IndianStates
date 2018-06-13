@@ -22,11 +22,14 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".DetailActivity" />
+        <activity android:name=".DetailActivity"
+            android:parentActivityName=".MainActivity">
+        <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity"/>
+        </activity>
         <activity
             android:name=".AppIntro"
             android:label="Intro Slider" />
-        <activity android:name=".BookmarksActivity"></activity>
     </application>
 
 </manifest>
