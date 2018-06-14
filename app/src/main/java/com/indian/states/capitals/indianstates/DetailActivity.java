@@ -14,11 +14,11 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        mTextView = findViewById(R.id.tv_detail);
+        /*mTextView = findViewById(R.id.tv_detail);*/
 
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         if(intent.hasExtra("State")) {
             mTextView.setText(intent.getStringExtra("State"));
-        }
+        }*/
     }
 }
