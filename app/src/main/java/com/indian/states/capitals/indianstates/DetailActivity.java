@@ -45,9 +45,9 @@ public class DetailActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
-    private TextView capital, area, population,languages,literacyRate,maleLiteracyRate, femaleLiteracyRate, sexRatio, regionalDance;
+    private TextView capital, area, population,literacyRate,maleLiteracyRate, femaleLiteracyRate, sexRatio;
     private ImageView appbarImageView;
-    private ExpandableTextView historyTextView;
+    private ExpandableTextView historyTextView, regionalDance,languages;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -75,7 +75,7 @@ public class DetailActivity extends AppCompatActivity {
         femaleLiteracyRate=findViewById(R.id.literacy_rate_female);
         sexRatio=findViewById(R.id.sex_ratio);
         regionalDance=findViewById(R.id.regional_dance);
-        languages = findViewById(R.id.languages);
+        languages = findViewById(R.id.languages_spoken);
 
         Intent intent = getIntent();
         if(intent.hasExtra("State")) {
