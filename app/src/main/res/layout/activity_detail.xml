@@ -1,180 +1,320 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".DetailActivity">
 
-  <android.support.design.widget.AppBarLayout
-      android:id="@+id/detail_app_bar_layout"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-      android:fitsSystemWindows="true"
-
-      >
-<android.support.design.widget.CollapsingToolbarLayout
-    android:layout_width="match_parent"
-    android:layout_height="350dp"
-    app:layout_scrollFlags="scroll|exitUntilCollapsed"
-    app:contentScrim="?attr/colorPrimary"
-    app:expandedTitleTextAppearance="@android:color/transparent"
-    android:fitsSystemWindows="true"
-    >
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:contentDescription="Allahabad"
-        android:scaleType="centerCrop"
-        android:src="@drawable/alld"
-        />
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/detail_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:titleTextColor="@android:color/white"
-        app:title="Allahabad"
-        app:layout_collapseMode="pin"
-        />
-
-</android.support.design.widget.CollapsingToolbarLayout>
-  </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="5dp">
-    <TextView
-        android:id="@+id/detail_capital"
+    <ProgressBar
+        android:visibility="visible"
+        android:id="@+id/progress_bar"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Capital City: "
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        android:layout_margin="6dp"
-        android:fontFamily="serif-monospace"
-        />
-        <TextView
-            android:id="@+id/detail_language"
-            android:layout_below="@id/detail_capital"
+        android:layout_height="wrap_content" />
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/detail_container"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="@color/colorPrimary"
+                app:layout_scrollFlags="exitUntilCollapsed|scroll"
+                app:title="State Name"
+                app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Headline"
+                app:expandedTitleMarginStart="48dp"
+                app:expandedTitleMarginEnd="64dp">
+
+                <ImageView
+                    android:id="@+id/app_bar_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    android:adjustViewBounds="true" />
+
+                <android.support.v7.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:layout_collapseMode="pin"
+                    />
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="4dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                           <LinearLayout
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:orientation="horizontal"
+                               android:weightSum="5"
+                               android:layout_margin="8dp">
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:text="Capital"
+                                   android:fontFamily="serif"
+                                   android:textSize="18sp"
+                                   android:layout_weight="2"/>
+                               <TextView
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:text=":"
+                                   android:textAlignment="center"
+                                   android:layout_weight="1"/>
+                               <TextView
+                                   android:id="@+id/capital"
+                                   android:layout_width="wrap_content"
+                                   android:layout_height="wrap_content"
+                                   android:layout_weight="2"
+                                   android:textAlignment="textEnd"
+                                   android:textSize="18sp"
+                                   android:fontFamily="@font/roboto_slab_light"
+                                   android:text="Ranchi"/>
+                           </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="5"
+                                android:layout_margin="8dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Population"
+                                    android:fontFamily="serif"
+                                    android:textSize="18sp"
+                                    android:layout_weight="2"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=":"
+                                    android:textAlignment="center"
+                                    android:layout_weight="1"/>
+                                <TextView
+                                    android:id="@+id/population"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:textAlignment="textEnd"
+                                    android:textSize="18sp"
+                                    android:fontFamily="@font/roboto_slab_light"
+                                    android:text="40,00,000*"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="5"
+                                android:layout_margin="8dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Total Area(in km.sq.)"
+                                    android:fontFamily="serif"
+                                    android:textSize="18sp"
+                                    android:layout_weight="2"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textAlignment="center"
+                                    android:text=":"
+                                    android:layout_weight="1"/>
+                                <TextView
+                                    android:id="@+id/area"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:textAlignment="textEnd"
+                                    android:textSize="18sp"
+                                    android:fontFamily="@font/roboto_slab_light"
+                                    android:text="45,000"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="5"
+                                android:layout_margin="8dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Literacy Rate"
+                                    android:fontFamily="serif"
+                                    android:textSize="18sp"
+                                    android:layout_weight="2"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=":"
+                                    android:textAlignment="center"
+                                    android:layout_weight="1"/>
+                                <TextView
+                                    android:id="@+id/literacy_rate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:textAlignment="textEnd"
+                                    android:textSize="18sp"
+                                    android:fontFamily="@font/roboto_slab_light"
+                                    android:text="69%"/>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:weightSum="5"
+                                android:layout_margin="8dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Languages Spoken"
+                                    android:fontFamily="serif"
+                                    android:textSize="18sp"
+                                    android:layout_weight="2"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=":"
+                                    android:textAlignment="center"
+                                    android:layout_weight="1"/>
+                                <TextView
+                                    android:id="@+id/languages"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="2"
+                                    android:textAlignment="textEnd"
+                                    android:textSize="18sp"
+                                    android:fontFamily="@font/roboto_slab_light"
+                                    android:text="Hindi, Urdu"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        app:cardElevation="4dp"
+                        app:cardCornerRadius="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_margin="8dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="History:"
+                                android:fontFamily="serif"
+                                android:textSize="18sp" />
+
+                            <com.ms.square.android.expandabletextview.ExpandableTextView
+                                android:id="@+id/expand_text_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                expandableTextView:maxCollapsedLines="4"
+                                expandableTextView:animDuration="200">
+
+                                <TextView
+                                    android:id="@id/expandable_text"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:textSize="16sp"
+                                    android:textColor="#666666" />
+
+                                <ImageButton
+                                    android:id="@id/expand_collapse"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="8dp"
+                                    android:layout_gravity="end|bottom"
+                                    android:background="@android:color/transparent"/>
+
+                            </com.ms.square.android.expandabletextview.ExpandableTextView>
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+                <RelativeLayout
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/view_pager_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/view_pager"
+                        android:fitsSystemWindows="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="220dp"/>
+
+                    <me.relex.circleindicator.CircleIndicator
+                        android:id="@+id/indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        app:ci_drawable="@drawable/black_radius"
+                        android:layout_alignBottom="@id/view_pager" />
+
+                </RelativeLayout>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_margin="8dp"
+                    app:cardElevation="4dp"
+                    app:cardCornerRadius="4dp" />
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Language: "
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            android:layout_margin="6dp"
-            android:fontFamily="serif-monospace"
+            android:elevation="6dp"
+            app:pressedTranslationZ="12dp"
+            app:layout_anchor="@id/appbar"
+            app:layout_anchorGravity="bottom|right|end"
             />
 
-    <TextView
-        android:id="@+id/detail_area"
-        android:layout_below="@id/detail_language"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Area: "
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        android:layout_margin="6dp"
-        android:fontFamily="serif-monospace"
-        />
-    <TextView
-        android:id="@+id/detail_population"
-        android:layout_below="@id/detail_area"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Population: "
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        android:layout_margin="6dp"
-        android:fontFamily="serif-monospace"
-        />
-    <TextView
-        android:id="@+id/detail_sex_ratio"
-        android:layout_below="@id/detail_population"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sex ratio: "
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        android:layout_margin="6dp"
-        android:fontFamily="serif-monospace"
-        />
-    <TextView
-        android:id="@+id/detail_history"
-        android:layout_below="@id/detail_sex_ratio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="History: "
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        android:layout_margin="6dp"
-        android:fontFamily="serif-monospace"
-        />
+    </android.support.design.widget.CoordinatorLayout>
 
-    <TextView
-        android:id="@+id/detail_dance"
-        android:layout_below="@id/detail_history"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dance: "
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        android:layout_margin="6dp"
-        android:fontFamily="serif-monospace"
-        />
-    <TextView
-        android:id="@+id/detail_song"
-        android:layout_below="@id/detail_dance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Song: "
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        android:layout_margin="6dp"
-        android:fontFamily="serif-monospace"
-        />
-    <TextView
-        android:id="@+id/detail_place_visit"
-        android:layout_below="@id/detail_song"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Places to visit: "
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        android:layout_margin="6dp"
-        android:fontFamily="serif-monospace"
-        />
-    <TextView
-        android:id="@+id/detail_why_here"
-        android:layout_below="@id/detail_place_visit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Why visit here ? "
-        android:textColor="@android:color/black"
-        android:textSize="22sp"
-        android:layout_margin="6dp"
-        android:fontFamily="cursive"
-        />
-
-
-
-</RelativeLayout>
-    </android.support.v4.widget.NestedScrollView>
-
-<android.support.design.widget.FloatingActionButton
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/ic_fav"
-    android:elevation="6dp"
-    app:pressedTranslationZ="12dp"
-    app:layout_anchor="@id/detail_app_bar_layout"
-    app:layout_anchorGravity="bottom|right|end"
-    />
-</android.support.design.widget.CoordinatorLayout>
+</FrameLayout>
