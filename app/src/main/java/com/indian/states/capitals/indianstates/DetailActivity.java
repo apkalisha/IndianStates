@@ -45,7 +45,7 @@ public class DetailActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
-    private TextView capital, area, population,languages,literacyRate;
+    private TextView capital, area, population,languages,literacyRate,maleLiteracyRate, femaleLiteracyRate, sexRatio, regionalDance;
     private ImageView appbarImageView;
     private ExpandableTextView historyTextView;
     @Override
@@ -71,6 +71,10 @@ public class DetailActivity extends AppCompatActivity {
         appbarImageView = findViewById(R.id.app_bar_image);
         historyTextView = findViewById(R.id.expand_text_view);
         literacyRate = findViewById(R.id.literacy_rate);
+        maleLiteracyRate=findViewById(R.id.literacy_rate_male);
+        femaleLiteracyRate=findViewById(R.id.literacy_rate_female);
+        sexRatio=findViewById(R.id.sex_ratio);
+        regionalDance=findViewById(R.id.regional_dance);
         languages = findViewById(R.id.languages);
 
         Intent intent = getIntent();
@@ -91,6 +95,10 @@ public class DetailActivity extends AppCompatActivity {
                 historyTextView.setText(stateDetails.getHistory());
                 languages.setText(stateDetails.getLanguages());
                 literacyRate.setText(String.valueOf(stateDetails.getLiteracyRate()));
+                maleLiteracyRate.setText(String.valueOf(stateDetails.getLiteracyRateMale()));
+                femaleLiteracyRate.setText(String.valueOf(stateDetails.getLiteracyRateFemale()));
+                sexRatio.setText(String.valueOf(stateDetails.getSexRatio()));
+                regionalDance.setText(String.valueOf(stateDetails.getRegionalDance()));
                 images = stateDetails.getImages();
                 imageDetails = stateDetails.getImageDetails();
                 Picasso.get().load(images.get(0)).into(appbarImageView);
