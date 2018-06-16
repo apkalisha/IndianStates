@@ -7,13 +7,17 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,41 +32,51 @@ import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
+
     private ProgressBar mProgressBar;
     private CoordinatorLayout coordinatorLayout;
+
+    private static final int RECOVERY_DIALOG_REQUEST = 1;
+    YouTubePlayerView youTubePlayerView;
 
     int currentPage = 0;
     Timer timer;
     final long DELAY_MS = 500;
     final long PERIOD_MS = 3000;
     CircleIndicator circleIndicator;
-    private ViewPager viewPager;
+    private AutoScrollViewPager viewPager;
     private PagerAdapter adapter;
 
     private ArrayList<String> images;
     private ArrayList<String> imageDetails;
 
-    private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
 
     private TextView capital, area, population,languages,literacyRate;
     private ImageView appbarImageView;
     private ExpandableTextView historyTextView;
+
+    private String youTubeVideoLink;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        CollapsingToolbarLayout toolbar = findViewById(R.id.collapsing_toolbar);
-        //setSupportActionBar(toolbar);
-        //toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
+        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
 
         viewPager = findViewById(R.id.view_pager);
         circleIndicator = findViewById(R.id.indicator);
         mProgressBar = findViewById(R.id.progress_bar);
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        viewPager.startAutoScroll();
+        viewPager.setInterval(5000);
+        viewPager.setCycle(true);
+        viewPager.setStopScrollWhenTouch(true);
+
+        youTubePlayerView =  findViewById(R.id.youtube_player_view);
+        youTubePlayerView.initialize(BuildConfig.ApiKey, this);
 
         population = findViewById(R.id.population);
         capital = findViewById(R.id.capital);
@@ -76,16 +90,34 @@ public class DetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if(intent.hasExtra("State")) {
-            toolbar.setTitle(intent.getStringExtra("State"));
-            databaseReference = firebaseDatabase.getReference().child("States").child(intent.getStringExtra("State").trim());
+            collapsingToolbarLayout.setTitle(intent.getStringExtra("State"));
+            databaseReference = FirebaseDatabase.getInstance().getReference().child("States").child(intent.getStringExtra("State").trim());
         }
+    }
 
+    private void readDataFromDatabase(final StatesCallback statesCallback) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                StateDetails stateDetails = dataSnapshot.getValue(StateDetails.class);
+                statesCallback.onCallback(stateDetails);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, final YouTubePlayer youTubePlayer, final boolean b) {
+
+        readDataFromDatabase(new StatesCallback() {
+            @Override
+            public void onCallback(StateDetails stateDetails) {
                 mProgressBar.setVisibility(View.GONE);
                 coordinatorLayout.setVisibility(View.VISIBLE);
-                StateDetails stateDetails = dataSnapshot.getValue(StateDetails.class);
                 capital.setText(stateDetails.getCapital());
                 area.setText(stateDetails.getArea());
                 population.setText(stateDetails.getPopulation());
@@ -94,40 +126,29 @@ public class DetailActivity extends AppCompatActivity {
                 literacyRate.setText(String.valueOf(stateDetails.getLiteracyRate()));
                 images = stateDetails.getImages();
                 imageDetails = stateDetails.getImageDetails();
+                youTubeVideoLink = stateDetails.getYouTubeVideoLink();
+
                 Picasso.get().load(images.get(0)).into(appbarImageView);
-                adapter = new CustomAdapter(DetailActivity.this,images,imageDetails);
+                adapter = new CustomAdapter(DetailActivity.this, images, imageDetails);
                 viewPager.setAdapter(adapter);
                 circleIndicator.setViewPager(viewPager);
                 adapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                if(!b) {
+                    youTubePlayer.cueVideo(youTubeVideoLink);
+                }
 
             }
         });
-
-        final Handler handler = new Handler();
-        final Runnable update = new Runnable() {
-            @Override
-            public void run() {
-                if(currentPage == 15) {
-                    currentPage = 0;
-                }
-                viewPager.setCurrentItem(currentPage++,true);
-            }
-        };
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(update);
-            }
-        },DELAY_MS,PERIOD_MS);
     }
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        timer.cancel();
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+        if(youTubeInitializationResult.isUserRecoverableError()) {
+            youTubeInitializationResult.getErrorDialog(DetailActivity.this,RECOVERY_DIALOG_REQUEST);
+        } else {
+            String errorMessage = getString(R.string.youTubeErrorMessage)+youTubeInitializationResult;
+            Toast.makeText(DetailActivity.this,errorMessage,Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

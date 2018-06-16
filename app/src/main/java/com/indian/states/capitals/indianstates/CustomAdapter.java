@@ -31,7 +31,11 @@ public class CustomAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.layout_viewpager,container,false);
         ImageView imageView = view.findViewById(R.id.image_viewpager);
         TextView textView = view.findViewById(R.id.tv_image_name);
-        Picasso.get().load(imagesArray.get(position+1)).into(imageView);
+        Picasso.get()
+                .load(imagesArray.get(position+1))
+                .placeholder(R.drawable.placeholder)
+                .fit()
+                .into(imageView);
         textView.setText(namesArray.get(position));
         container.addView(view);
 
