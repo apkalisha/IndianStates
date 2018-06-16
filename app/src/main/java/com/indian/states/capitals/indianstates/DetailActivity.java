@@ -2,11 +2,9 @@ package com.indian.states.capitals.indianstates;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,7 +26,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Timer;
-import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -53,9 +50,9 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
     private DatabaseReference databaseReference;
 
-    private TextView capital, area, population,languages,literacyRate;
+    private TextView capital, area, population,literacyRate;
     private ImageView appbarImageView;
-    private ExpandableTextView historyTextView;
+    private ExpandableTextView historyTextView, languages, regionalDance;
 
     private String youTubeVideoLink;
 
@@ -86,7 +83,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         appbarImageView = findViewById(R.id.app_bar_image);
         historyTextView = findViewById(R.id.expand_text_view);
         literacyRate = findViewById(R.id.literacy_rate);
-        languages = findViewById(R.id.languages);
+        languages = findViewById(R.id.languages_spoken);
+        regionalDance =findViewById(R.id.regional_dance);
 
         Intent intent = getIntent();
         if(intent.hasExtra("State")) {
@@ -123,6 +121,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                 population.setText(stateDetails.getPopulation());
                 historyTextView.setText(stateDetails.getHistory());
                 languages.setText(stateDetails.getLanguages());
+                regionalDance.setText(stateDetails.getRegionalDance());
                 literacyRate.setText(String.valueOf(stateDetails.getLiteracyRate()));
                 images = stateDetails.getImages();
                 imageDetails = stateDetails.getImageDetails();
