@@ -2,11 +2,9 @@ package com.indian.states.capitals.indianstates;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,8 +25,6 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -51,7 +47,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
     private TextView capital, area, population,literacyRate;
     private ImageView appbarImageView;
-    private ExpandableTextView historyTextView;
+    private ExpandableTextView historyTextView, languages, regionalDance;
 
     private String youTubeVideoLink;
 
@@ -81,6 +77,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         coordinatorLayout = findViewById(R.id.detail_container);
         appbarImageView = findViewById(R.id.app_bar_image);
         historyTextView = findViewById(R.id.expand_text_view);
+        languages=findViewById(R.id.languages_spoken);
+        regionalDance=findViewById(R.id.regional_dance);
         literacyRate = findViewById(R.id.literacy_rate);
 
         Intent intent = getIntent();
