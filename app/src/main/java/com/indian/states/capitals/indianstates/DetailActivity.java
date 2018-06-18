@@ -115,6 +115,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                 area.setText(stateDetails.getArea());
                 population.setText(stateDetails.getPopulation());
                 historyTextView.setText(stateDetails.getHistory());
+                languages.setText(stateDetails.getLanguages());
+                regionalDance.setText(stateDetails.getRegionalDance());
                 literacyRate.setText(String.valueOf(stateDetails.getLiteracyRate()));
                 images = stateDetails.getImages();
                 imageDetails = stateDetails.getImageDetails();
