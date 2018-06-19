@@ -46,7 +46,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
     private DatabaseReference databaseReference;
 
-    private TextView capital, area, population,literacyRate;
+    private TextView capital, area, population,literacyRate,literacyRateMale,literacyRateFemale,sexRatio;
     private ImageView appbarImageView;
     private ExpandableTextView historyTextView, languages, regionalDance;
 
@@ -92,6 +92,9 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         languages=findViewById(R.id.languages_spoken);
         regionalDance=findViewById(R.id.regional_dance);
         literacyRate = findViewById(R.id.literacy_rate);
+        literacyRateMale = findViewById(R.id.literacy_rate_male);
+        literacyRateFemale = findViewById(R.id.literacy_rate_female);
+        sexRatio = findViewById(R.id.sex_ratio);
 
         Intent intent = getIntent();
         if(intent.hasExtra("State")) {
@@ -121,8 +124,6 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         readDataFromDatabase(new StatesCallback() {
             @Override
             public void onCallback(StateDetails stateDetails) {
-                mProgressBar.setVisibility(View.GONE);
-                coordinatorLayout.setVisibility(View.VISIBLE);
                 capital.setText(stateDetails.getCapital());
                 area.setText(stateDetails.getArea());
                 population.setText(stateDetails.getPopulation());
@@ -130,6 +131,9 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                 languages.setText(stateDetails.getLanguages());
                 regionalDance.setText(stateDetails.getRegionalDance());
                 literacyRate.setText(String.valueOf(stateDetails.getLiteracyRate()));
+                literacyRateMale.setText(String.valueOf(stateDetails.getLiteracyRateMale()));
+                literacyRateFemale.setText(String.valueOf(stateDetails.getLiteracyRateFemale()));
+                sexRatio.setText(String.valueOf(stateDetails.getSexRatio()));
                 images = stateDetails.getImages();
                 imageDetails = stateDetails.getImageDetails();
                 youTubeVideoLink = stateDetails.getYouTubeVideoLink();
@@ -143,6 +147,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                     Log.i("video link",youTubeVideoLink);
                     youTubePlayer.cueVideo(youTubeVideoLink);
                 }
+                mProgressBar.setVisibility(View.GONE);
+                coordinatorLayout.setVisibility(View.VISIBLE);
 
             }
         });
