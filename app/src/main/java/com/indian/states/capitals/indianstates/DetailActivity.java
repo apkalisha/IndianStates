@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,6 +58,17 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
+
+
+        Toolbar toolbar=findViewById(R.id.detail_toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+
 
         viewPager = findViewById(R.id.view_pager);
         circleIndicator = findViewById(R.id.indicator);
