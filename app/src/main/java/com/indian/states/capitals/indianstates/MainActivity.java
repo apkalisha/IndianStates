@@ -86,6 +86,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
+        //reselected
+
+        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                
+            }
+        });
+
+
+
         setDefaultFragment();
 
     }
