@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -78,6 +80,24 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         viewPager.setInterval(5000);
         viewPager.setCycle(true);
         viewPager.setStopScrollWhenTouch(true);
+
+        //allow scrolling through ViewPager
+
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                view.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+
+        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                viewPager.getParent().requestDisallowInterceptTouchEvent(true);
+            }
+        });
 
         youTubePlayerView =  findViewById(R.id.youtube_player_view);
         youTubePlayerView.initialize(BuildConfig.ApiKey, this);
