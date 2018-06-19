@@ -178,7 +178,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Literacy Rate"
+                                    android:text="Literacy Rate(%)"
                                     android:fontFamily="serif"
                                     android:textSize="18sp"
                                     android:layout_weight="2"/>
@@ -208,7 +208,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Male Literacy Rate"
+                                    android:text="Male Literacy Rate(%)"
                                     android:fontFamily="serif"
                                     android:textSize="18sp"
                                     android:layout_weight="2"/>
@@ -238,7 +238,7 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Female Literacy Rate"
+                                    android:text="Female Literacy Rate(%)"
                                     android:fontFamily="serif"
                                     android:textSize="18sp"
                                     android:layout_weight="2"/>
@@ -355,6 +355,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_margin="8dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -387,25 +388,11 @@
                                 android:background="@android:color/transparent"/>
 
                         </com.ms.square.android.expandabletextview.ExpandableTextView>
-                    </LinearLayout>
 
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:cardElevation="4dp"
-                    app:cardCornerRadius="4dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_margin="8dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:text="Languages Spoken:"
                             android:fontFamily="serif"
                             android:textSize="18sp" />
@@ -439,23 +426,16 @@
 
                 </android.support.v7.widget.CardView>
 
-
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    expandableTextView:cardElevation="4dp"
-                    expandableTextView:cardCornerRadius="4dp">
-
                     <TextView
+                        android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Places to visit:"
+                        android:layout_marginStart="8dp"
+                        android:textStyle="bold"
                         android:fontFamily="serif"
+                        android:background="@android:color/darker_gray"
                         android:textSize="18sp"/>
-
-                </android.support.v7.widget.CardView>
-
                 <RelativeLayout
                     android:layout_marginTop="16dp"
                     android:id="@+id/view_pager_layout"
@@ -479,21 +459,16 @@
 
                 </RelativeLayout>
 
-                <android.support.v7.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    expandableTextView:cardElevation="4dp"
-                    expandableTextView:cardCornerRadius="4dp">
-
                     <TextView
+                        android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Recommended Video:"
+                        android:layout_marginStart="8dp"
+                        android:background="@android:color/darker_gray"
                         android:fontFamily="serif"
+                        android:textStyle="bold"
                         android:textSize="18sp"/>
-
-                </android.support.v7.widget.CardView>
 
 
                 <android.support.v7.widget.CardView
