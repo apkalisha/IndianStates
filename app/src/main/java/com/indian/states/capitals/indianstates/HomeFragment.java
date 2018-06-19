@@ -106,11 +106,16 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
         return homeFragment;
     }
 
+
+
     @Override
     public void onItemClick(String state) {
-        Intent intent = new Intent(getActivity(),DetailActivity.class);
-        intent.putExtra("State",state);
-        startActivity(intent);
+
+
+            Intent intent = new Intent(getActivity(), DetailActivity.class);
+            intent.putExtra("State", state);
+            startActivity(intent);
+
     }
 
     @Override

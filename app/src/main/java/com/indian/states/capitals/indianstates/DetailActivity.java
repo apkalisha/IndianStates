@@ -1,9 +1,13 @@
 package com.indian.states.capitals.indianstates;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
@@ -121,6 +125,19 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
             collapsingToolbarLayout.setTitle(intent.getStringExtra("State"));
             databaseReference = FirebaseDatabase.getInstance().getReference().child("States").child(intent.getStringExtra("State").trim());
         }
+
+
+
+
+        //Connectivity Manager
+        ConnectivityManager connectivityManager = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()){
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.detail_activity),"No Internet Connection", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+
+
     }
 
     private void readDataFromDatabase(final StatesCallback statesCallback) {
@@ -169,6 +186,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                 }
                 mProgressBar.setVisibility(View.GONE);
                 coordinatorLayout.setVisibility(View.VISIBLE);
+
+
 
             }
         });
