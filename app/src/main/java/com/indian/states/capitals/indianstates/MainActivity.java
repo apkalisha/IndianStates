@@ -88,12 +88,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //reselected
+        //reselected item will not redirect to same fragment
 
         bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
-                
+
             }
         });
 
