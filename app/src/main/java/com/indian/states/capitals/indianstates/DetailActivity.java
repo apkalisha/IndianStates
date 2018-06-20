@@ -85,7 +85,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         viewPager.setCycle(true);
         viewPager.setStopScrollWhenTouch(true);
 
-        //Allow scrolling through ViewPager
+        //Allow scrolling through ViewPager ha ha
 
         viewPager.setOnTouchListener(new View.OnTouchListener() {
             @Override
