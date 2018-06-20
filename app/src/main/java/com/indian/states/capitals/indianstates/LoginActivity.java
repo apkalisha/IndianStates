@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
     private String username,password;
+    private ProgressBar loginProgress;
     private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
@@ -32,13 +34,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        login=(Button)findViewById(R.id.login_id);
-        join=(Button)findViewById(R.id.join_id);
-        more=(Button)findViewById(R.id.more_id);
-        user=(EditText)findViewById(R.id.user_id);
-        pass=(EditText)findViewById(R.id.pass_id);
-        progressDialog=new ProgressDialog(this);
+        login = findViewById(R.id.login_id);
+        join = findViewById(R.id.join_id);
+        more = findViewById(R.id.more_id);
+        user = findViewById(R.id.user_id);
+        pass = findViewById(R.id.pass_id);
+        progressDialog = new ProgressDialog(this);
         firebaseAuth= FirebaseAuth.getInstance();
+        loginProgress = findViewById(R.id.login_progress);
 
        /* authStateListener=new FirebaseAuth.AuthStateListener() {
             @Override
@@ -56,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setContentView(R.layout.learnmore_xml);
+                setContentView(R.layout.learnmore);
             }
         });
 
@@ -103,22 +106,21 @@ public class LoginActivity extends AppCompatActivity {
         }
 
 
-
+        loginProgress.setVisibility(View.VISIBLE);
         firebaseAuth.signInWithEmailAndPassword(username,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(!task.isSuccessful()){
                     Toast.makeText(getApplicationContext(),"Sign In Problem",Toast.LENGTH_LONG).show();
                 }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"Logging  in...",Toast.LENGTH_LONG).show();
+                else {
                     Toast.makeText(getApplicationContext(),"Sign In Successful",Toast.LENGTH_LONG).show();
                     Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
-
-
+                    finish();
                 }
+                loginProgress.setVisibility(View.INVISIBLE);
             }
         });
 

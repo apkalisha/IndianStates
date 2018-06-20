@@ -8,6 +8,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText state;
     private FirebaseAuth mAuth;
     private DatabaseReference mdb;
+    private ProgressBar regProgress;
 
 
     @Override
@@ -42,15 +44,16 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
 
-        register=(Button)findViewById(R.id.reg_id);
-        user=(EditText)findViewById(R.id.user_id);
-        pass=(EditText)findViewById(R.id.pass_id);
-        confpass=(EditText)findViewById(R.id.confirmpass_id);
-        contact=(EditText)findViewById(R.id.contact_id);
-        email=(EditText)findViewById(R.id.email_id);
-        state=(EditText)findViewById(R.id.state_id);
+        register= findViewById(R.id.reg_id);
+        user= findViewById(R.id.user_id);
+        pass= findViewById(R.id.pass_id);
+        confpass= findViewById(R.id.confirmpass_id);
+        contact= findViewById(R.id.contact_id);
+        email= findViewById(R.id.email_id);
+        state= findViewById(R.id.state_id);
         mAuth = FirebaseAuth.getInstance();
         mdb= FirebaseDatabase.getInstance().getReference();
+        regProgress = findViewById(R.id.reg_progress);
 
 
         register.setOnClickListener(new View.OnClickListener() {
@@ -91,14 +94,13 @@ public class RegisterActivity extends AppCompatActivity {
             pass.requestFocus();
             return;
         }
-        /*if(password!= confpass.getText().toString().trim()){
-            confpass.setError("Confirm Password should be same as Password");
-            pass.requestFocus();
+        if(!password.equals(confpass.getText().toString())) {
+            confpass.setError("Passwords don't match");
             confpass.requestFocus();
             return;
-        }*/
+        }
 
-
+        regProgress.setVisibility(View.VISIBLE);
 
         mAuth.createUserWithEmailAndPassword(emailid, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -129,20 +131,18 @@ public class RegisterActivity extends AppCompatActivity {
                             intent.putExtra("state",states);
                             startActivity(intent);*/
                             Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
-
-
-
+                            finish();
 
                         } else {
                             // If sign in fails, display a message to the user.
 
                             Toast.makeText(getApplicationContext(), "Authentication failed***",
                                     Toast.LENGTH_SHORT).show();
+                            }
 
-                        }
-
-
+                        regProgress.setVisibility(View.INVISIBLE);
                     }
                 });
     }

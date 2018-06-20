@@ -12,9 +12,8 @@ public class BookmarkFragment extends Fragment {
     View bookmarkFragment;
 
     public static BookmarkFragment newInstance() {
-        BookmarkFragment bookmarkFragment = new BookmarkFragment();
 
-        return bookmarkFragment;
+        return new BookmarkFragment();
     }
 
     @Nullable

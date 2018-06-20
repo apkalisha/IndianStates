@@ -9,10 +9,8 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -85,24 +83,6 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         viewPager.setCycle(true);
         viewPager.setStopScrollWhenTouch(true);
 
-        //Allow scrolling through ViewPager ha ha
-
-        viewPager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                view.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-        });
-
-        viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                viewPager.getParent().requestDisallowInterceptTouchEvent(true);
-            }
-        });
-
         youTubePlayerView =  findViewById(R.id.youtube_player_view);
         youTubePlayerView.initialize(BuildConfig.ApiKey, this);
 
@@ -131,8 +111,12 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
         //Connectivity Manager
         ConnectivityManager connectivityManager = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        NetworkInfo networkInfo = null;
+        if (connectivityManager != null) {
+            networkInfo = connectivityManager.getActiveNetworkInfo();
+        }
         if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()){
+            mProgressBar.setVisibility(View.GONE);
             Snackbar snackbar = Snackbar.make(findViewById(R.id.detail_activity),"No Internet Connection", Snackbar.LENGTH_LONG);
             snackbar.show();
         }

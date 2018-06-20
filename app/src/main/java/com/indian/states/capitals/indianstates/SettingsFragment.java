@@ -12,9 +12,8 @@ public class SettingsFragment extends Fragment {
     View settingsFragment;
 
     public static SettingsFragment newInstance() {
-        SettingsFragment settingsFragment = new SettingsFragment();
 
-        return settingsFragment;
+        return new SettingsFragment();
     }
 
     @Nullable

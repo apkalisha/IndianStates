@@ -39,9 +39,8 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
     }
 
     public static HomeFragment newInstance() {
-        HomeFragment categoryFragment = new HomeFragment();
 
-        return categoryFragment;
+        return new HomeFragment();
     }
 
     @Nullable

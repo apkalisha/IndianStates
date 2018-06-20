@@ -16,6 +16,7 @@
             android:gravity="center"
             android:padding="2dp"
             android:text="About Us"
+            android:fontFamily="sans-serif-thin"
             android:textColor="@color/pink"
             android:textSize="36sp" />
 
@@ -27,7 +28,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:textColor="#2d2d2d"
-            android:fontFamily="@string/common_google_play_services_enable_button"
+            android:fontFamily="@font/roboto_slab_light"
             android:text="At The D Zone, we strive for the betterment of the available resources in an organized and strategized way for the overall development of the users. The main focus here is on the youth to showcase their skills and develop themselves to be portrayed as a resource for the nation. We believe in clarity and simplicity. We work hard at the ground level and there's no ultimate limit. Our mission is to provide opportunities to each and every hand equally and to enhance the sense of patriotism and unity amongst the youth of our nation"
             android:textSize="20sp" />
 

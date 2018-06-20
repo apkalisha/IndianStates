@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:background="@android:color/darker_gray"
         android:orientation="vertical">
 
         <TextView
@@ -18,11 +19,12 @@
             android:layout_height="wrap_content"
             android:text="REGISTER TO EXPLORE INDIAN STATES"
             android:textAllCaps="true"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <EditText
+            android:background="@drawable/background_white_border"
             android:id="@+id/user_id"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -33,38 +35,48 @@
 
 
         <EditText
+            android:background="@drawable/background_white_border"
             android:id="@+id/email_id"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:layout_marginTop="@dimen/margin_top"
             android:drawableLeft="@drawable/ic_email_black_24dp"
             android:hint="Email Id"
             android:inputType="textEmailAddress" />
 
         <EditText
+            android:background="@drawable/background_white_border"
             android:id="@+id/pass_id"
             android:layout_width="350dp"
+            android:layout_marginTop="@dimen/margin_top"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_lock_black_24dp"
             android:hint="Password"
             android:inputType="textPassword" />
 
         <EditText
+            android:background="@drawable/background_white_border"
             android:id="@+id/confirmpass_id"
             android:layout_width="350dp"
+            android:layout_marginTop="@dimen/margin_top"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_lock_black_24dp"
             android:hint="Confirm Password"
             android:inputType="textPassword" />
 
         <EditText
+            android:background="@drawable/background_white_border"
             android:id="@+id/contact_id"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
             android:drawableLeft="@drawable/ic_call_black_24dp"
-            android:hint="Contact" />
+            android:hint="Phone Number" />
 
         <EditText
+            android:layout_marginTop="@dimen/margin_top"
+            android:background="@drawable/background_white_border"
             android:id="@+id/state_id"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
@@ -76,11 +88,22 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:background="@drawable/buttonstylepink"
+            android:background="@drawable/buttonstyle"
             android:text="register"
             android:textColor="#fff" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/reg_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"

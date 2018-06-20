@@ -10,4 +10,12 @@
         android:textStyle="bold"
         android:layout_centerInParent="true"/>
 
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Log Out"
+        android:backgroundTint="@color/colorPrimary"/>
+
 </RelativeLayout>
