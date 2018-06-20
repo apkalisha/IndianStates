@@ -3,7 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#222222"
+    android:background="@drawable/walkthrough1"
     android:layout_weight="10"
     android:id="@+id/main">
 
@@ -17,8 +17,7 @@
         android:fontFamily="sans-serif-thin"
         android:textColor="#ffffff"
         android:paddingRight="32dp"
-        android:textSize="28sp"
-        android:text="Slide 1 title"/>
+        android:textSize="28sp"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -27,26 +26,28 @@
         android:gravity="center"
         android:layout_weight="5">
 
-        <ImageView
+        <!--<ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:src="@drawable/icon1"/>
+            android:src="@drawable/image1"/>-->
     </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_height="1dp"
         android:layout_gravity="center"
+        android:layout_weight="3"
         android:gravity="center"
-        android:textColor="#ffffff"
         android:paddingLeft="64dp"
         android:paddingRight="64dp"
-        android:textSize="16sp"
-        android:text="Long description here"/>
+        android:text="Learn more about the cultures in various parts of India"
+        android:textColor="#ffffff"
+        android:textSize="16sp" />
+
     <TextView
         android:layout_width="fill_parent"
-        android:layout_height="64dp" />
+        android:layout_height="50dp" />
 </LinearLayout>
