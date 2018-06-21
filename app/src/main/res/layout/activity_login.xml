@@ -4,14 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/login_activity"
     tools:context="com.indian.states.capitals.indianstates.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         android:orientation="vertical"
-        android:padding="50dp"
-        android:background="@color/colorPrimary">
+        android:padding="50dp">
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -22,6 +24,7 @@
             android:textColor="#fff"
             android:textSize="40sp"
             android:textStyle="bold" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,21 +34,22 @@
             android:textColor="#fff"
             android:textSize="40sp"
             android:textStyle="bold" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#fff"
-            android:text="This is an app on INDIAN STATES"
-            android:textSize="15sp"
             android:layout_marginTop="15dp"
-            />
+            android:text="This is an app on INDIAN STATES"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/more_id"
@@ -67,7 +71,6 @@
                 android:textColor="#fff" />
 
         </LinearLayout>
-
 
 
     </LinearLayout>
@@ -116,6 +119,12 @@
             android:layout_height="wrap_content"
             android:visibility="invisible"
             android:indeterminate="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password"
+            android:id="@+id/forgotPassword"/>
 
 
     </LinearLayout>

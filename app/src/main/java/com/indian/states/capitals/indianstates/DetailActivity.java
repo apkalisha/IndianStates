@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -82,6 +83,20 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         viewPager.setInterval(5000);
         viewPager.setCycle(true);
         viewPager.setStopScrollWhenTouch(true);
+
+
+        viewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                final int margin=10;
+                final int fragmentOffset=view.getScrollX() % view.getWidth();
+
+                if(fragmentOffset > margin && fragmentOffset <view.getWidth() - margin ){
+                    viewPager.getParent().requestDisallowInterceptTouchEvent(true);
+                }
+                return  false;
+            }
+        });
 
         youTubePlayerView =  findViewById(R.id.youtube_player_view);
         youTubePlayerView.initialize(BuildConfig.ApiKey, this);
