@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         more = findViewById(R.id.more_id);
         user = findViewById(R.id.user_id);
         pass = findViewById(R.id.pass_id);
+
         progressDialog = new ProgressDialog(this);
         firebaseAuth= FirebaseAuth.getInstance();
         loginProgress = findViewById(R.id.login_progress);

@@ -15,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -29,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText email;
     private EditText state;
     private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mdb;
     private ProgressBar regProgress;
 
@@ -48,7 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         email= findViewById(R.id.email_id);
         state= findViewById(R.id.state_id);
         mAuth = FirebaseAuth.getInstance();
-        mdb= FirebaseDatabase.getInstance().getReference();
+         mFirebaseDatabase = FirebaseDatabase.getInstance();
         regProgress = findViewById(R.id.reg_progress);
 
 
@@ -107,17 +110,33 @@ public class RegisterActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(getApplicationContext(), "Authentication successful.",
                                     Toast.LENGTH_SHORT).show();
+                            FirebaseUser current_user = mAuth.getCurrentUser();
+                            final String user_uid = current_user.getUid();
 
+                            mdb = mFirebaseDatabase.getReference().child("Users").child(user_uid);
                             HashMap<String,String> dmap=new HashMap<String, String>();
 
                             dmap.put("name",username);
-                            dmap.put("password",password);
                             dmap.put("contact",contact_no);
                             dmap.put("email",emailid);
                             dmap.put("state",states);
 
-                            mdb.push().setValue(dmap);
-
+                            //mdb.push().setValue(dmap);
+                            mdb.setValue(dmap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()) {
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                        startActivity(intent);
+                                        finish();
+                                    }else{
+                                        FirebaseAuthException e = (FirebaseAuthException) task.getException();
+                                        Toast.makeText(getApplicationContext(), "Authentication failed : " + e.getMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                             //finish();
                             /*
                             Intent intent=new Intent(getApplicationContext(),Profile.class);
@@ -126,15 +145,12 @@ public class RegisterActivity extends AppCompatActivity {
                             intent.putExtra("email",emailid);
                             intent.putExtra("state",states);
                             startActivity(intent);*/
-                            Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
-                            finish();
+
 
                         } else {
                             // If sign in fails, display a message to the user.
-
-                            Toast.makeText(getApplicationContext(), "Authentication failed***",
+                            FirebaseAuthException e = (FirebaseAuthException) task.getException();
+                            Toast.makeText(getApplicationContext(), "Authentication failed : " + e.getMessage(),
                                     Toast.LENGTH_SHORT).show();
                             }
 

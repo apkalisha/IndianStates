@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.Toolbar;
@@ -17,10 +19,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +35,8 @@ import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -37,6 +44,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
     private ProgressBar mProgressBar;
     private CoordinatorLayout coordinatorLayout;
+    private FloatingActionButton mActionButton;
 
     private static final int RECOVERY_DIALOG_REQUEST = 1;
     YouTubePlayerView youTubePlayerView;
@@ -56,6 +64,14 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
     private String youTubeVideoLink;
 
+    private StateDetails stateDetails;
+    private String stateName;
+    //Firebase
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mRef;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -72,7 +88,9 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
             }
         });
 
-
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mRef = mFirebaseDatabase.getReference().child("Users").child(mAuth.getCurrentUser().getUid());
 
         viewPager = findViewById(R.id.view_pager);
         circleIndicator = findViewById(R.id.indicator);
@@ -90,6 +108,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         capital = findViewById(R.id.capital);
         area = findViewById(R.id.area);
 
+
         coordinatorLayout = findViewById(R.id.detail_container);
         appbarImageView = findViewById(R.id.app_bar_image);
         historyTextView = findViewById(R.id.expand_text_view);
@@ -100,8 +119,10 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         literacyRateFemale = findViewById(R.id.literacy_rate_female);
         sexRatio = findViewById(R.id.sex_ratio);
 
+
         Intent intent = getIntent();
         if(intent.hasExtra("State")) {
+            stateName = intent.getStringExtra("State");
             collapsingToolbarLayout.setTitle(intent.getStringExtra("State"));
             databaseReference = FirebaseDatabase.getInstance().getReference().child("States").child(intent.getStringExtra("State").trim());
         }
@@ -120,15 +141,56 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
             Snackbar snackbar = Snackbar.make(findViewById(R.id.detail_activity),"No Internet Connection", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
+        mActionButton = findViewById(R.id.detail_action);
+        mActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                HashMap<String,String> bookmark=new HashMap<String, String>();
+                bookmark.put(stateName,stateName);
+                mRef.child("Bookmarks").child(stateName).setValue(bookmark).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            addDetailsToBookmark();
+                        }
+                    }
+                });
 
 
+
+
+            }
+        });
     }
 
+    public void addDetailsToBookmark(){
+
+        HashMap<String,String> details=new HashMap<String, String>();
+        details.put("area",stateDetails.getArea());
+        details.put("capital",stateDetails.getCapital());
+        details.put("history",stateDetails.getHistory());
+        details.put("languages",stateDetails.getLanguages());
+        details.put("literacyRate",String.valueOf(stateDetails.getLiteracyRate()));
+        details.put("literacyRateFemale",String.valueOf(stateDetails.getLiteracyRateFemale()));
+        details.put("literacyRateMale",String.valueOf(stateDetails.getLiteracyRateMale()));
+        details.put("population",String.valueOf(stateDetails.getPopulation()));
+        details.put("regionalDances",stateDetails.getRegionalDance());
+        details.put("sexRatio",String.valueOf(stateDetails.getSexRatio()));
+        mRef.child("Bookmarks").child(stateName).setValue(details).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(DetailActivity.this,"Bookmark Added",Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
+    }
     private void readDataFromDatabase(final StatesCallback statesCallback) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                StateDetails stateDetails = dataSnapshot.getValue(StateDetails.class);
+                stateDetails = dataSnapshot.getValue(StateDetails.class);
                 statesCallback.onCallback(stateDetails);
             }
 

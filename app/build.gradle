@@ -25,23 +25,20 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:cardview-v7:26.1.0'
-
     //material searchview
     implementation 'com.miguelcatalan:materialsearchview:1.4.0'
-
     //app intro library
     implementation 'com.github.apl-devs:appintro:v4.2.3'
-
     implementation 'com.squareup.picasso:picasso:2.71828'
     //Expandable TextView
     implementation 'com.ms-square:expandableTextView:0.1.4'
     implementation 'me.relex:circleindicator:1.2.2@aar'
-
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.google.firebase:firebase-storage:11.8.0'
@@ -49,7 +46,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    compile files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
 }
 
 configurations.all {
