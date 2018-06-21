@@ -1,5 +1,6 @@
 package com.indian.states.capitals.indianstates;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,9 +23,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements StateAdapter.StateAdapterOnClickHandler {
+public class HomeFragment extends Fragment implements StateAdapter.StateAdapterOnClickHandler, OnFavClickListener {
 
     private View homeFragment;
+
+    private Context mContext;
+
     private RecyclerView recyclerView;
 
     private StateAdapter stateAdapter;
@@ -46,21 +50,22 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        homeFragment = inflater.inflate(R.layout.fragment_home,container,false);
+        homeFragment = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = homeFragment.findViewById(R.id.recyclerview_states);
         states = Arrays.asList(getResources().getStringArray(R.array.india_states));
 
+
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
 
         materialSearchView = (MaterialSearchView) getActivity().findViewById(R.id.search_view);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext(),LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false);
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-
+        mContext = getActivity();
         stateAdapter = new StateAdapter(this);
         stateAdapter.setStateNames(states);
         recyclerView.setAdapter(stateAdapter);
@@ -85,10 +90,10 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(newText != null && !newText.isEmpty()) {
+                if (newText != null && !newText.isEmpty()) {
                     List<String> listFound = new ArrayList<>();
-                    for(String item : states){
-                        if(item.toLowerCase().contains(newText.toLowerCase())){
+                    for (String item : states) {
+                        if (item.toLowerCase().contains(newText.toLowerCase())) {
                             listFound.add(item);
                         }
                     }
@@ -106,22 +111,26 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
     }
 
 
-
     @Override
     public void onItemClick(String state) {
 
 
-            Intent intent = new Intent(getActivity(), DetailActivity.class);
-            intent.putExtra("State", state);
-            startActivity(intent);
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra("State", state);
+        startActivity(intent);
 
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
-        inflater.inflate(R.menu.main,menu);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
         materialSearchView.setMenuItem(menuItem);
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void OnFavclicked(String state) {
+
     }
 }

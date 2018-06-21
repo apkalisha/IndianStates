@@ -7,6 +7,6 @@
         android:id="@+id/recyclerview_states"
         android:background="#ffc048"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

@@ -36,7 +36,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -58,7 +57,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
     private DatabaseReference databaseReference;
 
-    private TextView capital, area, population,literacyRate,literacyRateMale,literacyRateFemale,sexRatio;
+    private TextView capital, area, population, literacyRate, literacyRateMale, literacyRateFemale, sexRatio;
     private ImageView appbarImageView;
     private ExpandableTextView historyTextView, languages, regionalDance;
 
@@ -80,7 +79,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
 
 
-        Toolbar toolbar=findViewById(R.id.detail_toolbar);
+        Toolbar toolbar = findViewById(R.id.detail_toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +100,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         viewPager.setCycle(true);
         viewPager.setStopScrollWhenTouch(true);
 
-        youTubePlayerView =  findViewById(R.id.youtube_player_view);
+        youTubePlayerView = findViewById(R.id.youtube_player_view);
         youTubePlayerView.initialize(BuildConfig.ApiKey, this);
 
         population = findViewById(R.id.population);
@@ -112,8 +111,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         coordinatorLayout = findViewById(R.id.detail_container);
         appbarImageView = findViewById(R.id.app_bar_image);
         historyTextView = findViewById(R.id.expand_text_view);
-        languages=findViewById(R.id.languages_spoken);
-        regionalDance=findViewById(R.id.regional_dance);
+        languages = findViewById(R.id.languages_spoken);
+        regionalDance = findViewById(R.id.regional_dance);
         literacyRate = findViewById(R.id.literacy_rate);
         literacyRateMale = findViewById(R.id.literacy_rate_male);
         literacyRateFemale = findViewById(R.id.literacy_rate_female);
@@ -121,24 +120,22 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
 
         Intent intent = getIntent();
-        if(intent.hasExtra("State")) {
+        if (intent.hasExtra("State")) {
             stateName = intent.getStringExtra("State");
             collapsingToolbarLayout.setTitle(intent.getStringExtra("State"));
             databaseReference = FirebaseDatabase.getInstance().getReference().child("States").child(intent.getStringExtra("State").trim());
         }
 
 
-
-
         //Connectivity Manager
-        ConnectivityManager connectivityManager = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = null;
         if (connectivityManager != null) {
             networkInfo = connectivityManager.getActiveNetworkInfo();
         }
-        if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()){
+        if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()) {
             mProgressBar.setVisibility(View.GONE);
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.detail_activity),"No Internet Connection", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.detail_activity), "No Internet Connection", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
         mActionButton = findViewById(R.id.detail_action);
@@ -146,46 +143,55 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
             @Override
             public void onClick(View view) {
 
-                HashMap<String,String> bookmark=new HashMap<String, String>();
-                bookmark.put(stateName,stateName);
-                mRef.child("Bookmarks").child(stateName).setValue(bookmark).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
-                            addDetailsToBookmark();
-                        }
-                    }
-                });
-
-
+                HashMap<String, String> bookmark = new HashMap<String, String>();
+                bookmark.put(stateName,"".trim());
+                mRef.child("Bookmarks").child(stateName).setValue(bookmark);
 
 
             }
         });
     }
 
-    public void addDetailsToBookmark(){
+   /* public void addDetailsToBookmark() {
 
-        HashMap<String,String> details=new HashMap<String, String>();
-        details.put("area",stateDetails.getArea());
-        details.put("capital",stateDetails.getCapital());
-        details.put("history",stateDetails.getHistory());
-        details.put("languages",stateDetails.getLanguages());
-        details.put("literacyRate",String.valueOf(stateDetails.getLiteracyRate()));
-        details.put("literacyRateFemale",String.valueOf(stateDetails.getLiteracyRateFemale()));
-        details.put("literacyRateMale",String.valueOf(stateDetails.getLiteracyRateMale()));
-        details.put("population",String.valueOf(stateDetails.getPopulation()));
-        details.put("regionalDances",stateDetails.getRegionalDance());
-        details.put("sexRatio",String.valueOf(stateDetails.getSexRatio()));
+        HashMap<String, String> details = new HashMap<String, String>();
+
+        details.put("area", stateDetails.getArea());
+        details.put("capital", stateDetails.getCapital());
+        details.put("history", stateDetails.getHistory());
+        details.put("languages", stateDetails.getLanguages());
+        details.put("literacyRate", String.valueOf(stateDetails.getLiteracyRate()));
+        details.put("literacyRateFemale", String.valueOf(stateDetails.getLiteracyRateFemale()));
+        details.put("literacyRateMale", String.valueOf(stateDetails.getLiteracyRateMale()));
+        details.put("population", String.valueOf(stateDetails.getPopulation()));
+        details.put("regionalDances", stateDetails.getRegionalDance());
+        details.put("sexRatio", String.valueOf(stateDetails.getSexRatio()));
         mRef.child("Bookmarks").child(stateName).setValue(details).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(DetailActivity.this,"Bookmark Added",Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailActivity.this, "Bookmark Added", Toast.LENGTH_SHORT).show();
+                HashMap<String, String> Imagedetails = new HashMap<String, String>();
+                HashMap<String, String> images = new HashMap<String, String>();
+                int i = 0;
+                ArrayList<String> imageDetails = stateDetails.getImageDetails();
+                for (i = 0; i < imageDetails.size(); i++) {
+                    Imagedetails.put(" " + i, imageDetails.get(i));
+
+                }
+                mRef.child("Bookmarks").child(stateName).child("imageDetails").setValue(Imagedetails);
+                i = 0;
+                ArrayList<String> img = stateDetails.getImages();
+                for (i = 0; i < img.size(); i++) {
+                    Imagedetails.put(" " + i, img.get(i));
+                }
+                mRef.child("Bookmarks").child(stateName).child("images").setValue(img);
+                Toast.makeText(DetailActivity.this, "Bookmark Added", Toast.LENGTH_SHORT).show();
             }
 
         });
 
-    }
+    }*/
+
     private void readDataFromDatabase(final StatesCallback statesCallback) {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -226,13 +232,12 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                 viewPager.setAdapter(adapter);
                 circleIndicator.setViewPager(viewPager);
                 adapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
-                if(!b) {
-                    Log.i("video link",youTubeVideoLink);
+                if (!b) {
+                    Log.i("video link", youTubeVideoLink);
                     youTubePlayer.cueVideo(youTubeVideoLink);
                 }
                 mProgressBar.setVisibility(View.GONE);
                 coordinatorLayout.setVisibility(View.VISIBLE);
-
 
 
             }
@@ -241,11 +246,11 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-        if(youTubeInitializationResult.isUserRecoverableError()) {
-            youTubeInitializationResult.getErrorDialog(DetailActivity.this,RECOVERY_DIALOG_REQUEST);
+        if (youTubeInitializationResult.isUserRecoverableError()) {
+            youTubeInitializationResult.getErrorDialog(DetailActivity.this, RECOVERY_DIALOG_REQUEST);
         } else {
-            String errorMessage = getString(R.string.youTubeErrorMessage)+youTubeInitializationResult;
-            Toast.makeText(DetailActivity.this,errorMessage,Toast.LENGTH_SHORT).show();
+            String errorMessage = getString(R.string.youTubeErrorMessage) + youTubeInitializationResult;
+            Toast.makeText(DetailActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
         }
 
     }
