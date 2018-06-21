@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         // Start the thread
         t.start();
         BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
-        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -153,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         if(currentUser == null) {
             Intent mainIntent = new Intent(MainActivity.this,LoginActivity.class);
             startActivity(mainIntent);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             finish();
         }
     }

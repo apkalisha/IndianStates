@@ -180,7 +180,6 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                 circleIndicator.setViewPager(viewPager);
                 adapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
                 if(!b) {
-                    Log.i("video link",youTubeVideoLink);
                     youTubePlayer.cueVideo(youTubeVideoLink);
                 }
                 mProgressBar.setVisibility(View.GONE);

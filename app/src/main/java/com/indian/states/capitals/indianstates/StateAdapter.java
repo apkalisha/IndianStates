@@ -49,7 +49,7 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.StateViewHol
         public final TextView mTextView;
         public StateViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.tv_state_name);
+            mTextView =  itemView.findViewById(R.id.tv_state_name);
             itemView.setOnClickListener(this);
         }
 

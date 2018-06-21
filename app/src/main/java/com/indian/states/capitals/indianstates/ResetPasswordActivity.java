@@ -37,7 +37,7 @@ public class ResetPasswordActivity extends AppCompatActivity{
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ResetPasswordActivity.this, LoginActivity.class));
+                finish();
             }
         });
 
