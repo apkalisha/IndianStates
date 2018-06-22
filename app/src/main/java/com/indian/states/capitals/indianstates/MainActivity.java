@@ -87,9 +87,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.navigation_profile:
                         selectedFragment = ProfileFragment.newInstance();
                         break;
-                    case R.id.navigation_settings:
+                    /*case R.id.navigation_settings:
                         selectedFragment = SettingsFragment.newInstance();
-                        break;
+                        break;*/
 
                 }
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();

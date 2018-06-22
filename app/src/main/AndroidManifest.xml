@@ -40,6 +40,7 @@
         <activity
             android:name=".AppIntro"
             android:label="Intro Slider" />
+        <activity android:name=".ResetPasswordActivity"></activity>
     </application>
 
 </manifest>
