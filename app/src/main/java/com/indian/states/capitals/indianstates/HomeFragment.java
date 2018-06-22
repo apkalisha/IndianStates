@@ -123,7 +123,7 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
 
     @Override
     public void OnFavClick(String state, Integer p) {
-      //nothing to do here
+        //nothing to do here
     }
 
     @Override
@@ -135,4 +135,4 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
     }
 
 
-    }
+}
