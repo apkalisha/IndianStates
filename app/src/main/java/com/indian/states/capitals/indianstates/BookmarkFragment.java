@@ -21,8 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class BookmarkFragment extends Fragment implements StateAdapter.StateAdapterOnClickHandler,
-        StateAdapter.OnFavClickListener {
+public class BookmarkFragment extends Fragment implements StateAdapter.StateAdapterOnClickHandler{
 
     View bookmarkFragment;
 
@@ -62,7 +61,7 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         mContext = getActivity();
-        stateAdapter = new StateAdapter(this,this);
+        stateAdapter = new StateAdapter(this,1);
         loadState();
 
 
@@ -78,7 +77,6 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
                     states.add(name);
 
                 }
-                stateAdapter.setBookmarkVisibility(1);
                 stateAdapter.setStateNames(states);
                 recyclerView.setAdapter(stateAdapter);
             }
@@ -89,7 +87,17 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
             }
         });
     }
+    @Override
+    public void OnFavClick(String state, Integer position) {
+        Toast.makeText(this.getActivity(), "Removed " + state + " from Bookmarks", Toast.LENGTH_SHORT).show();
+        mDatabase.child("Bookmarks").child(state).removeValue();
+        stateAdapter = new StateAdapter(this,1);
+        states.clear();
+        stateAdapter.notifyItemRemoved(position);
+        stateAdapter.notifyItemRangeChanged(position, 1);
 
+
+    }
 
     @Override
     public void onItemClick(String state) {
@@ -102,8 +110,5 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
     }
 
 
-    @Override
-    public void OnFavclicked(String state) {
-        Toast.makeText(this.getActivity(), "CLicked " + state, Toast.LENGTH_SHORT).show();
-    }
+
 }

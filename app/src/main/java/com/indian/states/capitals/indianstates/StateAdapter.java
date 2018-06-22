@@ -2,7 +2,6 @@ package com.indian.states.capitals.indianstates;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,29 +12,21 @@ import java.util.List;
 
 public class StateAdapter extends RecyclerView.Adapter<StateAdapter.StateViewHolder> {
     private List<String> stateNames;
-    private Integer visibilityImg = 0;
+    private Integer visibilityImg;//to set the bookmark visibility
 
     private final StateAdapterOnClickHandler stateAdapterOnClickHandler;
-    private final OnFavClickListener onFavClickListener;
 
-   /* StateAdapter(StateAdapterOnClickHandler stateAdapterOnClickHandler) {
+    StateAdapter(StateAdapterOnClickHandler stateAdapterOnClickHandler, Integer visible) {
 
         this.stateAdapterOnClickHandler = stateAdapterOnClickHandler;
-        OnFavClickListener = ;
-    }*/
+        this.visibilityImg = visible;
+
+    }
 
     public interface StateAdapterOnClickHandler {
         void onItemClick(String state);
-    }
 
-    StateAdapter(StateAdapterOnClickHandler stateAdapterOnClickHandler, OnFavClickListener monFavClickListener) {
-
-        this.stateAdapterOnClickHandler = stateAdapterOnClickHandler;
-        this.onFavClickListener = monFavClickListener;
-    }
-
-    public interface OnFavClickListener {
-         void OnFavclicked(String state);
+        void OnFavClick(String state, Integer pos);
     }
 
 
@@ -81,29 +72,27 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.StateViewHol
         public void onClick(View v) {
             int clickedPostion = getAdapterPosition();
             String state = stateNames.get(clickedPostion);
-            if (visibilityImg != 1) {
-                stateAdapterOnClickHandler.onItemClick(state);
-            } else if(visibilityImg == 1){
-
-
+            if (visibilityImg == 1) {
                 switch (v.getId()) {
                     case R.id.tv_state_name:
                         stateAdapterOnClickHandler.onItemClick(state);
                         break;
                     case R.id.bookmark_fav:
-                        onFavClickListener.OnFavclicked(state);
+                        stateAdapterOnClickHandler.OnFavClick(state,clickedPostion);
                         break;
                 }
+            } else {
+                stateAdapterOnClickHandler.onItemClick(state);
             }
         }
+
     }
 
     public void setStateNames(List<String> states) {
         stateNames = states;
         notifyDataSetChanged();
+
     }
 
-    public void setBookmarkVisibility(Integer x) {
-        this.visibilityImg = x;
-    }
+
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -19,6 +20,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
@@ -160,7 +163,12 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
                 HashMap<String, String> bookmark = new HashMap<String, String>();
                 bookmark.put(stateName, "".trim());
-                mRef.child("Bookmarks").child(stateName).setValue(bookmark);
+                mRef.child("Bookmarks").child(stateName).setValue(bookmark).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(DetailActivity.this, stateName+" added to the Bookmarks", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
 
             }

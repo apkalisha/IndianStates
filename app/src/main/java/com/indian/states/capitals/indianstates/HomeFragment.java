@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements StateAdapter.StateAdapterOnClickHandler, StateAdapter.OnFavClickListener {
+public class HomeFragment extends Fragment implements StateAdapter.StateAdapterOnClickHandler {
 
     private View homeFragment;
 
@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         mContext = getActivity();
-        stateAdapter = new StateAdapter(this,this);
+        stateAdapter = new StateAdapter(this,0);
         stateAdapter.setStateNames(states);
         recyclerView.setAdapter(stateAdapter);
 
@@ -122,6 +122,11 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
     }
 
     @Override
+    public void OnFavClick(String state, Integer p) {
+      //nothing to do here
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
@@ -130,8 +135,4 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
     }
 
 
-    @Override
-    public void OnFavclicked(String state) {
-
     }
-}
