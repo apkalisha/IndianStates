@@ -21,8 +21,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class BookmarkFragment extends Fragment implements
-        StateAdapter.StateAdapterOnClickHandler, OnFavClickListener {
+public class BookmarkFragment extends Fragment implements StateAdapter.StateAdapterOnClickHandler,
+        StateAdapter.OnFavClickListener {
 
     View bookmarkFragment;
 
@@ -62,7 +62,7 @@ public class BookmarkFragment extends Fragment implements
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         mContext = getActivity();
-        stateAdapter = new StateAdapter(this);
+        stateAdapter = new StateAdapter(this,this);
         loadState();
 
 
@@ -78,7 +78,7 @@ public class BookmarkFragment extends Fragment implements
                     states.add(name);
 
                 }
-                stateAdapter.setBookmarkVisibilty(1, getContext());
+                stateAdapter.setBookmarkVisibility(1);
                 stateAdapter.setStateNames(states);
                 recyclerView.setAdapter(stateAdapter);
             }
@@ -104,6 +104,6 @@ public class BookmarkFragment extends Fragment implements
 
     @Override
     public void OnFavclicked(String state) {
-        Toast.makeText(this.getActivity(), "CLicked", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this.getActivity(), "CLicked " + state, Toast.LENGTH_SHORT).show();
     }
 }
