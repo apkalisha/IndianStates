@@ -1,5 +1,6 @@
 package com.indian.states.capitals.indianstates;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setContentView(R.layout.learnmore);
+                updateUI(view);
             }
         });
 
@@ -106,6 +107,21 @@ public class LoginActivity extends AppCompatActivity {
             snackbar.show();
         }
 
+    }
+
+    private void updateUI(View view) {
+        final Dialog myDialog = new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        TextView txtClose;
+        myDialog.setContentView(R.layout.learnmore);
+        txtClose = myDialog.findViewById(R.id.close_text);
+        txtClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+        //myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        myDialog.show();
     }
 
     /*@Override
