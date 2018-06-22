@@ -78,7 +78,7 @@ public class BookmarkFragment extends Fragment implements
                     states.add(name);
 
                 }
-                stateAdapter.setBookmarkVisibilty(1, getContext());
+                stateAdapter.setBookmarkVisibility(1);
                 stateAdapter.setStateNames(states);
                 recyclerView.setAdapter(stateAdapter);
             }
