@@ -195,7 +195,6 @@ public class ProfileFragment extends Fragment {
 
                         }
                     });
-
                 }
 
             }).addOnFailureListener(new OnFailureListener() {
