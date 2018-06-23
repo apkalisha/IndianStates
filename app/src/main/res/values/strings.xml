@@ -79,4 +79,5 @@
     <string name="log_out">Log Out</string>
     <string name="contact">contact</string>
     <string name="username">USERNAME</string>
+    <string name="no_bookmarks_yet">No Bookmarks yet !!</string>
 </resources>

@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,9 +28,9 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
 
     private RecyclerView recyclerView;
     private StateAdapter stateAdapter;
+    private TextView noBookmark;
 
 
-    private Context mContext;
 
     private ArrayList<String> states = new ArrayList<>();
 
@@ -49,7 +50,7 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         bookmarkFragment = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = bookmarkFragment.findViewById(R.id.recyclerview_states);
-
+        noBookmark = bookmarkFragment.findViewById(R.id.no_bookmarks);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -62,7 +63,6 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        mContext = getActivity();
         stateAdapter = new StateAdapter(this,1);
         loadState();
 
@@ -82,9 +82,12 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
                     String name = String.valueOf(ds.getKey());
                     states.add(name);
 
+                }if(states.isEmpty()){
+                    noBookmark.setVisibility(View.VISIBLE);
+                }else {
+                    stateAdapter.setStateNames(states);
+                    recyclerView.setAdapter(stateAdapter);
                 }
-                stateAdapter.setStateNames(states);
-                recyclerView.setAdapter(stateAdapter);
             }
 
             @Override
