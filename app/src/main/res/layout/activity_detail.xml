@@ -499,6 +499,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_fav"
             android:elevation="6dp"
+            android:layout_margin="8dp"
             app:pressedTranslationZ="12dp"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|right|end"
