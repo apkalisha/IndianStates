@@ -28,6 +28,7 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
     private RecyclerView recyclerView;
     private StateAdapter stateAdapter;
 
+
     private Context mContext;
 
     private ArrayList<String> states = new ArrayList<>();
@@ -49,6 +50,7 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
         bookmarkFragment = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = bookmarkFragment.findViewById(R.id.recyclerview_states);
 
+
         mAuth = FirebaseAuth.getInstance();
 
 
@@ -69,6 +71,10 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
     }
 
     public void loadState() {
+
+
+
+
         mDatabase.child("Bookmarks").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
