@@ -58,6 +58,7 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference databaseReference;
     private Uri imageUri;
     private ProgressBar mProgressBar;
+    private ValueEventListener valueEventListener;
 
     private static final int GALLERY_PICK = 1;
 
@@ -81,6 +82,31 @@ public class ProfileFragment extends Fragment {
         user=mAuth.getCurrentUser();
         profileImage = profileFragment.findViewById(R.id.profile_image);
         ImageButton editNameBtn = profileFragment.findViewById(R.id.edit_name_btn);
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String username = dataSnapshot.child("name").getValue().toString();
+                String email = dataSnapshot.child("email").getValue().toString();
+                String cont = dataSnapshot.child("contact").getValue().toString();
+                if(dataSnapshot.child("profilePicUrl").exists()) {
+                    String image = dataSnapshot.child("profilePicUrl").getValue().toString();
+                    if (image != null) {
+                        Picasso.get().load(image).placeholder(R.drawable.profile).into(profileImage);
+                    }
+                }
+                profilename.setText(username);
+                useremailid.setText(email);
+                contactno.setText(cont);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(getActivity(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
+
+            }
+        };
+
+        loadData();
 
         profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,12 +141,13 @@ public class ProfileFragment extends Fragment {
                 logOut();
             }
         });
-        loadData();
+
         return profileFragment;
     }
 
     private void logOut() {
         mAuth.signOut();
+        databaseReference.removeEventListener(valueEventListener);
         Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(loginIntent);
@@ -130,30 +157,7 @@ public class ProfileFragment extends Fragment {
     private void loadData() {
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                    String username = dataSnapshot.child("name").getValue().toString();
-                    String email = dataSnapshot.child("email").getValue().toString();
-                    String cont = dataSnapshot.child("contact").getValue().toString();
-                    if(dataSnapshot.child("profilePicUrl").exists()) {
-                        String image = dataSnapshot.child("profilePicUrl").getValue().toString();
-                        if (image != null) {
-                            Picasso.get().load(image).placeholder(R.drawable.profile).into(profileImage);
-                        }
-                    }
-                    profilename.setText(username);
-                    useremailid.setText(email);
-                    contactno.setText(cont);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getActivity(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
-
-            }
-
-        });
+        databaseReference.addValueEventListener(valueEventListener);
 
     }
 
