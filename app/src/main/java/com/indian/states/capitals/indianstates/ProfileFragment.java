@@ -49,24 +49,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
-    View profileFragement;
-    View v;
-    private Button logOutBtn;
+    View profileFragment;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
     private TextView profilename;
     private TextView contactno;
     private TextView useremailid;
-    private TextView reset;
-    private ImageButton profileImageButton;
     private DatabaseReference databaseReference;
     private Uri imageUri;
     private ProgressBar mProgressBar;
-    private ImageButton editNameBtn;
 
     private static final int GALLERY_PICK = 1;
 
-    private StorageReference mImageStorage;
     private CircleImageView profileImage;
 
     public static ProfileFragment newInstance() {
@@ -76,17 +70,17 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        profileFragement = inflater.inflate(R.layout.fragment_profile,container,false);
-        profilename= profileFragement.findViewById(R.id.profname_id);
-        contactno= profileFragement.findViewById(R.id.profcontact_id);
-        useremailid= profileFragement.findViewById(R.id.profemail_id);
-        reset= profileFragement.findViewById(R.id.reset_pass_id);
-        profileImageButton = profileFragement.findViewById(R.id.profile_image_button);
-        mProgressBar = profileFragement.findViewById(R.id.image_progress);
+        profileFragment = inflater.inflate(R.layout.fragment_profile,container,false);
+        profilename= profileFragment.findViewById(R.id.profname_id);
+        contactno= profileFragment.findViewById(R.id.profcontact_id);
+        useremailid= profileFragment.findViewById(R.id.profemail_id);
+        TextView reset = profileFragment.findViewById(R.id.reset_pass_id);
+        ImageButton profileImageButton = profileFragment.findViewById(R.id.profile_image_button);
+        mProgressBar = profileFragment.findViewById(R.id.image_progress);
         mAuth=FirebaseAuth.getInstance();
         user=mAuth.getCurrentUser();
-        profileImage = profileFragement.findViewById(R.id.profile_image);
-        editNameBtn = profileFragement.findViewById(R.id.edit_name_btn);
+        profileImage = profileFragment.findViewById(R.id.profile_image);
+        ImageButton editNameBtn = profileFragment.findViewById(R.id.edit_name_btn);
 
         profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,29 +108,26 @@ public class ProfileFragment extends Fragment {
         });
 
 
-
-        logOutBtn = profileFragement.findViewById(R.id.btn_logout);
+        Button logOutBtn = profileFragment.findViewById(R.id.btn_logout);
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
-                loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(loginIntent);
-                getActivity().finish();
+                logOut();
             }
         });
-        return profileFragement;
+        loadData();
+        return profileFragment;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        this.v=profileFragement;
-        loaddata();
+    private void logOut() {
+        mAuth.signOut();
+        Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
+        loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(loginIntent);
+        getActivity().finish();
     }
 
-    private void loaddata() {
+    private void loadData() {
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -181,7 +172,7 @@ public class ProfileFragment extends Fragment {
 
         if (imageUri != null) {
             mProgressBar.setVisibility(View.VISIBLE);
-            mImageStorage = FirebaseStorage.getInstance().getReference("profile pics/"+"/"+user.getUid()+".jpg");
+            StorageReference mImageStorage = FirebaseStorage.getInstance().getReference("profile pics/" + "/" + user.getUid() + ".jpg");
             mImageStorage.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -204,7 +195,6 @@ public class ProfileFragment extends Fragment {
 
                         }
                     });
-
                 }
 
             }).addOnFailureListener(new OnFailureListener() {
