@@ -80,6 +80,7 @@
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_alignEnd="@+id/profname_id"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_edit_white_24dp" />
