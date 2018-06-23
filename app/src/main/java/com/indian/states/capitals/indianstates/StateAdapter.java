@@ -25,7 +25,6 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.StateViewHol
 
     public interface StateAdapterOnClickHandler {
         void onItemClick(String state);
-
         void OnFavClick(String state, Integer pos);
     }
 
@@ -93,6 +92,5 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.StateViewHol
         notifyDataSetChanged();
 
     }
-
 
 }

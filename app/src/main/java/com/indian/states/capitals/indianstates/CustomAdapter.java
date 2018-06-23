@@ -33,7 +33,7 @@ public class CustomAdapter extends PagerAdapter {
         TextView textView = view.findViewById(R.id.tv_image_name);
         Picasso.get()
                 .load(imagesArray.get(position+1))
-                .placeholder(R.drawable.placeholder)
+                .placeholder(R.drawable.image_placeholder)
                 .fit()
                 .into(imageView);
         textView.setText(namesArray.get(position));
