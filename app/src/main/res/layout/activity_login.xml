@@ -1,132 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/login_activity"
-    tools:context="com.indian.states.capitals.indianstates.LoginActivity">
+    android:fillViewport="true">
 
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/login_activity"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="50dp">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Welcome to"
-            android:textAllCaps="true"
-            android:textColor="#fff"
-            android:textSize="40sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:text="THE D-ZONE"
-            android:textAllCaps="true"
-            android:textColor="#fff"
-            android:textSize="40sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="This is an app on INDIAN STATES"
-            android:textColor="#fff"
-            android:textSize="15sp" />
+        tools:context="com.indian.states.capitals.indianstates.LoginActivity">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:padding="50dp">
 
-            <Button
-                android:id="@+id/more_id"
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/buttonstyle"
-                android:text="about us"
-                android:textColor="#fff" />
+                android:fontFamily="sans-serif-condensed"
+                android:text="@string/welcome_to"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/join_id"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/background_white_border"
-                android:text="Join Us"
-                android:textColor="#fff" />
+                android:fontFamily="sans-serif-condensed"
+                android:text="@string/the_d_zone"
+                android:textAllCaps="true"
+                android:textColor="#fff"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="@string/this_is_an_app_on_indian_states"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/more_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/buttonstyle"
+                    android:text="@string/about_us"
+                    android:textColor="#fff" />
+
+                <Button
+                    android:id="@+id/join_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/background_white_border"
+                    android:text="@string/join_us"
+                    android:textColor="#fff" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/user_id"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_white_border"
-            android:drawableLeft="@drawable/ic_email_black_24dp"
-            android:hint="Email Id"
-            android:inputType="textEmailAddress"
-            android:padding="16dp" />
-
-        <EditText
-            android:id="@+id/pass_id"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/background_white_border"
-            android:drawableLeft="@drawable/ic_lock_black_24dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="16dp" />
-
-        <Button
-            android:id="@+id/login_id"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/buttonstyle"
-            android:text="login"
-            android:textColor="#fff" />
-
-        <ProgressBar
-            android:id="@+id/login_progress"
-            style="?android:attr/progressBarStyleHorizontal"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:indeterminate="true"/>
+            android:layout_height="match_parent"
+            android:background="@android:color/darker_gray"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/forgot_password"
-            android:id="@+id/forgotPassword"/>
+            <EditText
+                android:id="@+id/user_id"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_white_border"
+                android:drawableLeft="@drawable/ic_email_black_24dp"
+                android:hint="@string/email_id"
+                android:inputType="textEmailAddress"
+                android:padding="16dp" />
 
+            <EditText
+                android:id="@+id/pass_id"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/background_white_border"
+                android:drawableLeft="@drawable/ic_lock_black_24dp"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="16dp" />
+
+            <Button
+                android:id="@+id/login_id"
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/buttonstyle"
+                android:text="@string/login"
+                android:textColor="#fff" />
+
+            <ProgressBar
+                android:id="@+id/login_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/forgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forgot_password" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

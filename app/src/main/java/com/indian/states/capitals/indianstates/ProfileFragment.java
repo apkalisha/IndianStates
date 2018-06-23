@@ -4,8 +4,6 @@ package com.indian.states.capitals.indianstates;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -76,26 +74,26 @@ public class ProfileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        profileFragement = inflater.inflate(R.layout.fragment_profile,container,false);
-        profilename= profileFragement.findViewById(R.id.profname_id);
-        contactno= profileFragement.findViewById(R.id.profcontact_id);
-        useremailid= profileFragement.findViewById(R.id.profemail_id);
-        reset= profileFragement.findViewById(R.id.reset_pass_id);
+        profileFragement = inflater.inflate(R.layout.fragment_profile, container, false);
+        profilename = profileFragement.findViewById(R.id.profname_id);
+        contactno = profileFragement.findViewById(R.id.profcontact_id);
+        useremailid = profileFragement.findViewById(R.id.profemail_id);
+        reset = profileFragement.findViewById(R.id.reset_pass_id);
         profileImageButton = profileFragement.findViewById(R.id.profile_image_button);
         mProgressBar = profileFragement.findViewById(R.id.image_progress);
-        mAuth=FirebaseAuth.getInstance();
-        user=mAuth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
         profileImage = profileFragement.findViewById(R.id.profile_image);
         editNameBtn = profileFragement.findViewById(R.id.edit_name_btn);
 
         profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent galleryIntent =  new Intent();
+                Intent galleryIntent = new Intent();
                 galleryIntent.setType("image/*");
                 galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
 
-                startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"),GALLERY_PICK);
+                startActivityForResult(Intent.createChooser(galleryIntent, "SELECT IMAGE"), GALLERY_PICK);
             }
         });
 
@@ -112,7 +110,6 @@ public class ProfileFragment extends Fragment {
                 updatePassword(view);
             }
         });
-
 
 
         logOutBtn = profileFragement.findViewById(R.id.btn_logout);
@@ -132,33 +129,33 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        this.v=profileFragement;
+        this.v = profileFragement;
         loaddata();
     }
 
     private void loaddata() {
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                    String username = dataSnapshot.child("name").getValue().toString();
-                    String email = dataSnapshot.child("email").getValue().toString();
-                    String cont = dataSnapshot.child("contact").getValue().toString();
-                    if(dataSnapshot.child("profilePicUrl").exists()) {
-                        String image = dataSnapshot.child("profilePicUrl").getValue().toString();
-                        if (image != null) {
-                            Picasso.get().load(image).placeholder(R.drawable.profile).into(profileImage);
-                        }
+                String username = dataSnapshot.child("name").getValue().toString();
+                String email = dataSnapshot.child("email").getValue().toString();
+                String cont = dataSnapshot.child("contact").getValue().toString();
+                if (dataSnapshot.child("profilePicUrl").exists()) {
+                    String image = dataSnapshot.child("profilePicUrl").getValue().toString();
+                    if (image != null) {
+                        Picasso.get().load(image).placeholder(R.drawable.profile).into(profileImage);
                     }
-                    profilename.setText(username);
-                    useremailid.setText(email);
-                    contactno.setText(cont);
+                }
+                profilename.setText(username);
+                useremailid.setText(email);
+                contactno.setText(cont);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getActivity(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
+                // Toast.makeText(getContext(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
 
             }
 
@@ -169,7 +166,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null && data.getData() != null ) {
+        if (requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
             Toast.makeText(getActivity(), imageUri.toString(), Toast.LENGTH_SHORT).show();
             profileImage.setImageURI(imageUri);
@@ -181,14 +178,14 @@ public class ProfileFragment extends Fragment {
 
         if (imageUri != null) {
             mProgressBar.setVisibility(View.VISIBLE);
-            mImageStorage = FirebaseStorage.getInstance().getReference("profile pics/"+"/"+user.getUid()+".jpg");
+            mImageStorage = FirebaseStorage.getInstance().getReference("profile pics/" + "/" + user.getUid() + ".jpg");
             mImageStorage.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                     String profileImageUrl = taskSnapshot.getDownloadUrl().toString();
                     Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("profilePicUrl",profileImageUrl);
+                    userMap.put("profilePicUrl", profileImageUrl);
 
                     databaseReference.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -216,6 +213,7 @@ public class ProfileFragment extends Fragment {
             });
         }
     }
+
     public void updateName(View view) {
         final Dialog myDialog = new Dialog(getActivity());
         TextView txtclose;
@@ -225,13 +223,13 @@ public class ProfileFragment extends Fragment {
         myDialog.setTitle("Update Name");
         txtclose = myDialog.findViewById(R.id.txt_close);
         txtclose.setText("X");
-        btnSave =  myDialog.findViewById(R.id.save_btn);
+        btnSave = myDialog.findViewById(R.id.save_btn);
         updatedName = myDialog.findViewById(R.id.edit_name);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(updatedName.getText().toString()))
+                if (TextUtils.isEmpty(updatedName.getText().toString()))
                     updatedName.setError("Required");
                 else {
                     new AlertDialog.Builder(getActivity())
@@ -242,7 +240,7 @@ public class ProfileFragment extends Fragment {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     myDialog.dismiss();
                                     Map<String, Object> userMap = new HashMap<>();
-                                    userMap.put("name",updatedName.getText().toString().trim());
+                                    userMap.put("name", updatedName.getText().toString().trim());
 
                                     databaseReference.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -256,7 +254,8 @@ public class ProfileFragment extends Fragment {
 
                                         }
                                     });
-                                }})
+                                }
+                            })
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
@@ -275,6 +274,7 @@ public class ProfileFragment extends Fragment {
         });
         myDialog.show();
     }
+
     public void updatePassword(View view) {
         final Dialog myDialog = new Dialog(getActivity());
         TextView txtclose;
@@ -283,21 +283,21 @@ public class ProfileFragment extends Fragment {
         myDialog.setTitle("Change Password");
         txtclose = myDialog.findViewById(R.id.txt_close);
         txtclose.setText("X");
-        btnSave =  myDialog.findViewById(R.id.save_btn);
-        final EditText oldPassword =  myDialog.findViewById(R.id.old_password);
-        final EditText newPassword =  myDialog.findViewById(R.id.new_password);
-        final EditText confirmPassword =  myDialog.findViewById(R.id.confirm_password);
+        btnSave = myDialog.findViewById(R.id.save_btn);
+        final EditText oldPassword = myDialog.findViewById(R.id.old_password);
+        final EditText newPassword = myDialog.findViewById(R.id.new_password);
+        final EditText confirmPassword = myDialog.findViewById(R.id.confirm_password);
         final ProgressBar progressBar = myDialog.findViewById(R.id.progressBar);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(oldPassword.getText().toString()))
+                if (TextUtils.isEmpty(oldPassword.getText().toString()))
                     oldPassword.setError("Required");
-                if(TextUtils.isEmpty(newPassword.getText().toString()))
+                if (TextUtils.isEmpty(newPassword.getText().toString()))
                     newPassword.setError("Required");
-                if(TextUtils.isEmpty(confirmPassword.getText().toString()))
+                if (TextUtils.isEmpty(confirmPassword.getText().toString()))
                     confirmPassword.setError("Required");
-                if(newPassword.getText().toString().length()<6)
+                if (newPassword.getText().toString().length() < 6)
                     newPassword.setError("Too Short");
                 else {
                     new AlertDialog.Builder(getActivity())
@@ -314,15 +314,15 @@ public class ProfileFragment extends Fragment {
                                         user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()){
+                                                if (task.isSuccessful()) {
                                                     user.updatePassword(newPassword.getText().toString())
                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 @Override
                                                                 public void onComplete(@NonNull Task<Void> task) {
-                                                                    if(task.isSuccessful()) {
+                                                                    if (task.isSuccessful()) {
                                                                         progressBar.setVisibility(View.GONE);
                                                                         myDialog.dismiss();
-                                                                        Toast.makeText(getActivity(),"Password Updated Successfully",Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(getActivity(), "Password Updated Successfully", Toast.LENGTH_SHORT).show();
 
                                                                     } else {
                                                                         progressBar.setVisibility(View.GONE);
@@ -341,7 +341,8 @@ public class ProfileFragment extends Fragment {
                                     } else {
                                         confirmPassword.setError("Does not Match");
                                     }
-                                }})
+                                }
+                            })
                             .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
