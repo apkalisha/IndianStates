@@ -1,147 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/gradientbackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/profile_image_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="200dp"
+        android:background="@color/cardview_dark_background">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/profile"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp"/>
+
+        <ProgressBar
+            android:id="@+id/image_progress"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/profile_image_button"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:id="@+id/profile_image_button"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="55dp"
+            android:layout_marginEnd="121dp"
+            android:src="@drawable/ic_camera_black_24dp" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="158dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="4dp"
+        app:cardMaxElevation="6dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="410dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:orientation="vertical"
-                android:background="@color/pink" >
-                <ImageButton
-                    android:id="@+id/img"
-                    android:layout_marginTop="35dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="100dp"
-                    android:layout_height="85dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/profile"/>
-
-                <TextView
-                    android:id="@+id/username_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="15dp"
-                    android:text="Username: "
-
-                    android:textColor="#fff"
-                    android:textSize="21sp"
-                    android:textStyle="bold" />
+            android:layout_height="90dp"
+            android:background="@color/colorPrimary">
 
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/profname_id"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="USERNAME"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-            <android.support.v7.widget.CardView
-                android:layout_width="300dp"
-                android:layout_height="120dp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="180dp">
-
-                <LinearLayout
-                    android:background="@color/colorPrimaryDark"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <LinearLayout
-
-                        android:layout_marginTop="12dp"
-                        android:layout_width="150dp"
-                        android:orientation="vertical"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/c_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="1dp"
-                            android:gravity="center_horizontal"
-                            android:text="CONTACT"
-                            android:textColor="#fff"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="2dp"
-                            android:textColor="#fff"
-                            android:id="@+id/contacno_id"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_marginTop="12dp"
-                        android:layout_width="150dp"
-                        android:orientation="vertical"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/s_id"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="1dp"
-                            android:gravity="center_horizontal"
-                            android:text="STATE"
-                            android:textColor="#fff"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="2dp"
-                            android:textColor="#fff"
-                            android:text="state"
-                            android:id="@+id/state_id"/>
-                    </LinearLayout>
-
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
-
+            <ImageButton
+                android:id="@+id/edit_name_btn"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/profname_id"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_edit_white_24dp" />
 
         </RelativeLayout>
 
-        <TextView
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/email_ids"
-            android:drawableLeft="@drawable/ic_email_black_24dp"
-            android:textColor="@color/colorPrimaryDark"
-            android:text=" YOUR EMAIL ID: "/>
+        <RelativeLayout
 
-        <Button
-            android:id="@+id/reg_id"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/buttonstyle"
-            android:text=" explore the states "
-            android:textColor="#fff" />
-        <Button
-            android:id="@+id/bookmark"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/buttonstyle"
-            android:text=" your customized view  "
-            android:textColor="#fff" />
-        <Button
-            android:id="@+id/btn_logout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Log Out"
-            android:backgroundTint="@color/colorPrimary"/>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-</ScrollView>
+            <TextView
+                android:id="@+id/profcontact_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="70dp"
+                android:layout_marginStart="8dp"
+                android:drawableLeft="@drawable/ic_call_black_24dp"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="6dp"
+                android:text="contact"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/profemail_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="28dp"
+                android:layout_marginStart="8dp"
+                android:drawableLeft="@drawable/ic_email_black_24dp"
+                android:fontFamily="sans-serif-light"
+                android:paddingLeft="6dp"
+                android:text="email"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/reset_pass_id"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="95dp"
+        android:textAlignment="center"
+        android:text="Click here to reset password"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:text="Log Out" />
+
+</RelativeLayout>

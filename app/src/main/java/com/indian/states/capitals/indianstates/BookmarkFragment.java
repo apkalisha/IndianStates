@@ -101,8 +101,6 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
 
     @Override
     public void onItemClick(String state) {
-
-
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra("State", state);
         startActivity(intent);
