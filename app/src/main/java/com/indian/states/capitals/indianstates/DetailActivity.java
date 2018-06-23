@@ -91,6 +91,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mRef = mFirebaseDatabase.getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        mRef.keepSynced(true);
 
         viewPager = findViewById(R.id.view_pager);
         circleIndicator = findViewById(R.id.indicator);
