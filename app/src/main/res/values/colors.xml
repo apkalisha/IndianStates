@@ -11,6 +11,7 @@
     <color name="brown">#bf8c09</color>
     <color name="yellow">#FFECD41B</color>
     <color name="red">#FF0000</color>
-    <color name="white">#ffff</color>
+    <color name="white">#ffffff</color>
     <color name="homeBackground">#ffc048</color>
+    <color name="whiteHalfOpacity">#50ffffff</color>
 </resources>

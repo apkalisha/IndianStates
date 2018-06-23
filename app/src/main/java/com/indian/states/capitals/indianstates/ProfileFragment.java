@@ -1,16 +1,23 @@
 package com.indian.states.capitals.indianstates;
 
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,6 +27,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -53,6 +62,7 @@ public class ProfileFragment extends Fragment {
     private DatabaseReference databaseReference;
     private Uri imageUri;
     private ProgressBar mProgressBar;
+    private ImageButton editNameBtn;
 
     private static final int GALLERY_PICK = 1;
 
@@ -76,6 +86,7 @@ public class ProfileFragment extends Fragment {
         mAuth=FirebaseAuth.getInstance();
         user=mAuth.getCurrentUser();
         profileImage = profileFragement.findViewById(R.id.profile_image);
+        editNameBtn = profileFragement.findViewById(R.id.edit_name_btn);
 
         profileImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,10 +99,17 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        editNameBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateName(v);
+            }
+        });
+
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), ResetPasswordActivity.class));
+                updatePassword(view);
             }
         });
 
@@ -197,6 +215,150 @@ public class ProfileFragment extends Fragment {
                 }
             });
         }
+    }
+    public void updateName(View view) {
+        final Dialog myDialog = new Dialog(getActivity());
+        TextView txtclose;
+        Button btnSave;
+        final EditText updatedName;
+        myDialog.setContentView(R.layout.change_name_popup);
+        myDialog.setTitle("Update Name");
+        txtclose = myDialog.findViewById(R.id.txt_close);
+        txtclose.setText("X");
+        btnSave =  myDialog.findViewById(R.id.save_btn);
+        updatedName = myDialog.findViewById(R.id.edit_name);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(updatedName.getText().toString()))
+                    updatedName.setError("Required");
+                else {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Update Name")
+                            .setMessage("Do you really want to change your name?")
+                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    myDialog.dismiss();
+                                    Map<String, Object> userMap = new HashMap<>();
+                                    userMap.put("name",updatedName.getText().toString().trim());
+
+                                    databaseReference.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_LONG).show();
+                                            } else {
+                                                Toast.makeText(getActivity(), "Failed to update profile, try again", Toast.LENGTH_LONG).show();
+                                            }
+
+                                        }
+                                    });
+                                }})
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    myDialog.dismiss();
+                                }
+                            }).show();
+
+                }
+            }
+        });
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.show();
+    }
+    public void updatePassword(View view) {
+        final Dialog myDialog = new Dialog(getActivity());
+        TextView txtclose;
+        Button btnSave;
+        myDialog.setContentView(R.layout.change_password_popup);
+        myDialog.setTitle("Change Password");
+        txtclose = myDialog.findViewById(R.id.txt_close);
+        txtclose.setText("X");
+        btnSave =  myDialog.findViewById(R.id.save_btn);
+        final EditText oldPassword =  myDialog.findViewById(R.id.old_password);
+        final EditText newPassword =  myDialog.findViewById(R.id.new_password);
+        final EditText confirmPassword =  myDialog.findViewById(R.id.confirm_password);
+        final ProgressBar progressBar = myDialog.findViewById(R.id.progressBar);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(TextUtils.isEmpty(oldPassword.getText().toString()))
+                    oldPassword.setError("Required");
+                if(TextUtils.isEmpty(newPassword.getText().toString()))
+                    newPassword.setError("Required");
+                if(TextUtils.isEmpty(confirmPassword.getText().toString()))
+                    confirmPassword.setError("Required");
+                if(newPassword.getText().toString().length()<6)
+                    newPassword.setError("Too Short");
+                else {
+                    new AlertDialog.Builder(getActivity())
+                            .setTitle("Change Password")
+                            .setMessage("Do you really want to change your password?")
+                            .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    if (newPassword.getText().toString().equals(confirmPassword.getText().toString())) {
+
+                                        progressBar.setVisibility(View.VISIBLE);
+                                        String email = user.getEmail();
+                                        AuthCredential credential = EmailAuthProvider.getCredential(email, oldPassword.getText().toString());
+                                        user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    user.updatePassword(newPassword.getText().toString())
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if(task.isSuccessful()) {
+                                                                        progressBar.setVisibility(View.GONE);
+                                                                        myDialog.dismiss();
+                                                                        Toast.makeText(getActivity(),"Password Updated Successfully",Toast.LENGTH_SHORT).show();
+
+                                                                    } else {
+                                                                        progressBar.setVisibility(View.GONE);
+                                                                        myDialog.dismiss();
+                                                                        Toast.makeText(getActivity(), "Failed to change password", Toast.LENGTH_LONG).show();
+                                                                    }
+                                                                }
+                                                            });
+                                                } else {
+                                                    oldPassword.setError("Wrong Old Password");
+                                                    progressBar.setVisibility(View.GONE);
+                                                }
+                                            }
+                                        });
+
+                                    } else {
+                                        confirmPassword.setError("Does not Match");
+                                    }
+                                }})
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    myDialog.dismiss();
+                                }
+                            }).show();
+
+                }
+            }
+        });
+        txtclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDialog.dismiss();
+            }
+        });
+        myDialog.show();
     }
 }
 

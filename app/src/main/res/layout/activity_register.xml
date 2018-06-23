@@ -1,127 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.indian.states.capitals.indianstates.RegisterActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:id="@+id/txt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="REGISTER TO EXPLORE INDIAN STATES"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:background="@android:color/darker_gray"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorPrimary">
-
-            <TextView
-                android:id="@+id/txt_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="REGISTER TO EXPLORE INDIAN STATES"
-                android:textAllCaps="true"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:textStyle="bold" />
-
-        </RelativeLayout>
-
-
 
         <EditText
-            android:background="@drawable/background_white_border"
             android:id="@+id/user_id"
             android:layout_width="350dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:background="@drawable/background_white_border"
             android:drawableLeft="@drawable/ic_person_black_24dp"
-            android:hint="Username" />
-
+            android:hint="Name" />
 
 
         <EditText
-            android:background="@drawable/background_white_border"
             android:id="@+id/email_id"
             android:layout_width="350dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:layout_marginTop="@dimen/margin_top"
+            android:background="@drawable/background_white_border"
             android:drawableLeft="@drawable/ic_email_black_24dp"
+            android:ems="10"
             android:hint="Email Id"
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:background="@drawable/background_white_border"
             android:id="@+id/pass_id"
             android:layout_width="350dp"
-            android:layout_marginTop="@dimen/margin_top"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_gravity="center"
+            android:background="@drawable/background_white_border"
             android:drawableLeft="@drawable/ic_lock_black_24dp"
             android:hint="Password"
             android:inputType="textPassword" />
 
         <EditText
-            android:background="@drawable/background_white_border"
             android:id="@+id/confirmpass_id"
             android:layout_width="350dp"
-            android:layout_marginTop="@dimen/margin_top"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_gravity="center"
+            android:background="@drawable/background_white_border"
             android:drawableLeft="@drawable/ic_lock_black_24dp"
             android:hint="Confirm Password"
             android:inputType="textPassword" />
 
         <EditText
-            android:background="@drawable/background_white_border"
             android:id="@+id/contact_id"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_top"
+            android:layout_gravity="center"
+            android:background="@drawable/background_white_border"
             android:drawableLeft="@drawable/ic_call_black_24dp"
             android:hint="Phone Number" />
 
-        <EditText
-            android:layout_marginTop="@dimen/margin_top"
-            android:background="@drawable/background_white_border"
-            android:id="@+id/state_id"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_place_black_24dp"
-            android:hint="State" />
-
         <Button
             android:id="@+id/reg_id"
+            android:layout_gravity="center"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/buttonstyle"
             android:text="register"
             android:textColor="#fff" />
+        <ProgressBar
+            android:id="@+id/reg_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/reg_progress"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
-
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

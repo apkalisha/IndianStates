@@ -29,7 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText confpass;
     private EditText contact;
     private EditText email;
-    private EditText state;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mdb;
@@ -49,7 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
         confpass= findViewById(R.id.confirmpass_id);
         contact= findViewById(R.id.contact_id);
         email= findViewById(R.id.email_id);
-        state= findViewById(R.id.state_id);
         mAuth = FirebaseAuth.getInstance();
          mFirebaseDatabase = FirebaseDatabase.getInstance();
         regProgress = findViewById(R.id.reg_progress);
@@ -70,7 +68,6 @@ public class RegisterActivity extends AppCompatActivity {
         password=pass.getText().toString().trim();
         contact_no=contact.getText().toString().trim();
         emailid=email.getText().toString().trim();
-        states=state.getText().toString().trim();
 
         if(!Patterns.EMAIL_ADDRESS.matcher(emailid).matches()){
             email.setError("Enter valid email address");
@@ -118,7 +115,6 @@ public class RegisterActivity extends AppCompatActivity {
                             dmap.put("name",username);
                             dmap.put("contact",contact_no);
                             dmap.put("email",emailid);
-                            dmap.put("state",states);
 
                             //mdb.push().setValue(dmap);
                             mdb.setValue(dmap).addOnCompleteListener(new OnCompleteListener<Void>() {
