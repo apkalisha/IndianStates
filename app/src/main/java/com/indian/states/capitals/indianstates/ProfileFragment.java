@@ -156,7 +156,6 @@ public class ProfileFragment extends Fragment {
 
     private void loadData() {
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(user.getUid());
-
         databaseReference.addValueEventListener(valueEventListener);
 
     }
