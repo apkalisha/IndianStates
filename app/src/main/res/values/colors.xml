@@ -3,11 +3,14 @@
     <color name="colorPrimary">#e67e22</color>
     <color name="colorPrimaryDark">#d35400</color>
     <color name="colorAccent">#f44339</color>
+    <color name="Primary">#3F51B5</color>
+    <color name="PrimaryDark">#23283a</color>
     <color name="pink">#c20e3c</color>
     <color name="green">#0c8c07</color>
     <color name="blue">#FF1FEFC2</color>
     <color name="brown">#bf8c09</color>
     <color name="yellow">#FFECD41B</color>
-    <color name="Primary">#3F51B5</color>
-    <color name="PrimaryDark">#23283a</color>
+    <color name="red">#FF0000</color>
+    <color name="white">#ffff</color>
+    <color name="homeBackground">#ffc048</color>
 </resources>

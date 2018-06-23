@@ -2,6 +2,8 @@ package com.indian.states.capitals.indianstates;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -56,7 +58,6 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
     private ArrayList<String> images;
     private ArrayList<String> imageDetails;
 
-    private DatabaseReference databaseReference;
 
     private TextView capital, area, population, literacyRate, literacyRateMale, literacyRateFemale, sexRatio;
     private ImageView appbarImageView;
@@ -69,7 +70,10 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
     //Firebase
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference databaseReference;
     private DatabaseReference mRef;
+
+    private Boolean checkBookmark = false;
 
 
     @Override
@@ -77,6 +81,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
 
 
@@ -91,6 +96,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mRef = mFirebaseDatabase.getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        mRef.keepSynced(true);
+
 
         viewPager = findViewById(R.id.view_pager);
         circleIndicator = findViewById(R.id.indicator);
@@ -161,61 +168,51 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
             @Override
             public void onClick(View view) {
 
-                HashMap<String, String> bookmark = new HashMap<String, String>();
-                bookmark.put(stateName, "".trim());
-                mRef.child("Bookmarks").child(stateName).setValue(bookmark).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(DetailActivity.this, stateName+" added to the Bookmarks", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                if (!checkBookmark) {
+                    checkBookmark = true;
+                    change();
+                    HashMap<String, String> bookmark = new HashMap<String, String>();
+                    bookmark.put(stateName, "".trim());
+                    mRef.child("Bookmarks").child(stateName).setValue(bookmark).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(DetailActivity.this, stateName + " added to the Bookmarks", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
+                }else{
+                    checkBookmark = false;
+                    change();
+                    Toast.makeText(DetailActivity.this, "Removed " + stateName + " from Bookmarks", Toast.LENGTH_SHORT).show();
+                    mRef.child("Bookmarks").child(stateName).removeValue();
 
+                }
             }
         });
     }
 
-   /* public void addDetailsToBookmark() {
+    public void checkIfBookmarked() {
 
-        HashMap<String, String> details = new HashMap<String, String>();
-
-        details.put("area", stateDetails.getArea());
-        details.put("capital", stateDetails.getCapital());
-        details.put("history", stateDetails.getHistory());
-        details.put("languages", stateDetails.getLanguages());
-        details.put("literacyRate", String.valueOf(stateDetails.getLiteracyRate()));
-        details.put("literacyRateFemale", String.valueOf(stateDetails.getLiteracyRateFemale()));
-        details.put("literacyRateMale", String.valueOf(stateDetails.getLiteracyRateMale()));
-        details.put("population", String.valueOf(stateDetails.getPopulation()));
-        details.put("regionalDances", stateDetails.getRegionalDance());
-        details.put("sexRatio", String.valueOf(stateDetails.getSexRatio()));
-        mRef.child("Bookmarks").child(stateName).setValue(details).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mRef.child("Bookmarks").addValueEventListener(new ValueEventListener() {
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(DetailActivity.this, "Bookmark Added", Toast.LENGTH_SHORT).show();
-                HashMap<String, String> Imagedetails = new HashMap<String, String>();
-                HashMap<String, String> images = new HashMap<String, String>();
-                int i = 0;
-                ArrayList<String> imageDetails = stateDetails.getImageDetails();
-                for (i = 0; i < imageDetails.size(); i++) {
-                    Imagedetails.put(" " + i, imageDetails.get(i));
-
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(stateName)) {
+                    checkBookmark = true;
+                    Log.i("this", stateName);
                 }
-                mRef.child("Bookmarks").child(stateName).child("imageDetails").setValue(Imagedetails);
-                i = 0;
-                ArrayList<String> img = stateDetails.getImages();
-                for (i = 0; i < img.size(); i++) {
-                    Imagedetails.put(" " + i, img.get(i));
-                }
-                mRef.child("Bookmarks").child(stateName).child("images").setValue(img);
-                Toast.makeText(DetailActivity.this, "Bookmark Added", Toast.LENGTH_SHORT).show();
             }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
         });
 
-    }*/
+
+    }
 
     private void readDataFromDatabase(final StatesCallback statesCallback) {
+        checkIfBookmarked();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -234,8 +231,10 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
     public void onInitializationSuccess(YouTubePlayer.Provider provider, final YouTubePlayer youTubePlayer, final boolean b) {
 
         readDataFromDatabase(new StatesCallback() {
+
             @Override
             public void onCallback(StateDetails stateDetails) {
+                change();
                 capital.setText(stateDetails.getCapital());
                 area.setText(stateDetails.getArea());
                 population.setText(stateDetails.getPopulation());
@@ -250,6 +249,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                 imageDetails = stateDetails.getImageDetails();
                 youTubeVideoLink = stateDetails.getYouTubeVideoLink();
 
+
                 Picasso.get().load(images.get(0)).into(appbarImageView);
                 adapter = new CustomAdapter(DetailActivity.this, images, imageDetails);
                 viewPager.setAdapter(adapter);
@@ -262,9 +262,20 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                 mProgressBar.setVisibility(View.GONE);
                 coordinatorLayout.setVisibility(View.VISIBLE);
 
-
             }
         });
+    }
+
+    public void change() {
+        if (checkBookmark) {
+            //setting white color as background
+            mActionButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
+            mActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_fav, this.getTheme()));
+        } else {
+            mActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_fav2, this.getTheme()));
+            //setting red color as background
+            mActionButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
+        }
     }
 
     @Override
