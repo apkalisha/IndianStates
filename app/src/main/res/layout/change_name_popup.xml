@@ -22,6 +22,7 @@
         android:layout_marginTop="100dp"
         android:textColor="@color/white"
         android:ems="10"
+        android:background="@drawable/background_white_border"
         android:inputType="textEmailAddress"
         android:hint="New Name"
         />

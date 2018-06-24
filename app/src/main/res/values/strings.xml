@@ -75,9 +75,9 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="name">Name</string>
     <string name="register_to_explore_indian_states">REGISTER TO EXPLORE INDIAN STATES</string>
-    <string name="click_here_to_reset_password">Click here to reset password</string>
+    <string name="click_here_to_reset_password">Change your password</string>
     <string name="log_out">Log Out</string>
     <string name="contact">contact</string>
     <string name="username">USERNAME</string>
-    <string name="no_bookmarks_yet">No Bookmarks yet !!</string>
+    <string name="no_bookmarks_yet">No Bookmarks yet !</string>
 </resources>
