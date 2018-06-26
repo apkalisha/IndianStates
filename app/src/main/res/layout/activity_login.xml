@@ -56,14 +56,6 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/more_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/buttonstyle"
-                    android:text="@string/about_us"
-                    android:textColor="#fff" />
 
                 <Button
                     android:id="@+id/join_id"

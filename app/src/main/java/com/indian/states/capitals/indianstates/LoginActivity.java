@@ -26,7 +26,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity {
     private Button login;
     private Button join;
-    private Button more;
     private EditText user;
     private EditText pass;
     ProgressDialog progressDialog;
@@ -43,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
 
         login = findViewById(R.id.login_id);
         join = findViewById(R.id.join_id);
-        more = findViewById(R.id.more_id);
         user = findViewById(R.id.user_id);
         pass = findViewById(R.id.pass_id);
 
@@ -67,12 +65,6 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         };*/
-        more.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                updateUI(view);
-            }
-        });
 
         txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
