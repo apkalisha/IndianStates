@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AboutFragment"
+    android:background="@android:color/darker_gray">
+
+    <TextView
+        android:id="@+id/about_tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:background="@android:color/white"
+        android:elevation="6dp"
+        android:textColor="@android:color/black"
+        />
+    <TextView
+        android:id="@+id/about_tv2"
+        android:layout_below="@id/about_tv1"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="15dp"
+        android:textColor="@android:color/black"
+        android:background="@android:color/white"
+        android:elevation="6dp"
+
+        />
+    <TextView
+        android:id="@+id/about_tv3"
+        android:layout_below="@id/about_tv2"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="15dp"
+        android:textColor="@android:color/black"
+        android:background="@android:color/white"
+        android:elevation="6dp"
+
+        />
+    <TextView
+        android:id="@+id/about_tv4"
+        android:layout_below="@id/about_tv3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textSize="20sp"
+        android:layout_margin="15dp"
+        android:textColor="@android:color/black"
+        android:background="@android:color/white"
+        android:elevation="6dp"
+
+        />
+</RelativeLayout>

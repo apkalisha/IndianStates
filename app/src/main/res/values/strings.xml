@@ -80,4 +80,8 @@
     <string name="contact">contact</string>
     <string name="username">USERNAME</string>
     <string name="no_bookmarks_yet">No Bookmarks yet !</string>
+    <string name="home">Home</string>
+    <string name="share">Share</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="exit">Exit</string>
 </resources>
