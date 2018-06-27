@@ -14,7 +14,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -74,7 +73,6 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
     private DatabaseReference mRef;
 
     private Boolean checkBookmark = false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,6 +161,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
             Snackbar snackbar = Snackbar.make(findViewById(R.id.detail_activity), "No Internet Connection", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
+        loadThis();
         mActionButton = findViewById(R.id.detail_action);
         mActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,7 +179,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                         }
                     });
 
-                }else{
+                } else {
                     checkBookmark = false;
                     change();
                     Toast.makeText(DetailActivity.this, "Removed " + stateName + " from Bookmarks", Toast.LENGTH_SHORT).show();
@@ -198,7 +197,6 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild(stateName)) {
                     checkBookmark = true;
-                    Log.i("this", stateName);
                 }
             }
 
@@ -218,6 +216,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
             public void onDataChange(DataSnapshot dataSnapshot) {
                 stateDetails = dataSnapshot.getValue(StateDetails.class);
                 statesCallback.onCallback(stateDetails);
+
             }
 
             @Override
@@ -227,9 +226,28 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         });
     }
 
+
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, final YouTubePlayer youTubePlayer, final boolean b) {
+        databaseReference.child("youTubeVideoLink").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String getLink = dataSnapshot.getValue(String.class);
+                if (!b) {
+                    youTubePlayer.cueVideo(getLink);
+                }
 
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void loadThis() {
         readDataFromDatabase(new StatesCallback() {
 
             @Override
@@ -247,7 +265,6 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                 sexRatio.setText(String.valueOf(stateDetails.getSexRatio()));
                 images = stateDetails.getImages();
                 imageDetails = stateDetails.getImageDetails();
-                youTubeVideoLink = stateDetails.getYouTubeVideoLink();
 
 
                 Picasso.get().load(images.get(0)).into(appbarImageView);
@@ -255,16 +272,16 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                 viewPager.setAdapter(adapter);
                 circleIndicator.setViewPager(viewPager);
                 adapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
-                if (!b) {
-                    Log.i("video link", youTubeVideoLink);
-                    youTubePlayer.cueVideo(youTubeVideoLink);
-                }
+
                 mProgressBar.setVisibility(View.GONE);
                 coordinatorLayout.setVisibility(View.VISIBLE);
 
+
             }
         });
+
     }
+
 
     public void change() {
         if (checkBookmark) {

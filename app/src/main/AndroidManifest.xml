@@ -6,54 +6,46 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
-        android:name=".IndianStates"
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name=".IndianStates">
         <activity
-            android:name=".Splash"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
-
-
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".MainActivity">
-        </activity>
         <activity
             android:name=".DetailActivity"
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".RegisterActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AppIntro"
             android:label="Intro Slider" />
-        <activity
-            android:name=".ResetPasswordActivity"
-            android:screenOrientation="portrait" />
-
+        <activity android:name=".ResetPasswordActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
