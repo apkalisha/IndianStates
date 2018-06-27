@@ -129,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="95dp"
+            android:layout_marginBottom="81dp"
             android:background="@drawable/background_white_border"
             android:text="@string/click_here_to_reset_password"
             android:textAlignment="center"

@@ -95,6 +95,11 @@ public class RegisterActivity extends AppCompatActivity {
             confpass.requestFocus();
             return;
         }
+        if(contact_no.isEmpty()){
+            contact.setError("Contact required");
+            contact.requestFocus();
+            return;
+        }
 
         regProgress.setVisibility(View.VISIBLE);
 
