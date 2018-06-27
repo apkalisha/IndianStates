@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme"
         android:name=".IndianStates">
         <activity
-            android:name=".MainActivity"
+            android:name=".Splash"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -28,6 +28,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".DetailActivity"
