@@ -38,6 +38,7 @@
         <item>Uttar Pradesh</item>
         <item>West Bengal</item>
     </string-array>
+
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_bottom_nav">BottomNavActivity</string>
     <string name="title_home">Home</string>

@@ -17,19 +17,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DrawerLayout mDrawerLayout;
     private  Fragment selectedFragment = null;
-    private Toolbar mToolbar;
 
 
     @Override
@@ -45,13 +39,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mDrawerLayout = findViewById(R.id.drawer_layout);
-        mToolbar = findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
-        ActionBar actionbar = getSupportActionBar();
-        actionbar.setDisplayHomeAsUpEnabled(true);
-        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu_nav_24dp);
 
-
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_nav_24dp);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -102,12 +94,15 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         selectedFragment = HomeFragment.newInstance();
+                        setTitle("Indian States");
                         break;
                     case R.id.navigation_bookmarks:
                         selectedFragment = BookmarkFragment.newInstance();
+                        setTitle(item.getTitle());
                         break;
                     case R.id.navigation_profile:
                         selectedFragment = ProfileFragment.newInstance();
+                        setTitle(item.getTitle());
                         break;
                 }
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -120,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         // set item as selected to persist highlight
                         menuItem.setChecked(true);
                         // close drawer when item is tapped
@@ -129,12 +124,13 @@ public class MainActivity extends AppCompatActivity {
                         switch (menuItem.getItemId()) {
                             case R.id.nav_home:
                                 setDefaultFragment();
+                                setTitle("Indian States");
                                 bottomNavigationView.setSelectedItemId(R.id.navigation_home);
                                 break;
                             case R.id.nav_about_us:
-
                                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction.replace(R.id.frame_layout, AboutFragment.newInstance());
+                                setTitle(menuItem.getTitle());
                                 fragmentTransaction.commit();
                                 break;
                             case R.id.nav_share:
@@ -163,8 +159,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
         bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
@@ -178,9 +172,12 @@ public class MainActivity extends AppCompatActivity {
 
         //Connectivity Manager
         ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        NetworkInfo networkInfo = null;
+        if (connectivityManager != null) {
+            networkInfo = connectivityManager.getActiveNetworkInfo();
+        }
         if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()) {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.main_activity), "No Internet Connection", Snackbar.LENGTH_LONG);
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.container), "No Internet Connection", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
 
@@ -194,24 +191,37 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            return;
-        }
-
-        this.doubleBackToExitPressedOnce = true;
-        Snackbar.make(findViewById(R.id.snackbar_container), "Press back again to exit", Snackbar.LENGTH_SHORT).show();
-
-        new Handler().postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                doubleBackToExitPressedOnce = false;
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
             }
-        }, 2000);
+            this.doubleBackToExitPressedOnce = true;
+            Snackbar.make(findViewById(R.id.snackbar_container), "Press back again to exit", Snackbar.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        }
     }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser == null) {
+            Intent mainIntent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(mainIntent);
+            mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            finish();
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -222,6 +232,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
