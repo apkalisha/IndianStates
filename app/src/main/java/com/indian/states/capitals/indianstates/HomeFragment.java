@@ -54,11 +54,6 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
         recyclerView = homeFragment.findViewById(R.id.recyclerview_states);
         states = Arrays.asList(getResources().getStringArray(R.array.india_states));
 
-
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(Color.parseColor("#ffffff"));
-
         materialSearchView = (MaterialSearchView) getActivity().findViewById(R.id.search_view);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false);
