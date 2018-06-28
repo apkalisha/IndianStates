@@ -85,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         // Start the thread
         t.start();
 
-
         final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
