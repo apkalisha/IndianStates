@@ -68,6 +68,12 @@ public class ProfileFragment extends Fragment {
         return new ProfileFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -165,7 +171,7 @@ public class ProfileFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null && data.getData() != null ) {
             imageUri = data.getData();
-            Toast.makeText(getActivity(), imageUri.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Updating Profile", Toast.LENGTH_SHORT).show();
             profileImage.setImageURI(imageUri);
             uploadImageToFirebaseStorage();
         }
