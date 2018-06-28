@@ -16,41 +16,28 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Splash extends AppCompatActivity {
 
-    FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
         getSupportActionBar().hide();
-        ImageView imageView = (ImageView) findViewById(R.id.splash_img);
+        ImageView imageView = findViewById(R.id.splash_img);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade);
         imageView.startAnimation(animation);
-        mAuth=FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null) {
-
-            LogoLauncher2 logoLauncher2 = new LogoLauncher2();
-            logoLauncher2.start();
-        }
-        else {
-            LogoLauncher logoLauncher = new LogoLauncher();
-            logoLauncher.start();
-        }
-
+        LogoLauncher logoLauncher = new LogoLauncher();
+        logoLauncher.start();
     }
-
-
     class LogoLauncher extends Thread {
         public void run() {
 
             try {
                 sleep(4000);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(Splash.this, MainActivity.class);
                 startActivity(intent);
                 Splash.this.finish();
 
@@ -62,25 +49,4 @@ public class Splash extends AppCompatActivity {
 
         }
     }
-
-        class LogoLauncher2 extends Thread {
-            public void run() {
-
-                try {
-                    sleep(4000);
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
-                    Splash.this.finish();
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-
-
-            }
-        }
-
-
-    }
-
+}
