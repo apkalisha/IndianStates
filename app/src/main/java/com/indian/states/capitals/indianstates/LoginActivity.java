@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
         password = pass.getText().toString().trim();
 
         if (TextUtils.isEmpty(username)) {
-            Toast.makeText(getApplicationContext(), "Please enter username", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Please enter email", Toast.LENGTH_LONG).show();
             return;
         }
         if (TextUtils.isEmpty(password)) {

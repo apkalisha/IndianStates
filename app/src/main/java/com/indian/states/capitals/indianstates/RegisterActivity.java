@@ -2,6 +2,7 @@ package com.indian.states.capitals.indianstates;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
@@ -34,6 +35,7 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference mdb;
     private ProgressBar regProgress;
 
+    int ctr=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,23 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //add intent
-                register_user();
+
+
+                ctr++;
+                Handler handler=new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(ctr!=0) {
+                            if (ctr == 1) {
+                                //add intent
+                                register_user();
+                            } else {
+                                register.setEnabled(false);
+                            }
+                        }
+                    }
+                },500);
 
             }
         });
@@ -126,7 +143,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()) {
-                                        Toast.makeText(RegisterActivity.this, "Authentication successful.",
+                                        Toast.makeText(RegisterActivity.this, "Registration Successful.",
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

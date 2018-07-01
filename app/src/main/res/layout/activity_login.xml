@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
             android:orientation="vertical"
-            android:padding="50dp">
+            android:padding="40dp">
 
 
             <TextView
@@ -26,6 +26,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:text="@string/welcome_to"
                 android:textAllCaps="true"
+                android:layout_gravity="center"
                 android:textColor="#fff"
                 android:textSize="40sp"
                 android:textStyle="bold" />
@@ -36,6 +37,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:text="@string/the_d_zone"
                 android:textAllCaps="true"
+                android:layout_gravity="center"
                 android:textColor="#fff"
                 android:textSize="40sp"
                 android:textStyle="bold" />
@@ -44,9 +46,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="@string/this_is_an_app_on_indian_states"
+                android:gravity="center"
+                android:text="INDIAN STATES AND UNION TERRITORIES"
                 android:textColor="#fff"
-                android:textSize="15sp" />
+                android:textSize="22sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -113,7 +116,7 @@
                 android:id="@+id/login_progress"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="2dp"
                 android:indeterminate="true"
                 android:visibility="invisible" />
 
