@@ -31,7 +31,7 @@ public class StatesFragment extends Fragment implements StateAdapter.StateAdapte
     private StateAdapter stateAdapter;
 
     private List<String> states;
-    private MaterialSearchView materialSearchView;
+   // private MaterialSearchView materialSearchView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class StatesFragment extends Fragment implements StateAdapter.StateAdapte
         recyclerView = stateFragment.findViewById(R.id.recyclerview_states);
         states = Arrays.asList(getResources().getStringArray(R.array.india_states));
 
-        materialSearchView =  getActivity().findViewById(R.id.search_view);
+       // materialSearchView =  getActivity().findViewById(R.id.search_view);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false);
 
@@ -57,7 +57,7 @@ public class StatesFragment extends Fragment implements StateAdapter.StateAdapte
         stateAdapter.setStateNames(states);
         recyclerView.setAdapter(stateAdapter);
 
-        materialSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+     /*   materialSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
 
@@ -93,7 +93,7 @@ public class StatesFragment extends Fragment implements StateAdapter.StateAdapte
                 return true;
             }
         });
-
+               */
         return stateFragment;
     }
 
@@ -113,13 +113,13 @@ public class StatesFragment extends Fragment implements StateAdapter.StateAdapte
         //nothing to do here
     }
 
-    @Override
+  /*  @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
         materialSearchView.setMenuItem(menuItem);
         super.onCreateOptionsMenu(menu, inflater);
-    }
+    }*/
 
 
 }

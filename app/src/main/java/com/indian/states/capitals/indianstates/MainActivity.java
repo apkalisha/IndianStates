@@ -14,11 +14,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     private FirebaseAuth mAuth;
     private DrawerLayout mDrawerLayout;
-    private  Fragment selectedFragment = null;
+    private Fragment selectedFragment = null;
 
 
     @SuppressLint("NewApi")
@@ -89,14 +88,14 @@ public class MainActivity extends AppCompatActivity {
         // Start the thread
         t.start();
 
-      final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                       selectedFragment = HomeFragment.newInstance();
+                        selectedFragment = HomeFragment.newInstance();
                         setTitle("Indian States");
                         break;
                     case R.id.navigation_bookmarks:
@@ -143,11 +142,11 @@ public class MainActivity extends AppCompatActivity {
                                         "Hey check out my app at: PUT GOOGLE PLAY LINK OF APP HERE");
                                 sendIntent.setType("text/plain");
                                 startActivity(sendIntent);
-                                Toast.makeText(MainActivity.this,"Share",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Share", Toast.LENGTH_SHORT).show();
                                 break;
                             case R.id.nav_contact_use:
                                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                                        "mailto","dzoneassociation@gmail.com", null));
+                                        "mailto", "dzoneassociation@gmail.com", null));
                                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
                                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
                                 break;
@@ -161,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
-
         bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
             @Override
             public void onNavigationItemReselected(@NonNull MenuItem item) {
@@ -170,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-       // setDefaultFragment();
+        // setDefaultFragment();
 
 
         //Connectivity Manager

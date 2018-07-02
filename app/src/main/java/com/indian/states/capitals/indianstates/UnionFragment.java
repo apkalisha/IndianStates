@@ -38,7 +38,7 @@ public class UnionFragment extends Fragment implements StateAdapter.StateAdapter
     private StateAdapter stateAdapter;
 
     private List<String> unionTerritories;
-    private MaterialSearchView materialSearchView;
+  //  private MaterialSearchView materialSearchView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class UnionFragment extends Fragment implements StateAdapter.StateAdapter
         recyclerView = unionFragment.findViewById(R.id.recyclerview_union);
         unionTerritories = Arrays.asList(getResources().getStringArray(R.array.union_territories));
 
-        materialSearchView = getActivity().findViewById(R.id.search_view);
+        //materialSearchView = getActivity().findViewById(R.id.search_view);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false);
 
@@ -64,7 +64,7 @@ public class UnionFragment extends Fragment implements StateAdapter.StateAdapter
         stateAdapter.setStateNames(unionTerritories);
         recyclerView.setAdapter(stateAdapter);
 
-        materialSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+      /*  materialSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
             @Override
             public void onSearchViewShown() {
 
@@ -100,7 +100,7 @@ public class UnionFragment extends Fragment implements StateAdapter.StateAdapter
                 return true;
             }
         });
-
+*/
         return unionFragment;
     }
 
@@ -119,7 +119,7 @@ public class UnionFragment extends Fragment implements StateAdapter.StateAdapter
         //nothing to do here
     }
 
-    @Override
+  /*  @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.main, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
@@ -127,5 +127,5 @@ public class UnionFragment extends Fragment implements StateAdapter.StateAdapter
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-
+*/
 }
