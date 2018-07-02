@@ -2,15 +2,11 @@ package com.indian.states.capitals.indianstates;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 
+class SectionPagerAdapter extends FragmentStatePagerAdapter {
 
-/**
- * Created by shivam on 19-03-2018.
- */
-
-class SectionPagerAdapter extends FragmentPagerAdapter {
     public SectionPagerAdapter(FragmentManager fm) {
         super(fm);
     }

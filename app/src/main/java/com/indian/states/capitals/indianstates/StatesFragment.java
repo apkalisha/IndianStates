@@ -22,7 +22,7 @@ import java.util.List;
 
 public class StatesFragment extends Fragment implements StateAdapter.StateAdapterOnClickHandler {
 
-    private View homeFragment;
+    private View stateFragment;
 
     private Context mContext;
 
@@ -39,19 +39,14 @@ public class StatesFragment extends Fragment implements StateAdapter.StateAdapte
         setHasOptionsMenu(true);
     }
 
-    public static StatesFragment newInstance() {
-
-        return new StatesFragment();
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        homeFragment = inflater.inflate(R.layout.fragment_home, container, false);
-        recyclerView = homeFragment.findViewById(R.id.recyclerview_states);
+        stateFragment = inflater.inflate(R.layout.fragment_states, container, false);
+        recyclerView = stateFragment.findViewById(R.id.recyclerview_states);
         states = Arrays.asList(getResources().getStringArray(R.array.india_states));
 
-        materialSearchView = (MaterialSearchView) getActivity().findViewById(R.id.search_view);
+        materialSearchView =  getActivity().findViewById(R.id.search_view);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false);
 
@@ -99,7 +94,7 @@ public class StatesFragment extends Fragment implements StateAdapter.StateAdapte
             }
         });
 
-        return homeFragment;
+        return stateFragment;
     }
 
 

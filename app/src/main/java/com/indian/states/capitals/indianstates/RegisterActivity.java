@@ -113,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
         if(contact_no.isEmpty()){
-            contact.setError("Contact required");
+            contact.setError("Required");
             contact.requestFocus();
             return;
         }

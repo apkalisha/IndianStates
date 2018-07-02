@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_states"
-        android:background="@color/homeBackground"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <TextView
-        android:id="@+id/no_bookmarks"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_bookmarks_yet"
-        android:textSize="22sp"
-        android:textStyle="italic"
-        android:textColor="@android:color/white"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:theme="@style/AppTheme.AppBarOverlay">
 
+        <android.support.design.widget.TabLayout
+            android:id="@+id/main_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextColor="#ffffff"
+            app:tabTextAppearance="?android:attr/textAppearanceMedium"/>
+    </android.support.design.widget.AppBarLayout>
 
-</RelativeLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/main_tabPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</android.support.design.widget.CoordinatorLayout>

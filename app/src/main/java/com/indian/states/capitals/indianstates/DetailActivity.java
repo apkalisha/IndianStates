@@ -144,9 +144,13 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
         Intent intent = getIntent();
         if (intent.hasExtra("State")) {
-            stateName = intent.getStringExtra("State");
-            collapsingToolbarLayout.setTitle(intent.getStringExtra("State"));
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("States").child(intent.getStringExtra("State").trim());
+            stateName = intent.getStringExtra("State").trim();
+            collapsingToolbarLayout.setTitle(stateName);
+            databaseReference = FirebaseDatabase.getInstance().getReference().child("States").child(stateName);
+        } else {
+            stateName = intent.getStringExtra("Union Territories").trim();
+            collapsingToolbarLayout.setTitle(stateName);
+            databaseReference = FirebaseDatabase.getInstance().getReference().child("Union Territories").child(stateName);
         }
 
 

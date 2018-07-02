@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".UnionFragment">
 
-
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_union"
+        android:background="@color/homeBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text= "hello_blank_fragment UNION"
-        android:textSize="24sp"/>
+        android:layout_height="match_parent" />
 
 </FrameLayout>
