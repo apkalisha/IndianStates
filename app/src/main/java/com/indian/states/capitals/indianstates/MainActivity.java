@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //setting home fragment
        setDefaultFragment();
 
 
