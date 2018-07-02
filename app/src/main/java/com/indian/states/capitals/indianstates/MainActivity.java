@@ -13,9 +13,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -32,6 +34,10 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DrawerLayout mDrawerLayout;
     private  Fragment selectedFragment = null;
+    private Toolbar mToolbar;
+    private ViewPager mViewPager;
+    private SectionPagerAdapter mSectionPagerAdapter;
+    private TabLayout mTabLayout;
 
 
     @Override
@@ -39,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mDrawerLayout = findViewById(R.id.drawer_layout);
-        Toolbar mToolbar = findViewById(R.id.main_toolbar);
+        mToolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -85,14 +91,20 @@ public class MainActivity extends AppCompatActivity {
         // Start the thread
         t.start();
 
-        final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+
+        mViewPager = (ViewPager) findViewById(R.id.main_tabPager);
+        mSectionPagerAdapter = new SectionPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mSectionPagerAdapter);
+        mTabLayout = (TabLayout) findViewById(R.id.main_tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
+      final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        selectedFragment = HomeFragment.newInstance();
+                       selectedFragment = StatesFragment.newInstance();
                         setTitle("Indian States");
                         break;
                     case R.id.navigation_bookmarks:
@@ -122,9 +134,9 @@ public class MainActivity extends AppCompatActivity {
 
                         switch (menuItem.getItemId()) {
                             case R.id.nav_home:
-                                setDefaultFragment();
-                                setTitle("Indian States");
-                                bottomNavigationView.setSelectedItemId(R.id.navigation_home);
+                              //  setDefaultFragment();
+                                //setTitle("Indian States");
+                                //bottomNavigationView.setSelectedItemId(R.id.navigation_home);
                                 break;
                             case R.id.nav_about_us:
                                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -166,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        setDefaultFragment();
+       // setDefaultFragment();
 
 
         //Connectivity Manager
@@ -184,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setDefaultFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, HomeFragment.newInstance());
+        fragmentTransaction.replace(R.id.frame_layout, StatesFragment.newInstance());
         fragmentTransaction.commit();
     }
 
