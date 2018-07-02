@@ -48,7 +48,7 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        bookmarkFragment = inflater.inflate(R.layout.fragment_states, container, false);
+        bookmarkFragment = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = bookmarkFragment.findViewById(R.id.recyclerview_states);
         noBookmark = bookmarkFragment.findViewById(R.id.no_bookmarks);
 

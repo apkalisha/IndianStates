@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-       // setDefaultFragment();
+       setDefaultFragment();
 
 
         //Connectivity Manager
@@ -183,8 +183,6 @@ public class MainActivity extends AppCompatActivity {
             Snackbar snackbar = Snackbar.make(findViewById(R.id.container), "No Internet Connection", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
-
-        setDefaultFragment();
     }
 
     private void setDefaultFragment() {

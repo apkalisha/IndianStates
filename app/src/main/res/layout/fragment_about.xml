@@ -27,9 +27,7 @@
         android:layout_margin="15dp"
         android:textColor="@android:color/black"
         android:background="@android:color/white"
-        android:elevation="6dp"
-
-        />
+        android:elevation="6dp" />
     <TextView
         android:id="@+id/about_tv3"
         android:layout_below="@id/about_tv2"
