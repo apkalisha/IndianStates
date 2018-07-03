@@ -9,11 +9,16 @@
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
         android:id="@+id/spinner"
+        android:visibility="gone"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp" />
 
     <LinearLayout
+        android:id="@+id/sort_spinner_container"
+        android:layout_toEndOf="@+id/spinner"
+        android:layout_toRightOf="@+id/spinner"
+        android:visibility="gone"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:orientation="horizontal"

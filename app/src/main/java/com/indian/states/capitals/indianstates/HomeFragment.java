@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
@@ -79,6 +80,10 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
         materialSearchView =  getActivity().findViewById(R.id.search_view);
         Spinner spinner = homeFragment.findViewById(R.id.spinner);
         final Spinner sortSpinner = homeFragment.findViewById(R.id.sort_spinner);
+        LinearLayout sortSpinnerLayout = homeFragment.findViewById(R.id.sort_spinner_container);
+
+        spinner.setVisibility(View.VISIBLE);
+        sortSpinnerLayout.setVisibility(View.VISIBLE);
 
         String[] items = {"States","Union Territories"};
         String[] sortOptions = {"Name","Area","Population","Literacy Rate","Sex Ratio"};

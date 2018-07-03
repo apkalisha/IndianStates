@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void updateUI(View view) {
+    /*private void updateUI(View view) {
         final Dialog myDialog = new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         TextView txtClose;
         myDialog.setContentView(R.layout.learnmore);
@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
         myDialog.show();
     }
 
-    /*@Override
+    @Override
     protected void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(authStateListener);
