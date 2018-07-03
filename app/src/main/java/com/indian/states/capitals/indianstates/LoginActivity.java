@@ -139,6 +139,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         loginProgress.setVisibility(View.VISIBLE);
+        login.setEnabled(false);
         firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -152,6 +153,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 loginProgress.setVisibility(View.INVISIBLE);
+                login.setEnabled(true);
             }
         });
 
