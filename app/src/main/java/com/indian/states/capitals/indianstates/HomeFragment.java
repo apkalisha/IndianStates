@@ -1,21 +1,24 @@
 package com.indian.states.capitals.indianstates;
 
+
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
@@ -23,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements StateAdapter.StateAdapterOnClickHandler {
+public class HomeFragment extends Fragment implements StateAdapter.StateAdapterOnClickHandler{
 
     private View homeFragment;
 
@@ -34,7 +37,10 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
     private StateAdapter stateAdapter;
 
     private List<String> states;
+    private List<String> unions;
+    private List<String> searchItems;
     private MaterialSearchView materialSearchView;
+    private Spinner spinner;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,8 +59,35 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
         homeFragment = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = homeFragment.findViewById(R.id.recyclerview_states);
         states = Arrays.asList(getResources().getStringArray(R.array.india_states));
+        unions = Arrays.asList(getResources().getStringArray(R.array.union_territories));
 
-        materialSearchView = (MaterialSearchView) getActivity().findViewById(R.id.search_view);
+        materialSearchView =  getActivity().findViewById(R.id.search_view);
+        spinner = homeFragment.findViewById(R.id.spinner);
+        String[] items = {"States","Union Territories"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item,items);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        stateAdapter.setStateNames(states);
+                        searchItems = states;
+                        break;
+                    case 1:
+                        stateAdapter.setStateNames(unions);
+                        searchItems = unions;
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(container.getContext(), LinearLayoutManager.VERTICAL, false);
 
@@ -62,7 +95,6 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
         recyclerView.setHasFixedSize(true);
         mContext = getActivity();
         stateAdapter = new StateAdapter(this,0);
-        stateAdapter.setStateNames(states);
         recyclerView.setAdapter(stateAdapter);
 
         materialSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
@@ -87,7 +119,7 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
             public boolean onQueryTextChange(String newText) {
                 if (newText != null && !newText.isEmpty()) {
                     List<String> listFound = new ArrayList<>();
-                    for (String item : states) {
+                    for (String item : searchItems) {
                         if (item.toLowerCase().contains(newText.toLowerCase())) {
                             listFound.add(item);
                         }
@@ -95,7 +127,7 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
                     stateAdapter.setStateNames(listFound);
                     recyclerView.setAdapter(stateAdapter);
                 } else {
-                    stateAdapter.setStateNames(states);
+                    stateAdapter.setStateNames(searchItems);
                     recyclerView.setAdapter(stateAdapter);
                 }
                 return true;
@@ -108,7 +140,6 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
 
     @Override
     public void onItemClick(String state) {
-
 
         Intent intent = new Intent(getActivity(), DetailActivity.class);
         intent.putExtra("State", state);
@@ -128,6 +159,4 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
         materialSearchView.setMenuItem(menuItem);
         super.onCreateOptionsMenu(menu, inflater);
     }
-
-
 }

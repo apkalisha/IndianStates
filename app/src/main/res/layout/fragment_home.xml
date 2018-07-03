@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/homeBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Spinner
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/spinner"
         android:id="@+id/recyclerview_states"
         android:background="@color/homeBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
     <TextView
         android:id="@+id/no_bookmarks"
         android:layout_width="wrap_content"

@@ -108,6 +108,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
                                 android:textAlignment="textEnd"
+                                android:layout_gravity="end"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/roboto_slab_light"
                                 />
@@ -137,6 +138,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
                                 android:textAlignment="textEnd"
+                                android:layout_gravity="end"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/roboto_slab_light"
                                 />
@@ -172,6 +174,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
                                 android:textAlignment="textEnd"
+                                android:layout_gravity="end"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/roboto_slab_light"
                                 />
@@ -201,6 +204,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
                                 android:textAlignment="textEnd"
+                                android:layout_gravity="end"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/roboto_slab_light"/>
                         </LinearLayout>
@@ -230,6 +234,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
                                 android:textAlignment="textEnd"
+                                android:layout_gravity="end"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/roboto_slab_light"
                                 />
@@ -260,6 +265,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
                                 android:textAlignment="textEnd"
+                                android:layout_gravity="end"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/roboto_slab_light"
                                 />
@@ -290,6 +296,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
                                 android:textAlignment="textEnd"
+                                android:layout_gravity="end"
                                 android:textSize="18sp"
                                 android:fontFamily="@font/roboto_slab_light"
                                 />
@@ -443,6 +450,7 @@
                     android:padding="6dp"
                     android:elevation="6dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
                     android:textStyle="bold"
                     android:fontFamily="serif"
                     android:background="@android:color/darker_gray"
@@ -480,6 +488,7 @@
                     android:padding="6dp"
                     android:elevation="6dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
                     android:background="@android:color/darker_gray"
                     android:fontFamily="serif"
                     android:textStyle="bold"
@@ -506,6 +515,7 @@
 
                 <LinearLayout
                     android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginBottom="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">

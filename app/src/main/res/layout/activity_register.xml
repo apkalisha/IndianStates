@@ -22,10 +22,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="@string/register_to_explore_indian_states"
+                android:gravity="center"
+                android:text= "REGISTER TO EXPLORE INDIAN STATES AND THE UNION TERRITORIES"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
-                android:textSize="18sp"
+                android:textSize="19sp"
                 android:textStyle="bold" />
 
         </RelativeLayout>

@@ -6,6 +6,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -144,9 +145,9 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
         Intent intent = getIntent();
         if (intent.hasExtra("State")) {
-            stateName = intent.getStringExtra("State");
-            collapsingToolbarLayout.setTitle(intent.getStringExtra("State"));
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("States").child(intent.getStringExtra("State").trim());
+            stateName = intent.getStringExtra("State").trim();
+            collapsingToolbarLayout.setTitle(stateName);
+            databaseReference = FirebaseDatabase.getInstance().getReference().child("States").child(stateName);
         }
 
 
@@ -287,9 +288,13 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
         if (checkBookmark) {
             //setting white color as background
             mActionButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#ffffff")));
-            mActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_fav, this.getTheme()));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_fav, this.getTheme()));
+            }
         } else {
-            mActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_fav2, this.getTheme()));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mActionButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_fav2, this.getTheme()));
+            }
             //setting red color as background
             mActionButton.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
         }

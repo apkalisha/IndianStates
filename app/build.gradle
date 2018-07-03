@@ -8,6 +8,7 @@ android {
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
+        resConfigs "en"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -16,8 +17,9 @@ android {
             resValue 'string', "api_key", IndianStates_YouTubeApiKey
         }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            shrinkResources true
             buildConfigField 'String', "ApiKey", IndianStates_YouTubeApiKey
             resValue 'string', "api_key", IndianStates_YouTubeApiKey
         }

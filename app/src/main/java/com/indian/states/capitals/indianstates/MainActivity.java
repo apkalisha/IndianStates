@@ -1,5 +1,6 @@
 package com.indian.states.capitals.indianstates;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,9 +14,11 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private  Fragment selectedFragment = null;
 
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,15 +89,14 @@ public class MainActivity extends AppCompatActivity {
         // Start the thread
         t.start();
 
-
-        final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+      final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
-                        selectedFragment = HomeFragment.newInstance();
+                       selectedFragment = HomeFragment.newInstance();
                         setTitle("Indian States");
                         break;
                     case R.id.navigation_bookmarks:
@@ -166,8 +169,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        setDefaultFragment();
+        //setting home fragment
+       setDefaultFragment();
 
 
         //Connectivity Manager
@@ -180,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
             Snackbar snackbar = Snackbar.make(findViewById(R.id.container), "No Internet Connection", Snackbar.LENGTH_LONG);
             snackbar.show();
         }
-
     }
 
     private void setDefaultFragment() {
