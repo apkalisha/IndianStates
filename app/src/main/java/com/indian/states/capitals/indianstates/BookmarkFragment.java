@@ -100,11 +100,9 @@ public class BookmarkFragment extends Fragment implements StateAdapter.StateAdap
     public void OnFavClick(String state, Integer position) {
         Toast.makeText(this.getActivity(), "Removed " + state + " from Bookmarks", Toast.LENGTH_SHORT).show();
         mDatabase.child("Bookmarks").child(state).removeValue();
-        stateAdapter = new StateAdapter(this,1);
+     
         states.clear();
-        stateAdapter.notifyItemRemoved(position);
-        stateAdapter.notifyItemRangeChanged(position, 1);
-
+         stateAdapter.notifyDataSetChanged();
 
     }
 
