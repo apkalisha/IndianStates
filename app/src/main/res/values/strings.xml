@@ -32,6 +32,132 @@
         <item>West Bengal</item>
     </string-array>
 
+    <string-array name="states_area">
+        <item>Rajasthan</item>
+        <item>Madhya Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Uttar Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Gujarat</item>
+        <item>Karnataka</item>
+        <item>Andhra Pradesh</item>
+        <item>Odisha</item>
+        <item>Chhattisgarh</item>
+        <item>Tamil Nadu</item>
+        <item>Telangana</item>
+        <item>Bihar</item>
+        <item>West Bengal</item>
+        <item>Arunachal Pradesh</item>
+        <item>Jharkhand</item>
+        <item>Assam</item>
+        <item>Himachal Pradesh</item>
+        <item>Uttarakhand</item>
+        <item>Punjab</item>
+        <item>Haryana</item>
+        <item>Kerala</item>
+        <item>Meghalaya</item>
+        <item>Manipur</item>
+        <item>Mizoram</item>
+        <item>Nagaland</item>
+        <item>Tripura</item>
+        <item>Sikkim</item>
+        <item>Goa</item>
+
+    </string-array>
+    <string-array name="states_population">
+        <item>Uttar Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Bihar</item>
+        <item>West Bengal</item>
+        <item>Madhya Pradesh</item>
+        <item>Tamil Nadu</item>
+        <item>Rajasthan</item>
+        <item>Karnataka</item>
+        <item>Gujarat</item>
+        <item>Andhra Pradesh</item>
+        <item>Odisha</item>
+        <item>Telangana</item>
+        <item>Kerela</item>
+        <item>Jharkhand</item>
+        <item>Assam</item>
+        <item>Punjab</item>
+        <item>Chattisgarh</item>
+        <item>Haryana</item>
+        <item>Jammu and Kashmir</item>
+        <item>Uttarakhand</item>
+        <item>Himachal Pradesh</item>
+        <item>Tripura</item>
+        <item>Meghalaya</item>
+        <item>Manipur</item>
+        <item>Nagaland</item>
+        <item>Goa</item>
+        <item>Arunanchal Pradesh</item>
+        <item>Mizoram</item>
+        <item>Sikkim</item>
+    </string-array>
+    <string-array name="states_literacy_rate">
+        <item>Kerala</item>
+        <item>Mizoram</item>
+        <item>Goa</item>
+        <item>Tripura</item>
+        <item>Himachal Pradesh</item>
+        <item>Maharashtra</item>
+        <item>Sikkim</item>
+        <item>Nagaland</item>
+        <item>Tamil Nadu</item>
+        <item>Manipur</item>
+        <item>Gujarat</item>
+        <item>Uttarakhand</item>
+        <item>Haryana</item>
+        <item>West Bengal</item>
+        <item>Punjab</item>
+        <item>Karnataka</item>
+        <item>Meghalaya</item>
+        <item>Odisha</item>
+        <item>Assam</item>
+        <item>Chhattisgarh</item>
+        <item>Madhya Pradesh</item>
+        <item>Jammu and Kashmir</item>
+        <item>Uttar Pradesh</item>
+        <item>Jharkhand</item>
+        <item>Andhra Pradesh</item>
+        <item>Arunachal Pradesh</item>
+        <item>Rajasthan</item>
+        <item>Bihar</item>
+        <item>Telangana</item>
+    </string-array>
+    <string-array name="states_sex_ratio">
+        <item>Kerala</item>
+        <item>Tamil Nadu</item>
+        <item>Andhra Pradesh</item>
+        <item>Chhattisgarh</item>
+        <item>Meghalaya</item>
+        <item>Telangana</item>
+        <item>Manipur</item>
+        <item>Odisha</item>
+        <item>Mizoram</item>
+        <item>Goa</item>
+        <item>Karnataka</item>
+        <item>Himachal Pradesh</item>
+        <item>Uttarakhand</item>
+        <item>Tripura</item>
+        <item>Assam</item>
+        <item>West Bengal</item>
+        <item>Jharkhand</item>
+        <item>Arunachal Pradesh</item>
+        <item>Madhya Pradesh</item>
+        <item>Nagaland</item>
+        <item>Maharashtra</item>
+        <item>Rajasthan</item>
+        <item>Gujarat</item>
+        <item>Bihar</item>
+        <item>Uttar Pradesh</item>
+        <item>Punjab</item>
+        <item>Sikkim</item>
+        <item>Jammu and Kashmir</item>
+        <item>Haryana</item>
+    </string-array>
+
     <string-array name="union_territories">
         <item>Andaman and Nicobar Islands</item>
         <item>Chandigarh</item>
@@ -39,7 +165,44 @@
         <item>Daman and Diu</item>
         <item>Lakshadweep</item>
         <item>National Capital Territory of Delhi</item>
-        <item>Pondicherry</item>
+        <item>Puducherry</item>
+    </string-array>
+
+    <string-array name="ut_area">
+        <item>Andaman and Nicobar Island</item>
+        <item>National Capital Territory of Delhi</item>
+        <item>Puducherry</item>
+        <item>Dadra and Nagar Haveli</item>
+        <item>Chandigarh</item>
+        <item>Daman and Diu</item>
+        <item>Lakshadweep</item>
+    </string-array>
+    <string-array name="ut_population">
+        <item>National Capital Territory of Delhi</item>
+        <item>Puducherry</item>
+        <item>Chandigarh</item>
+        <item>Andaman and Nicobar Island</item>
+        <item>Dadra and Nagar Haveli</item>
+        <item>Daman and Diu</item>
+        <item>Lakshadweep</item>
+    </string-array>
+    <string-array name="ut_literacy_rate">
+        <item>Lakshadweep</item>
+        <item>Daman and Diu</item>
+        <item>Puducherry</item>
+        <item>Chandigarh</item>
+        <item>National Capital Territory of Delhi</item>
+        <item>Andaman and Nicobar Island</item>
+        <item>Dadra and Nagar Haveli</item>
+    </string-array>
+    <string-array name="ut_sex_ratio">
+        <item>Puducherry</item>
+        <item>Lakshadweep</item>
+        <item>Andaman and Nicobar Islands</item>
+        <item>National Capital Territory of Delhi</item>
+        <item>Chandigarh</item>
+        <item>Dadra and Nagar Haveli</item>
+        <item>Daman and Diu</item>
     </string-array>
 
     <string name="title_activity_detail">DetailActivity</string>
@@ -88,5 +251,6 @@
     <string name="share">Share</string>
     <string name="contact_us">Contact Us</string>
     <string name="exit">Exit</string>
+    <string name="sort_by">Sort By:</string>
 
 </resources>

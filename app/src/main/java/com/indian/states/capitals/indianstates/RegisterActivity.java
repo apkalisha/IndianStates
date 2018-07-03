@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
     private void register_user() {
-        final String username,password,contact_no,emailid,states;
+        final String username,password,contact_no,emailid;
         username=user.getText().toString().trim();
         password=pass.getText().toString().trim();
         contact_no=contact.getText().toString().trim();
