@@ -65,6 +65,7 @@ public class HomeFragment extends Fragment implements StateAdapter.StateAdapterO
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View homeFragment = inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView = homeFragment.findViewById(R.id.recyclerview_states);
+
         states = Arrays.asList(getResources().getStringArray(R.array.india_states));
         statesArea = Arrays.asList(getResources().getStringArray(R.array.states_area));
         statesPopulation = Arrays.asList(getResources().getStringArray(R.array.states_population));
