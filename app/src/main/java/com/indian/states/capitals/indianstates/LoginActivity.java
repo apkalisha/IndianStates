@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -52,20 +53,6 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         loginProgress = findViewById(R.id.login_progress);
 
-       /* authStateListener=new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser()!=null){
-                    Intent intent= new Intent(getApplicationContext(), ProfileActivity.class);
-                    startActivity(intent);
-                    intent.putExtra("email","username");;
-                    finish();
-
-                }
-
-            }
-        };*/
-
         txtForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,9 +86,14 @@ public class LoginActivity extends AppCompatActivity {
             snackbar.show();
         }
 
+        //Hide Automatic Keyboard Popup
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
     }
 
-    /*private void updateUI(View view) {
+    private void updateUI(View view) {
         final Dialog myDialog = new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         TextView txtClose;
         myDialog.setContentView(R.layout.learnmore);
@@ -115,12 +107,6 @@ public class LoginActivity extends AppCompatActivity {
         //myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
     }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        firebaseAuth.addAuthStateListener(authStateListener);
-    }*/
 
     private void loginprocess() {
 
@@ -139,7 +125,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         loginProgress.setVisibility(View.VISIBLE);
-        login.setEnabled(false);
         firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -153,7 +138,6 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 loginProgress.setVisibility(View.INVISIBLE);
-                login.setEnabled(true);
             }
         });
 

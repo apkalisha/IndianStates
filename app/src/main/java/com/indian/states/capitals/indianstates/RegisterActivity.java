@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -78,6 +79,12 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+
+        //Hide Automatic Keyboard Popup
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
     }
     private void register_user() {
         final String username,password,contact_no,emailid;
@@ -112,8 +119,8 @@ public class RegisterActivity extends AppCompatActivity {
             confpass.requestFocus();
             return;
         }
-        if(contact_no.isEmpty()){
-            contact.setError("Required");
+        if(contact_no.isEmpty() || contact_no.toString().length()!=10){
+            contact.setError("Invalid");
             contact.requestFocus();
             return;
         }
