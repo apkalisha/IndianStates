@@ -56,11 +56,13 @@ public class RegisterActivity extends AppCompatActivity {
         regProgress = findViewById(R.id.reg_progress);
 
 
+
+
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
+                //To avoid multiple clicks
                 ctr++;
                 Handler handler=new Handler();
                 handler.postDelayed(new Runnable() {
@@ -96,32 +98,38 @@ public class RegisterActivity extends AppCompatActivity {
         if(!Patterns.EMAIL_ADDRESS.matcher(emailid).matches()){
             email.setError("Enter valid email address");
             email.requestFocus();
+            ctr=0;
             return;
         }
 
-        if(emailid.isEmpty()){
+        else if(emailid.isEmpty()){
             email.setError("Email required");
             email.requestFocus();
+            ctr=0;
             return;
         }
-        if(password.isEmpty()){
+        else if(password.isEmpty()){
             pass.setError("Password required");
             pass.requestFocus();
+            ctr=0;
             return;
         }
-        if(password.length()<6){
+        else if(password.length()<6){
             pass.setError("Min password length should be 6");
             pass.requestFocus();
+            ctr=0;
             return;
         }
-        if(!password.equals(confpass.getText().toString())) {
+        else if(!password.equals(confpass.getText().toString())) {
             confpass.setError("Passwords don't match");
             confpass.requestFocus();
+            ctr=0;
             return;
         }
-        if(contact_no.isEmpty() || contact_no.toString().length()!=10){
+        else if(contact_no.isEmpty() || contact_no.length()!=10){
             contact.setError("Invalid");
             contact.requestFocus();
+            ctr=0;
             return;
         }
 

@@ -24,7 +24,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/profile"
-                app:civ_border_color="#FF000000"
+                app:civ_border_color="#fff"
                 app:civ_border_width="2dp" />
 
             <ProgressBar
@@ -44,7 +44,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginBottom="55dp"
                 android:layout_marginEnd="121dp"
-                android:src="@drawable/ic_camera_black_24dp" />
+                android:src="@drawable/ic_camera_white_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="121dp" />
         </RelativeLayout>
 
         <android.support.v7.widget.CardView
@@ -83,7 +85,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignEnd="@+id/profname_id"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_edit_white_24dp" />
+                    android:src="@drawable/ic_edit_white_24dp"
+                    android:layout_alignRight="@+id/profname_id" />
 
             </RelativeLayout>
 
@@ -105,7 +108,9 @@
                     android:fontFamily="sans-serif-light"
                     android:paddingLeft="6dp"
                     android:text="@string/contact"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="8dp" />
 
                 <TextView
                     android:id="@+id/profemail_id"
@@ -119,7 +124,9 @@
                     android:fontFamily="sans-serif-light"
                     android:paddingLeft="6dp"
                     android:text="email"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="8dp" />
             </RelativeLayout>
         </android.support.v7.widget.CardView>
 
