@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Indian States</string>
+    <string name="app_name">Indian States and UTs</string>
     <string-array name="india_states">
         <item>Andhra Pradesh</item>
         <item>Arunachal Pradesh</item>

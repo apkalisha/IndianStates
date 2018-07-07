@@ -18,15 +18,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Splash extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
-
         ImageView imageView = findViewById(R.id.splash_img);
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade);
         imageView.startAnimation(animation);
@@ -46,8 +43,6 @@ public class Splash extends AppCompatActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-
 
         }
     }

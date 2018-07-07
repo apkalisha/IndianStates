@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private  Fragment selectedFragment = null;
 
-
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                         switch (menuItem.getItemId()) {
                             case R.id.nav_home:
                                 setDefaultFragment();
-                                setTitle("Indian States");
+                                setTitle("Indian States and UTs");
                                 bottomNavigationView.setSelectedItemId(R.id.navigation_home);
                                 break;
                             case R.id.nav_about_us:
