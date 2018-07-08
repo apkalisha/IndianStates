@@ -341,8 +341,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:textSize="16sp"
-                                android:textColor="#666666" />
+                                android:fontFamily="@font/alegreya"
+                                android:textColor="#666666"
+                                android:textSize="16sp" />
 
                             <ImageButton
                                 android:id="@id/expand_collapse"
@@ -389,6 +390,7 @@
                                 android:id="@id/expandable_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/libre_baskerville"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
                                 android:textSize="16sp"
