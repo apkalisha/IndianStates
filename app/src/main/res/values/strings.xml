@@ -252,5 +252,7 @@
     <string name="contact_us">Contact Us</string>
     <string name="exit">Exit</string>
     <string name="sort_by">Sort By:</string>
+    <string name="logo_main">LOGO MAIN</string>
+    <string name="indian_states_and_union_territories">Indian States and Union Territories</string>
 
 </resources>

@@ -63,13 +63,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
     private ImageView appbarImageView;
     private ExpandableTextView historyTextView, languages, regionalDance;
 
-    private String youTubeVideoLink;
-
     private StateDetails stateDetails;
     private String stateName;
-    //Firebase
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference databaseReference;
     private DatabaseReference mRef;
 
@@ -92,8 +87,8 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         mRef = mFirebaseDatabase.getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mRef.keepSynced(true);
 
@@ -171,7 +166,7 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
                 if (!checkBookmark) {
                     checkBookmark = true;
                     change();
-                    HashMap<String, String> bookmark = new HashMap<String, String>();
+                    HashMap<String, String> bookmark = new HashMap<>();
                     bookmark.put(stateName, "".trim());
                     mRef.child("Bookmarks").child(stateName).setValue(bookmark).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
