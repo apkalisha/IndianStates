@@ -93,21 +93,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void updateUI(View view) {
-        final Dialog myDialog = new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-        TextView txtClose;
-        myDialog.setContentView(R.layout.learnmore);
-        txtClose = myDialog.findViewById(R.id.close_text);
-        txtClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-            }
-        });
-        //myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
-    }
-
     private void loginprocess() {
 
 
@@ -122,8 +107,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please enter password", Toast.LENGTH_LONG).show();
             return;
         }
-
-
+        login.setEnabled(false);
         loginProgress.setVisibility(View.VISIBLE);
         firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -138,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 loginProgress.setVisibility(View.INVISIBLE);
+                login.setEnabled(true);
             }
         });
 

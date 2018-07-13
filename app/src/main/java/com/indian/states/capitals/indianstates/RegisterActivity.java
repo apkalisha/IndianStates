@@ -134,6 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         regProgress.setVisibility(View.VISIBLE);
+        register.setEnabled(false);
 
         mAuth.createUserWithEmailAndPassword(emailid, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -175,6 +176,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
 
                         regProgress.setVisibility(View.INVISIBLE);
+                        register.setEnabled(true);
                     }
                 });
     }
