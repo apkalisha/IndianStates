@@ -332,6 +332,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:elevation="6dp"
+                            android:fontFamily="@font/baumans"
                             expandableTextView:maxCollapsedLines="4"
                             expandableTextView:animDuration="200">
 
@@ -341,7 +342,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:fontFamily="@font/alegreya"
+                                android:fontFamily="@font/baumans"
                                 android:textColor="#666666"
                                 android:textSize="16sp" />
 
@@ -383,6 +384,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:elevation="6dp"
+                            android:fontFamily="@font/baumans"
                             expandableTextView:maxCollapsedLines="4"
                             expandableTextView:animDuration="200">
 
@@ -390,9 +392,9 @@
                                 android:id="@id/expandable_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/libre_baskerville"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
+                                android:fontFamily="@font/baumans"
                                 android:textSize="16sp"
                                 android:textColor="#666666" />
 
@@ -419,6 +421,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:elevation="6dp"
+                            android:fontFamily="@font/baumans"
                             expandableTextView:maxCollapsedLines="4"
                             expandableTextView:animDuration="200">
 
@@ -429,6 +432,7 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
                                 android:textSize="16sp"
+                                android:fontFamily="@font/baumans"
                                 android:textColor="#666666" />
 
                             <ImageButton
