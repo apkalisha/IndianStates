@@ -343,9 +343,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:fontFamily="@font/baumans"
+                                android:fontFamily="sans-serif-condensed"
                                 android:textColor="#666666"
-                                android:textSize="16sp" />
+                                android:textSize="17sp" />
 
                             <ImageButton
                                 android:id="@id/expand_collapse"
@@ -395,9 +395,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:fontFamily="@font/baumans"
-                                android:textSize="16sp"
-                                android:textColor="#666666" />
+                                android:fontFamily="sans-serif-condensed"
+                                android:textColor="#666666"
+                                android:textSize="17sp" />
 
                             <ImageButton
                                 android:id="@id/expand_collapse"
@@ -432,9 +432,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginRight="10dp"
-                                android:textSize="16sp"
-                                android:fontFamily="@font/baumans"
-                                android:textColor="#666666" />
+                                android:fontFamily="sans-serif-condensed"
+                                android:textColor="#666666"
+                                android:textSize="17sp" />
 
                             <ImageButton
                                 android:id="@id/expand_collapse"
