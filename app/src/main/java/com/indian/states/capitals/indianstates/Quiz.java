@@ -1,6 +1,8 @@
 package com.indian.states.capitals.indianstates;
 
 public class Quiz {
+
+    //Quiz class
     private String Type;
     private String Image;
     public Quiz(){

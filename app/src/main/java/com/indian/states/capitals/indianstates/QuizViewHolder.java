@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class QuizViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    //View Holder
 
     public ImageView quiz_img;
     private ItemClickListener itemClickListener;

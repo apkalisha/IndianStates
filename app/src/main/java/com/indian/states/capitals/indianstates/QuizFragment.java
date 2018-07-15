@@ -21,6 +21,7 @@ public class QuizFragment extends Fragment{
 
     View quizFragment;
 
+    //Extracting data from firebase
     RecyclerView listQuiz;
     RecyclerView.LayoutManager layoutManager;
     FirebaseRecyclerAdapter<Quiz,QuizViewHolder> adapter;
