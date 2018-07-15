@@ -14,11 +14,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +25,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.miguelcatalan.materialsearchview.MaterialSearchView;
+
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DrawerLayout mDrawerLayout;
     private  Fragment selectedFragment = null;
+    private MaterialSearchView searchView;
+    private NavigationView navigationView;
 
     @SuppressLint("NewApi")
     @Override
@@ -47,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_nav_24dp);
+
+        searchView = findViewById(R.id.search_view);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -89,21 +93,30 @@ public class MainActivity extends AppCompatActivity {
         t.start();
 
       final BottomNavigationView bottomNavigationView = findViewById(R.id.navigation);
+      BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
+                        navigationView.getMenu().getItem(0).setChecked(true);
                        selectedFragment = HomeFragment.newInstance();
                         setTitle("Indian States");
                         break;
                     case R.id.navigation_bookmarks:
+                        navigationView.getMenu().getItem(0).setChecked(false);
                         selectedFragment = BookmarkFragment.newInstance();
                         setTitle(item.getTitle());
                         break;
                     case R.id.navigation_profile:
+                        navigationView.getMenu().getItem(0).setChecked(false);
                         selectedFragment = ProfileFragment.newInstance();
+                        setTitle(item.getTitle());
+                        break;
+                    case R.id.navigation_quiz:
+                        navigationView.getMenu().getItem(0).setChecked(false);
+                        selectedFragment = QuizFragment.newInstance();
                         setTitle(item.getTitle());
                         break;
                 }
@@ -113,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -130,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                                 bottomNavigationView.setSelectedItemId(R.id.navigation_home);
                                 break;
                             case R.id.nav_about_us:
+                                //bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId()).setChecked(false);
                                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction.replace(R.id.frame_layout, AboutFragment.newInstance());
                                 setTitle(menuItem.getTitle());
@@ -185,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setDefaultFragment() {
+        navigationView.getMenu().getItem(0).setChecked(true);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, HomeFragment.newInstance());
         fragmentTransaction.commit();
@@ -195,7 +210,11 @@ public class MainActivity extends AppCompatActivity {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            if (doubleBackToExitPressedOnce) {
+            if(searchView.isSearchOpen()) {
+                searchView.closeSearch();
+                return;
+            }
+            else if (doubleBackToExitPressedOnce) {
                 super.onBackPressed();
                 return;
             }
