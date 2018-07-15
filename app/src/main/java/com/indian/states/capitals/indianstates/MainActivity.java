@@ -144,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                             case R.id.nav_about_us:
                                 //bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId()).setChecked(false);
+                                //
                                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction.replace(R.id.frame_layout, AboutFragment.newInstance());
                                 setTitle(menuItem.getTitle());
