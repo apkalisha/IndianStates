@@ -21,6 +21,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private  Fragment selectedFragment = null;
     private MaterialSearchView searchView;
     private NavigationView navigationView;
+    private static int index = 0;
 
     @SuppressLint("NewApi")
     @Override
@@ -97,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
                         navigationView.getMenu().getItem(0).setChecked(true);
@@ -105,17 +106,17 @@ public class MainActivity extends AppCompatActivity {
                         setTitle("Indian States");
                         break;
                     case R.id.navigation_bookmarks:
-                        navigationView.getMenu().getItem(0).setChecked(false);
+                        navigationView.getMenu().getItem(index).setChecked(false);
                         selectedFragment = BookmarkFragment.newInstance();
                         setTitle(item.getTitle());
                         break;
                     case R.id.navigation_profile:
-                        navigationView.getMenu().getItem(0).setChecked(false);
+                        navigationView.getMenu().getItem(index).setChecked(false);
                         selectedFragment = ProfileFragment.newInstance();
                         setTitle(item.getTitle());
                         break;
                     case R.id.navigation_quiz:
-                        navigationView.getMenu().getItem(0).setChecked(false);
+                        navigationView.getMenu().getItem(index).setChecked(false);
                         selectedFragment = QuizFragment.newInstance();
                         setTitle(item.getTitle());
                         break;
@@ -138,13 +139,16 @@ public class MainActivity extends AppCompatActivity {
 
                         switch (menuItem.getItemId()) {
                             case R.id.nav_home:
+                                //bottomNavigationView.setVisibility(View.VISIBLE);
+                                index = 0;
                                 setDefaultFragment();
                                 setTitle("Indian States and UTs");
                                 bottomNavigationView.setSelectedItemId(R.id.navigation_home);
                                 break;
                             case R.id.nav_about_us:
-                                //bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId()).setChecked(false);
-                                //
+                                //bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId()).setCheckable(false);
+                                //bottomNavigationView.setVisibility(View.INVISIBLE);
+                                index = 1;
                                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                                 fragmentTransaction.replace(R.id.frame_layout, AboutFragment.newInstance());
                                 setTitle(menuItem.getTitle());
