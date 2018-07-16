@@ -19,9 +19,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Play Quiz"
+                android:text="@string/select_a_category_to_start"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="28sp"
+                android:fontFamily="sans-serif-light"
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
 
@@ -40,6 +41,7 @@
             <android.support.v7.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:cardBackgroundColor="@color/blue"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
@@ -50,18 +52,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="16dp"
                     android:orientation="vertical">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/external_link_symbol"
+                        android:layout_height="100dp"
+                        android:src="@drawable/all"
                         android:layout_gravity="center_horizontal"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="First"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/general_knowledge"
                         android:textStyle="bold"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -70,6 +73,7 @@
                 android:layout_height="0dp"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
+                app:cardBackgroundColor="@color/red"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -78,18 +82,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="16dp"
                     android:orientation="vertical">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_question_answer_black_24dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/capitals"
                         android:layout_gravity="center_horizontal"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="Second"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/capitals"
+                        android:textColor="@color/white"
                         android:textStyle="bold"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -101,6 +106,7 @@
                 android:layout_height="0dp"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
+                app:cardBackgroundColor="@color/green"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -109,24 +115,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="16dp"
                     android:orientation="vertical">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_camera_black_24dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/area"
                         android:layout_gravity="center_horizontal"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="Third"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/white"
+                        android:text="@string/area"
                         android:textStyle="bold"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:cardBackgroundColor="@color/brown"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
                 android:layout_marginBottom="16dp"
@@ -137,18 +145,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="16dp"
                     android:orientation="vertical">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_about_us_24dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/population"
                         android:layout_gravity="center_horizontal"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="Fourth"
+                        android:text="@string/population"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="@color/white"
                         android:textStyle="bold"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -160,6 +169,7 @@
                 android:layout_height="0dp"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
+                app:cardBackgroundColor="@color/pink"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -168,26 +178,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
-                    android:layout_margin="16dp"
                     android:orientation="vertical">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_account_circle_black_24dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/literacy_rate"
                         android:layout_gravity="center_horizontal"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="Fifth"
+                        android:text="@string/literacy_rate1"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal"
                         android:textStyle="bold"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
+
             <android.support.v7.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
+                app:cardBackgroundColor="@color/blueDark"
                 android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
@@ -200,14 +213,17 @@
                     android:orientation="vertical">
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_action_navigation_close"
-                        android:layout_gravity="center_horizontal"/>
+                        android:layout_height="100dp"
+                        android:src="@drawable/sex_ratio"
+                        android:layout_gravity="center_horizontal"
+                        android:contentDescription="@string/img_sex_ratio" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:text="Sixth"
+                        android:text="@string/sex_ratio"
+                        android:textColor="@color/white"
+                        android:layout_gravity="center_horizontal"
                         android:textStyle="bold"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
