@@ -45,11 +45,11 @@ public class QuizFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         quizFragment = inflater.inflate(R.layout.fragment_quiz,container,false);
-        listQuiz=(RecyclerView)quizFragment.findViewById(R.id.id_view_quiz);
-        listQuiz.setHasFixedSize(true);
-        layoutManager=new LinearLayoutManager(container.getContext());
-        listQuiz.setLayoutManager(layoutManager);
-        loadCategories();
+//        listQuiz=(RecyclerView)quizFragment.findViewById(R.id.id_view_quiz);
+//        listQuiz.setHasFixedSize(true);
+//        layoutManager=new LinearLayoutManager(container.getContext());
+//        listQuiz.setLayoutManager(layoutManager);
+//        loadCategories();
         
         return quizFragment;
     }
