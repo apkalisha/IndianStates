@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/crown"
+        android:layout_marginLeft="60dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:text="HIGH SCORE:0"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="25dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center_horizontal"
+            android:text="RECENT SCORE:0"
+            android:textSize="20dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:textColor="@color/pink"
+            android:textSize="24sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="Bravo! You learnt something new :)"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
