@@ -119,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
             confpass.requestFocus();
             return;
         }
-        if(contact_no.isEmpty() || contact_no.toString().length()!=10){
+        if(contact_no.isEmpty() || contact_no.length()!=10){
             contact.setError("Invalid");
             contact.requestFocus();
             return;
