@@ -29,6 +29,7 @@ public class QuizFragment extends Fragment{
     DatabaseReference dbref;
 
 
+
     public static QuizFragment newInstance() {
 
         return new QuizFragment();
@@ -38,7 +39,7 @@ public class QuizFragment extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db=FirebaseDatabase.getInstance();
-        dbref=db.getReference("quiz");
+        dbref=db.getReference("Quiz");
     }
 
     @Nullable
@@ -54,7 +55,7 @@ public class QuizFragment extends Fragment{
         return quizFragment;
     }
 
-    private void loadCategories() {
+    private void loadQues() {
         adapter=new FirebaseRecyclerAdapter<Quiz, QuizViewHolder>(
                 Quiz.class,
                 R.layout.quiz,
