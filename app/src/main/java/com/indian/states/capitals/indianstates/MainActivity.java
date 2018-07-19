@@ -21,7 +21,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -117,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.navigation_quiz:
                         navigationView.getMenu().getItem(index).setChecked(false);
-                        selectedFragment = QuizFragment.newInstance();
+                        selectedFragment = QuizCategoryFragment.newInstance();
                         setTitle(item.getTitle());
                         break;
                 }

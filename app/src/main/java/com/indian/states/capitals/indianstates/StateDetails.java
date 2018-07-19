@@ -3,6 +3,9 @@ package com.indian.states.capitals.indianstates;
 import java.util.ArrayList;
 
 public class StateDetails {
+
+
+    private String stateName;
     private String area;
     private String capital;
     private String history;
@@ -38,6 +41,15 @@ public class StateDetails {
         this.sexRatio = sexRatio;
         this.youTubeVideoLink = youTubeVideoLink;
     }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
 
     public String getArea() {
         return area;

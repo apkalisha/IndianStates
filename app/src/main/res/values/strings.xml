@@ -263,4 +263,14 @@
     <string name="area">Area</string>
     <string name="literacy_rate1">Literacy Rate</string>
 
+
+
+    //firebase category name
+    <string name="area_fire">area</string>
+    <string name="population_fire">population</string>
+    <string name="generalKnowledge_fire">generalKnowledge</string>
+    <string name="capitals_fire">capitals</string>
+    <string name="literacy_fire">literacyRate</string>
+    <string name="sexRatio_fire">sexRatio</string>
+
 </resources>

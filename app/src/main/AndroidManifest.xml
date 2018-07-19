@@ -50,6 +50,7 @@
         <activity
             android:name=".ResetPasswordActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".QuizMainActivity"></activity>
     </application>
 
 </manifest>

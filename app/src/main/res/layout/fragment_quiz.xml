@@ -39,7 +39,7 @@
             <!--Row 1-->
 
             <android.support.v7.widget.CardView
-                android:id="@+id/gk"
+                android:id="@+id/gk_cardview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_columnWeight="1"
@@ -76,7 +76,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/capitals"
+                android:id="@+id/capitals_cardview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_columnWeight="1"
@@ -115,7 +115,7 @@
             <!--Row 2-->
 
             <android.support.v7.widget.CardView
-                android:id="@+id/area"
+                android:id="@+id/area_cardview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_columnWeight="1"
@@ -152,7 +152,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/population"
+                android:id="@+id/population_cardview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_columnWeight="1"
@@ -191,7 +191,7 @@
             <!--Row 3-->
 
             <android.support.v7.widget.CardView
-                android:id="@+id/lieracyrate"
+                android:id="@+id/lieracyrate_cardview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_columnWeight="1"
@@ -228,7 +228,7 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
-                android:id="@+id/sexRatio"
+                android:id="@+id/sexRatio_cardview"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_columnWeight="1"

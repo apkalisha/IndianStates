@@ -1,5 +1,5 @@
 package com.indian.states.capitals.indianstates;
-
+/*
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -20,7 +20,7 @@ public class QuizViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private ItemClickListener itemClickListener;
     public QuizViewHolder(View itemView) {
         super(itemView);
-        quiz_img=(ImageView)itemView.findViewById(R.id.quiz_img_id);
+       // quiz_img=(ImageView)itemView.findViewById(R.id.quiz_img_id);
         Gk=(CardView)itemView.findViewById(R.id.gk);
         Capitals=(CardView)itemView.findViewById(R.id.capitals);
         Area=(CardView)itemView.findViewById(R.id.area);
@@ -30,7 +30,6 @@ public class QuizViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
 
         itemView.setOnClickListener(this);
-
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -44,3 +43,4 @@ public class QuizViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         itemClickListener.onClick(view,getAdapterPosition(),false);
     }
 }
+*/
