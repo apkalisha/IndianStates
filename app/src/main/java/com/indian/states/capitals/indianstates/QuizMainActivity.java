@@ -113,7 +113,7 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
 
         String selected = v.toString();
 
-        countDownTimer.cancel();
+        countDownTimer.cancel();//check
         Log.i("Correct Answer",Questions.questionList.get(index).getAnswer());
         Log.i("Selected Answer",selected);
         if(Questions.questionList.get(index).getAnswer().equals(selected)) { //still have questions in the list
