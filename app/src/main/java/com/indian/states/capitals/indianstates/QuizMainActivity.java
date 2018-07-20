@@ -110,21 +110,19 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
     }
     @Override
     public void onClick(View v) {
-
-        String selected = v.toString();
+        Button selectedButton = (Button)v;
+        String selected = selectedButton.getText().toString();
 
         countDownTimer.cancel();//check
         Log.i("Correct Answer",Questions.questionList.get(index).getAnswer());
         Log.i("Selected Answer",selected);
         if(Questions.questionList.get(index).getAnswer().equals(selected)) { //still have questions in the list
             //Correct answer chosen
-            v.setBackgroundColor(getResources().getColor(R.color.green));
             score += 10;
             correctAnswer++;
             showQuestion(++index);
         } else {
             //Wrong answer chosen
-            v.setBackgroundColor(getResources().getColor(R.color.red));
             showQuestion(++index);
         }
 
