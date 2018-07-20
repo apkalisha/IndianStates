@@ -96,27 +96,33 @@ public class QuizCategoryFragment extends Fragment {
 
     public void callQuizActivity(int category) {
         String CategoryName = null;
+        Intent intent = new Intent(getContext(), QuizMainActivity.class);
         switch (category) {
             case 0:
                 CategoryName = GK;
+                intent.putExtra("category_no",category);
                 break;
             case 1:
                 CategoryName = CAPITALS;
+                intent.putExtra("category_no",category);
                 break;
             case 2:
                 CategoryName = AREA;
+                intent.putExtra("category_no",category);
                 break;
             case 3:
                 CategoryName = POPULATION;
+                intent.putExtra("category_no",category);
                 break;
             case 4:
                CategoryName = LITERACY;
+                intent.putExtra("category_no",category);
                 break;
             case 5:
                 CategoryName = SEXRATIO;
+                intent.putExtra("category_no",category);
                 break;
         }
-        Intent intent = new Intent(getContext(), QuizMainActivity.class);
         intent.putExtra("categoryName",CategoryName);
         startActivity(intent);
     }
