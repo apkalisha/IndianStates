@@ -4,11 +4,26 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:contentDescription="@string/places_to_visit"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:id="@+id/image_viewpager"
         android:adjustViewBounds="true"
         android:fitsSystemWindows="true"/>
+
+    <ImageButton
+        android:id="@+id/external_link_btn"
+        android:contentDescription="@string/view_website"
+        android:layout_width="30dp"
+        android:layout_alignTop="@+id/image_viewpager"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/whiteHalfOpacity"
+        android:src="@drawable/external_link_symbol"
+        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
 
     <TextView
         android:id="@+id/tv_image_name"
@@ -22,6 +37,9 @@
         android:paddingStart="16dp"
         android:fontFamily="@font/roboto_slab_light"
         android:textColor="@android:color/white"
-        android:textSize="22sp" />
+        android:textSize="22sp"
+        android:layout_alignLeft="@+id/image_viewpager"
+        android:layout_alignRight="@+id/image_viewpager"
+        android:paddingLeft="16dp" />
 
 </RelativeLayout>

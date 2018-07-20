@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
+    android:background="@color/yellow"
     tools:context=".Splash">
 
 
@@ -17,8 +17,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_app_icon"
-        tools:ignore="VectorDrawableCompat" />
+        android:src="@drawable/app_icon" />
 
     <TextView
         android:id="@+id/textView"
@@ -26,12 +25,12 @@
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="58dp"
+        android:layout_marginBottom="98dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="INDIAN STATES AND UNION TERRETORIES"
+        android:text="INDIAN STATES AND UNION TERRITORIES"
         android:textAllCaps="true"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#fff"
         android:textSize="18sp"
         android:textStyle="bold" />
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Indian States</string>
+    <string name="app_name">Indian States and UTs</string>
     <string-array name="india_states">
         <item>Andhra Pradesh</item>
         <item>Arunachal Pradesh</item>
@@ -252,5 +252,25 @@
     <string name="contact_us">Contact Us</string>
     <string name="exit">Exit</string>
     <string name="sort_by">Sort By:</string>
+    <string name="logo_main">LOGO MAIN</string>
+    <string name="indian_states_and_union_territories">Indian States and Union Territories</string>
+    <string name="view_website">View Website</string>
+    <string name="quiz">Quiz</string>
+    <string name="img_sex_ratio">img_sex_ratio</string>
+    <string name="select_a_category_to_start">Select a category to Start</string>
+    <string name="general_knowledge">General Knowledge</string>
+    <string name="capitals">Capitals</string>
+    <string name="area">Area</string>
+    <string name="literacy_rate1">Literacy Rate</string>
+
+
+    //firebase category name
+    <string name="area_fire">area</string>
+    <string name="population_fire">population</string>
+    <string name="generalKnowledge_fire">generalKnowledge</string>
+    <string name="capitals_fire">capitals</string>
+    <string name="literacy_fire">literacyRate</string>
+    <string name="sexRatio_fire">sexRatio</string>
+    <string name="score">Score:</string>
 
 </resources>

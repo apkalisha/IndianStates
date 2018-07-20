@@ -3,10 +3,14 @@ package com.indian.states.capitals.indianstates;
 import java.util.ArrayList;
 
 public class StateDetails {
+
+
+    private String stateName;
     private String area;
     private String capital;
     private String history;
     private ArrayList<String> imageDetails;
+    private ArrayList<String> imageLinks;
     private ArrayList<String> images;
     private String languages;
     private float literacyRate;
@@ -21,11 +25,12 @@ public class StateDetails {
     public StateDetails() {
     }
 
-    public StateDetails(String area, String capital, String history, ArrayList<String> imageDetails, ArrayList<String> images, String languages, float literacyRate, float literacyRateFemale, float literacyRateMale, String population, String regionalDance, int sexRatio, String youTubeVideoLink) {
+    public StateDetails(String area, String capital, String history, ArrayList<String> imageDetails,ArrayList<String> imageLinks, ArrayList<String> images, String languages, float literacyRate, float literacyRateFemale, float literacyRateMale, String population, String regionalDance, int sexRatio, String youTubeVideoLink) {
         this.area = area;
         this.capital = capital;
         this.history = history;
         this.imageDetails = imageDetails;
+        this.imageLinks = imageLinks;
         this.images = images;
         this.languages = languages;
         this.literacyRate = literacyRate;
@@ -36,6 +41,15 @@ public class StateDetails {
         this.sexRatio = sexRatio;
         this.youTubeVideoLink = youTubeVideoLink;
     }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
 
     public String getArea() {
         return area;
@@ -139,5 +153,13 @@ public class StateDetails {
 
     public void setYouTubeVideoLink(String youTubeVideoLink) {
         this.youTubeVideoLink = youTubeVideoLink;
+    }
+
+    public ArrayList<String> getImageLinks() {
+        return imageLinks;
+    }
+
+    public void setImageLinks(ArrayList<String> imageLinks) {
+        this.imageLinks = imageLinks;
     }
 }

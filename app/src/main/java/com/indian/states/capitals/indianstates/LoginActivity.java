@@ -1,6 +1,5 @@
 package com.indian.states.capitals.indianstates;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,15 +26,11 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
     private Button login;
-    private Button join;
     private EditText user;
     private EditText pass;
     ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-    private String username, password;
     private ProgressBar loginProgress;
-    private FirebaseAuth.AuthStateListener authStateListener;
-    private TextView txtForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +38,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         login = findViewById(R.id.login_id);
-        join = findViewById(R.id.join_id);
+        Button join = findViewById(R.id.join_id);
         user = findViewById(R.id.user_id);
         pass = findViewById(R.id.pass_id);
 
 
-        txtForgotPassword = findViewById(R.id.forgotPassword);
+        TextView txtForgotPassword = findViewById(R.id.forgotPassword);
 
         progressDialog = new ProgressDialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -93,26 +89,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void updateUI(View view) {
-        final Dialog myDialog = new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-        TextView txtClose;
-        myDialog.setContentView(R.layout.learnmore);
-        txtClose = myDialog.findViewById(R.id.close_text);
-        txtClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myDialog.dismiss();
-            }
-        });
-        //myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
-    }
-
     private void loginprocess() {
 
 
-        username = user.getText().toString().trim();
-        password = pass.getText().toString().trim();
+        String username = user.getText().toString().trim();
+        String password = pass.getText().toString().trim();
 
         if (TextUtils.isEmpty(username)) {
             Toast.makeText(getApplicationContext(), "Please enter email", Toast.LENGTH_LONG).show();
@@ -122,8 +103,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please enter password", Toast.LENGTH_LONG).show();
             return;
         }
-
-
+        login.setEnabled(false);
         loginProgress.setVisibility(View.VISIBLE);
         firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -138,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 loginProgress.setVisibility(View.INVISIBLE);
+                login.setEnabled(true);
             }
         });
 
