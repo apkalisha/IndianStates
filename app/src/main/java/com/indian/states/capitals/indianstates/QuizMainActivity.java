@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -113,6 +114,8 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
         String selected = v.toString();
 
         countDownTimer.cancel();
+        Log.i("Correct Answer",Questions.questionList.get(index).getAnswer());
+        Log.i("Selected Answer",selected);
         if(Questions.questionList.get(index).getAnswer().equals(selected)) { //still have questions in the list
             //Correct answer chosen
             v.setBackgroundColor(getResources().getColor(R.color.green));
