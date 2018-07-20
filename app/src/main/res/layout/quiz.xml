@@ -21,6 +21,7 @@
             android:src="@drawable/ic_keyboard_arrow_left_black_24dp"/>
 
         <TextView
+            android:id="@+id/quesnotext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -114,14 +115,16 @@
 
 
     </LinearLayout>
+
     <Button
+        android:id="@+id/nextorsubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/buttonstyle"
         android:text="SUBMIT"
-        android:textColor="#fff"
-        android:background="@drawable/buttonstyle"/>
+        android:textColor="#fff" />
 
 </LinearLayout>
 </ScrollView>
