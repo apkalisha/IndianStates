@@ -50,7 +50,14 @@
         <activity
             android:name=".ResetPasswordActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".QuizMainActivity"></activity>
+        <activity
+            android:name=".QuizMainActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".HighScoreActivity"></activity>
     </application>
 
 </manifest>

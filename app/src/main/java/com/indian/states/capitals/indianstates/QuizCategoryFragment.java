@@ -26,8 +26,6 @@ public class QuizCategoryFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //db=FirebaseDatabase.getInstance();
-        //dbref=db.getReference("Quiz");
     }
 
     @Nullable
@@ -35,12 +33,12 @@ public class QuizCategoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         quizFragment = inflater.inflate(R.layout.fragment_quiz, container, false);
-        gk = (CardView) quizFragment.findViewById(R.id.gk_cardview);
-        capitals = (CardView) quizFragment.findViewById(R.id.capitals_cardview);
-        area = (CardView) quizFragment.findViewById(R.id.area_cardview);
-        population = (CardView) quizFragment.findViewById(R.id.population_cardview);
-        literacy = (CardView) quizFragment.findViewById(R.id.lieracyrate_cardview);
-        sex_ratio = (CardView) quizFragment.findViewById(R.id.sexRatio_cardview);
+        gk = quizFragment.findViewById(R.id.gk_cardview);
+        capitals = quizFragment.findViewById(R.id.capitals_cardview);
+        area = quizFragment.findViewById(R.id.area_cardview);
+        population = quizFragment.findViewById(R.id.population_cardview);
+        literacy = quizFragment.findViewById(R.id.lieracyrate_cardview);
+        sex_ratio = quizFragment.findViewById(R.id.sexRatio_cardview);
 
         GK = getString(R.string.generalKnowledge_fire);
         AREA = getString(R.string.area_fire);
@@ -85,11 +83,6 @@ public class QuizCategoryFragment extends Fragment {
                 callQuizActivity(5);
             }
         });
-        //listQuiz=(RecyclerView)quizFragment.findViewById(R.id.id_view_quiz);
-        //listQuiz.setHasFixedSize(true);
-        //layoutManager=new LinearLayoutManager(container.getContext());
-        //listQuiz.setLayoutManager(layoutManager);
-        //loadCategories();
 
         return quizFragment;
     }
@@ -116,34 +109,9 @@ public class QuizCategoryFragment extends Fragment {
                 CategoryName = SEXRATIO;
                 break;
         }
-        Intent intent = new Intent(getContext(), QuizMainActivity.class);
-        intent.putExtra("categoryName",CategoryName);
+        Intent intent = new Intent(getContext(), HighScoreActivity.class);
+        Questions.category = CategoryName;
         startActivity(intent);
     }
 
-  /*  private void loadQues() {
-        adapter=new FirebaseRecyclerAdapter<Quiz, QuizViewHolder>(
-                Quiz.class,
-                R.layout.quiz,
-                QuizViewHolder.class,
-                dbref
-        ) {
-            @Override
-            protected void populateViewHolder(QuizViewHolder viewHolder, final Quiz model, int position) {
-
-                Picasso.get()
-                        .load(model.getImage())
-                        .into(viewHolder.quiz_img);
-
-                viewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(getActivity(),String.format("%s|%s",adapter.getRef(position).getKey(),model.getType()),Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-        };
-        adapter.notifyDataSetChanged();
-        listQuiz.setAdapter(adapter);
-    }  */
 }
