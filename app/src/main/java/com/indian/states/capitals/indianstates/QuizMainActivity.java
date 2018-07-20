@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 public class QuizMainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    final static long INTERVAL = 2000;
-    final static long TIMEOUT = 10000; //10 Sec
+    final static long INTERVAL = 1000;
+    final static long TIMEOUT = 10000;
     int progressValue = 0;
 
     CountDownTimer countDownTimer;
@@ -93,7 +93,7 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onTick(long millisUntilFinished) {
                 progressBar.setProgress(progressValue);
-                //txtTime.setText((int) (millisUntilFinished/1000));
+                txtTime.setText(String.format("%d",(int) (millisUntilFinished/1000)));
                 progressValue++;
 
             }
