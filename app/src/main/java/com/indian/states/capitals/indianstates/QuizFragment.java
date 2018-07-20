@@ -54,29 +54,5 @@ public class QuizFragment extends Fragment{
         return quizFragment;
     }
 
-    private void loadCategories() {
-        adapter=new FirebaseRecyclerAdapter<Quiz, QuizViewHolder>(
-                Quiz.class,
-                R.layout.quiz,
-                QuizViewHolder.class,
-                dbref
-        ) {
-            @Override
-            protected void populateViewHolder(QuizViewHolder viewHolder, final Quiz model, int position) {
 
-                Picasso.get()
-                        .load(model.getImage())
-                        .into(viewHolder.quiz_img);
-
-                viewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(getActivity(),String.format("%s|%s",adapter.getRef(position).getKey(),model.getType()),Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-        };
-        adapter.notifyDataSetChanged();
-        listQuiz.setAdapter(adapter);
-    }
 }
