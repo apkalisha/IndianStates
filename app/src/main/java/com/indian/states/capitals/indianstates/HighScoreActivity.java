@@ -43,9 +43,10 @@ public class HighScoreActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabase = mFirebaseDatabase.getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mDatabase.keepSynced(true);
+        score = findViewById(R.id.highScore);
         getHighScore();
 
-        score = findViewById(R.id.highScore);
+
 
        loadQuestions();
 
