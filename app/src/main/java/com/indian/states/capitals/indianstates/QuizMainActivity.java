@@ -182,7 +182,7 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
             },2000);
         }
 
-        txtScore.setText(String.format("%s%d", getString(R.string.score), score));
+        txtScore.setText(String.format("%s%d", getString(R.string.score), score));//display score
 
 
     }
