@@ -190,11 +190,9 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
     public void setHighScore(){
 
         if(score > mScore) {
-            showDialog();
             mDatabase.child("HighScore").child(category).child("Score").setValue(score).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-
 
                 }
             });
@@ -245,32 +243,6 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
-    public void showDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(QuizMainActivity.this);
-        builder.setMessage("Congratulations, You have set a new High Score !!")
-                .setCancelable(false)
-                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent intent = new Intent(QuizMainActivity.this,HighScoreActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                })
-                .setNegativeButton("Explore States and UTs", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(QuizMainActivity.this,MainActivity.class);
-                        startActivity(intent);
-                        finish();
-
-                    }
-                });
-        AlertDialog alert = builder.create();
-        //Setting the title manually
-        alert.setTitle("Indian States and Capitals Quiz");
-        alert.show();
-
-    }
 
     @Override
     protected void onStop() {
