@@ -3,6 +3,7 @@ package com.indian.states.capitals.indianstates;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -25,8 +26,6 @@ public class HighScoreActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private ValueEventListener valueEventListener;
     private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase mFirebaseDatabase;
     private Integer mScore = 0;
     TextView score;
 
@@ -36,11 +35,13 @@ public class HighScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_high_score);
         Button startBtn = findViewById(R.id.btn_start);
         Button resetBtn = findViewById(R.id.btn_reset);
+        TextView currentScore = findViewById(R.id.txt_current_score);
+        TextView correctAnswers = findViewById(R.id.txt_correct_answers);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Quiz").child(category);
 
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabase = mFirebaseDatabase.getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mDatabase.keepSynced(true);
         score = findViewById(R.id.highScore);
@@ -66,6 +67,19 @@ public class HighScoreActivity extends AppCompatActivity {
                score.setText("0");
            }
        });
+
+       Bundle bundle = this.getIntent().getExtras();
+       if(bundle != null) {
+           String score = String.valueOf(bundle.getInt("SCORE"));
+           String correct = String.valueOf(bundle.getInt("CORRECT"));
+           CardView currentScoreCard = findViewById(R.id.currentScore_card);
+           currentScoreCard.setVisibility(View.VISIBLE);
+
+           currentScore.setText(score);
+           correctAnswers.setText(correct);
+           startBtn.setText(R.string.try_again);
+
+       }
 
     }
 

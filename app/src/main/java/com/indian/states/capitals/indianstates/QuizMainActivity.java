@@ -8,14 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,8 +23,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.HashMap;
 
 import static com.indian.states.capitals.indianstates.Questions.category;
 
@@ -48,8 +44,6 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
 
     //firebase for High Score
     private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase mFirebaseDatabase;
     private  Integer mScore = 0;
 
     @Override
@@ -76,8 +70,8 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
         choiceDBtn.setOnClickListener(this);
 
 
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         mDatabase = mFirebaseDatabase.getReference().child("Users").child(mAuth.getCurrentUser().getUid());
         mDatabase.child("HighScore").child(category);
 
@@ -86,6 +80,8 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
     private void showQuestion(int index) {
 
         if(index < totalQuestions) {
+            txtTime.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
 
             thisQuestion++;
             txtQuestionNum.setText((thisQuestion + "/" + totalQuestions));
@@ -104,41 +100,38 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
             choiceCBtn.setEnabled(true);
             choiceDBtn.setEnabled(true);
 
-            choiceABtn.setText(Questions.questionList.get(index).getChoice1());
-            choiceBBtn.setText(Questions.questionList.get(index).getChoice2());
-            choiceCBtn.setText(Questions.questionList.get(index).getChoice3());
-            choiceDBtn.setText(Questions.questionList.get(index).getChoice4());
+            choiceABtn.setText(Questions.questionList.get(index).getChoice1().trim());
+            choiceBBtn.setText(Questions.questionList.get(index).getChoice2().trim());
+            choiceCBtn.setText(Questions.questionList.get(index).getChoice3().trim());
+            choiceDBtn.setText(Questions.questionList.get(index).getChoice4().trim());
 
             countDownTimer.start();
             //Start timer
         } else{
             //final question
 
-            //Bundle dataSend = new Bundle();
-           // dataSend.putInt("SCORE", score);
-            //dataSend.putInt("TOTAL", totalQuestions);
-            //dataSend.putInt("CORRECT", correctAnswer);
-            //intent.putExtras(dataSend);
             checkIfHighScored();
-                Intent intent = new Intent(QuizMainActivity.this,HighScoreActivity.class);
-                startActivity(intent);
-                finish();
+            Intent intent = new Intent(QuizMainActivity.this,HighScoreActivity.class);
+            Bundle dataSend = new Bundle();
+            dataSend.putInt("SCORE", score);
+            dataSend.putInt("CORRECT", correctAnswer);
+            intent.putExtras(dataSend);
+            startActivity(intent);
+            finish();
 
            // startActivity(intent);
-
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         totalQuestions = 10;
         countDownTimer = new CountDownTimer(TIMEOUT, INTERVAL) {
             @Override
             public void onTick(long millisUntilFinished) {
                 progressBar.setProgress(progressValue);
-                txtTime.setText(String.format("%d",(int) (millisUntilFinished/1000)));
+                txtTime.setText(String.format("%d", (int) (millisUntilFinished / 1000)));
                 progressValue++;
 
             }
@@ -156,16 +149,17 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         Button selectedButton = (Button)v;
         String selected = selectedButton.getText().toString();
-        String correct = Questions.questionList.get(index).getAnswer();
+        String correct = Questions.questionList.get(index).getAnswer().trim();
 
         countDownTimer.cancel();
-        txtTime.setText("0");
+        txtTime.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.INVISIBLE);
         choiceABtn.setEnabled(false);
         choiceBBtn.setEnabled(false);
         choiceCBtn.setEnabled(false);
         choiceDBtn.setEnabled(false);
 
-        if(correct.equals(selected)) { //still have questions in the list
+        if(correct.equals(selected)) {
             //Correct answer chosen
             score += 10;
             selectedButton.setBackground(getResources().getDrawable(R.drawable.green_border));
@@ -195,9 +189,8 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
 
     public void setHighScore(){
 
-        if(score > mScore)
-         {
-             showDialog();
+        if(score > mScore) {
+            showDialog();
             mDatabase.child("HighScore").child(category).child("Score").setValue(score).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -277,5 +270,11 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
         alert.setTitle("Indian States and Capitals Quiz");
         alert.show();
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        countDownTimer.cancel();
     }
 }

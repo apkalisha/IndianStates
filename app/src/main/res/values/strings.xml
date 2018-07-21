@@ -272,5 +272,6 @@
     <string name="literacy_fire">literacyRate</string>
     <string name="sexRatio_fire">sexRatio</string>
     <string name="score">Score:</string>
+    <string name="try_again">Try Again</string>
 
 </resources>
