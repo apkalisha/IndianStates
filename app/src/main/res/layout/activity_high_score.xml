@@ -9,17 +9,31 @@
 
 
     <TextView
+        android:id="@+id/highScore_txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="High Score will be show here"
+        android:text="Your Highest Score is "
         android:textColor="@color/white"
+        android:paddingTop="50dp"
         android:layout_marginTop="50dp"
+        android:layout_margin="16dp"
+        android:textSize="28sp"
+        android:layout_centerHorizontal="true"/>
+    <TextView
+        android:id="@+id/highScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/highScore_txt"
+        android:textColor="@color/white"
+        android:layout_marginTop="80dp"
         android:layout_margin="16dp"
         android:textSize="28sp"/>
 
     <Button
         android:id="@+id/btn_start"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/buttonstyle"
         android:textColor="@color/white"

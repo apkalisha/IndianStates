@@ -3,9 +3,12 @@ package com.indian.states.capitals.indianstates;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +24,11 @@ public class HighScoreActivity extends AppCompatActivity {
 
     private DatabaseReference databaseReference;
     private ValueEventListener valueEventListener;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private Integer mScore = 0;
+    TextView score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +38,44 @@ public class HighScoreActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Quiz").child(category);
 
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabase = mFirebaseDatabase.getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        mDatabase.keepSynced(true);
+        getHighScore();
+
+        score = findViewById(R.id.highScore);
+
        loadQuestions();
 
        startBtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
+
                Intent intent = new Intent(HighScoreActivity.this,QuizMainActivity.class);
                startActivity(intent);
                finish();
            }
        });
 
+    }
+
+    public void getHighScore(){
+        mDatabase.child("HighScore").child(category).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("Score")) {
+                        mScore = dataSnapshot.child("Score").getValue(Integer.class);
+                    score.setText(String.valueOf(mScore));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void loadQuestions() {

@@ -202,8 +202,6 @@ public class DetailActivity extends YouTubeBaseActivity implements YouTubePlayer
 
             }
         });
-
-
     }
 
     private void readDataFromDatabase(final StatesCallback statesCallback) {

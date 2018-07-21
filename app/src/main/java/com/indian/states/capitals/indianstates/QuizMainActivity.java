@@ -1,8 +1,11 @@
 package com.indian.states.capitals.indianstates;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,12 +15,26 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+
+import static com.indian.states.capitals.indianstates.Questions.category;
 
 
 public class QuizMainActivity extends AppCompatActivity implements View.OnClickListener {
 
     final static long INTERVAL = 1000;
-    final static long TIMEOUT = 10000;
+    final static long TIMEOUT = 20000;
     int progressValue = 0;
 
     CountDownTimer countDownTimer;
@@ -28,6 +45,12 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
 
     Button choiceABtn, choiceBBtn, choiceCBtn, choiceDBtn;
     TextView txtScore, txtQuestionNum,txtTime, questionText;
+
+    //firebase for High Score
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private  Integer mScore = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +74,12 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
         choiceBBtn.setOnClickListener(this);
         choiceCBtn.setOnClickListener(this);
         choiceDBtn.setOnClickListener(this);
+
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mDatabase = mFirebaseDatabase.getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        mDatabase.child("HighScore").child(category);
 
 
     }
@@ -84,14 +113,19 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
             //Start timer
         } else{
             //final question
-            Intent intent = new Intent(QuizMainActivity.this,HighScoreActivity.class);
-            Bundle dataSend = new Bundle();
-            dataSend.putInt("SCORE", score);
-            dataSend.putInt("TOTAL", totalQuestions);
-            dataSend.putInt("CORRECT", correctAnswer);
-            intent.putExtras(dataSend);
-            startActivity(intent);
-            finish();
+
+            //Bundle dataSend = new Bundle();
+           // dataSend.putInt("SCORE", score);
+            //dataSend.putInt("TOTAL", totalQuestions);
+            //dataSend.putInt("CORRECT", correctAnswer);
+            //intent.putExtras(dataSend);
+            checkIfHighScored();
+                Intent intent = new Intent(QuizMainActivity.this,HighScoreActivity.class);
+                startActivity(intent);
+                finish();
+
+           // startActivity(intent);
+
         }
     }
 
@@ -156,5 +190,52 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
 
         txtScore.setText(String.format("%s%d", getString(R.string.score), score));
 
+
+    }
+
+    public void setHighScore(){
+
+        if(score > mScore)
+         {
+
+            mDatabase.child("HighScore").child(category).child("Score").setValue(score).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+
+                }
+            });
+
+        }
+    }
+
+    public void checkIfHighScored() {
+
+
+        mDatabase.child("HighScore").child(category).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild("Score")) {
+                    mScore = dataSnapshot.child("Score").getValue(Integer.class);
+                }
+                setHighScore();
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    public void showDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(QuizMainActivity.this);
+        builder.setMessage("Congratulations, You have set a new High Score !!")
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Intent intent = new Intent(QuizMainActivity.this,HighScoreActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+        builder.create();
+        builder.show();
     }
 }
