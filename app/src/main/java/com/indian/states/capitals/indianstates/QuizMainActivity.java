@@ -2,6 +2,7 @@ package com.indian.states.capitals.indianstates;
 
 import android.content.Intent;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,6 +65,15 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
 
             questionText.setText(Questions.questionList.get(index).getQuestion());
 
+            choiceABtn.setBackground(getResources().getDrawable(R.drawable.background_white_border));
+            choiceBBtn.setBackground(getResources().getDrawable(R.drawable.background_white_border));
+            choiceCBtn.setBackground(getResources().getDrawable(R.drawable.background_white_border));
+            choiceDBtn.setBackground(getResources().getDrawable(R.drawable.background_white_border));
+
+            choiceABtn.setEnabled(true);
+            choiceBBtn.setEnabled(true);
+            choiceCBtn.setEnabled(true);
+            choiceDBtn.setEnabled(true);
 
             choiceABtn.setText(Questions.questionList.get(index).getChoice1());
             choiceBBtn.setText(Questions.questionList.get(index).getChoice2());
@@ -112,18 +122,36 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         Button selectedButton = (Button)v;
         String selected = selectedButton.getText().toString();
+        String correct = Questions.questionList.get(index).getAnswer();
 
-        countDownTimer.cancel();//check
-        Log.i("Correct Answer",Questions.questionList.get(index).getAnswer());
-        Log.i("Selected Answer",selected);
-        if(Questions.questionList.get(index).getAnswer().equals(selected)) { //still have questions in the list
+        countDownTimer.cancel();
+        txtTime.setText("0");
+        choiceABtn.setEnabled(false);
+        choiceBBtn.setEnabled(false);
+        choiceCBtn.setEnabled(false);
+        choiceDBtn.setEnabled(false);
+
+        if(correct.equals(selected)) { //still have questions in the list
             //Correct answer chosen
             score += 10;
+            selectedButton.setBackground(getResources().getDrawable(R.drawable.green_border));
             correctAnswer++;
-            showQuestion(++index);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showQuestion(++index);
+                }
+            },3000);
         } else {
             //Wrong answer chosen
-            showQuestion(++index);
+            selectedButton.setBackground(getResources().getDrawable(R.drawable.red_border));
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showQuestion(++index);
+                }
+            },2000);
         }
 
         txtScore.setText(String.format("%s%d", getString(R.string.score), score));
