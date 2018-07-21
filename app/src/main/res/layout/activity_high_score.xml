@@ -37,7 +37,18 @@
         android:layout_height="wrap_content"
         android:background="@drawable/buttonstyle"
         android:textColor="@color/white"
-        android:text="Start"
+        android:text="Start Quiz"
+        android:layout_centerInParent="true"/>
+
+    <Button
+        android:id="@+id/btn_reset"
+        android:layout_marginTop="25dp"
+        android:layout_below="@id/btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/buttonstyle"
+        android:textColor="@color/white"
+        android:text="Reset the Score"
         android:layout_centerInParent="true"/>
 
 </RelativeLayout>

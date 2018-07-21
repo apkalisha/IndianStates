@@ -35,6 +35,7 @@ public class HighScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_high_score);
         Button startBtn = findViewById(R.id.btn_start);
+        Button resetBtn = findViewById(R.id.btn_reset);
 
         databaseReference = FirebaseDatabase.getInstance().getReference().child("Quiz").child(category);
 
@@ -57,11 +58,18 @@ public class HighScoreActivity extends AppCompatActivity {
                finish();
            }
        });
+       resetBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               mDatabase.child("HighScore").child(category).child("Score").removeValue();
+               score.setText("0");
+           }
+       });
 
     }
 
     public void getHighScore(){
-        mDatabase.child("HighScore").child(category).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("HighScore").child(category).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChild("Score")) {
