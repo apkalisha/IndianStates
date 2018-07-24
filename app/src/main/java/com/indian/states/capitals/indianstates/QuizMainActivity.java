@@ -173,6 +173,19 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
         } else {
             //Wrong answer chosen
             selectedButton.setBackground(getResources().getDrawable(R.drawable.red_border));
+            if(correct.equals(choiceABtn.getText().toString())){
+                choiceABtn.setBackground(getResources().getDrawable(R.drawable.green_border));
+            }
+            if(correct.equals(choiceBBtn.getText().toString())){
+                choiceBBtn.setBackground(getResources().getDrawable(R.drawable.green_border));
+            }
+            if(correct.equals(choiceCBtn.getText().toString())){
+                choiceCBtn.setBackground(getResources().getDrawable(R.drawable.green_border));
+            }
+            if(correct.equals(choiceDBtn.getText().toString())){
+                choiceDBtn.setBackground(getResources().getDrawable(R.drawable.green_border));
+            }
+
 
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -198,7 +211,7 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
             });
 
         }
-        else {
+        /*else {
             AlertDialog.Builder builder = new AlertDialog.Builder(QuizMainActivity.this);
             builder.setMessage("Your score:"+score)
                     .setCancelable(false)
@@ -222,7 +235,7 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
             //Setting the title manually
             alert.setTitle("Indian States and Capitals Quiz");
             alert.show();
-        }
+        }*/
     }
 
     public void checkIfHighScored() {
