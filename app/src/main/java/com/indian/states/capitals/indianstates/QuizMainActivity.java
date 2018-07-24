@@ -189,7 +189,7 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
                 public void run() {
                     showQuestion(++index);
                 }
-            },2000);
+            },3000);
         }
 
         txtScore.setText(String.format("%s%d", getString(R.string.score), score));//display score
