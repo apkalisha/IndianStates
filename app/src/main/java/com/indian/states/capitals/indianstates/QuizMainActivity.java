@@ -208,31 +208,6 @@ public class QuizMainActivity extends AppCompatActivity implements View.OnClickL
             });
 
         }
-        else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(QuizMainActivity.this);
-            builder.setMessage("Your score:"+score)
-                    .setCancelable(false)
-                    .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Intent intent = new Intent(QuizMainActivity.this,HighScoreActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }).setNegativeButton("Explore States and UTs", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(QuizMainActivity.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
-
-
-                }
-            });
-            AlertDialog alert = builder.create();
-            //Setting the title manually
-            alert.setTitle("Indian States and Capitals Quiz");
-            alert.show();
-        }
     }
 
     public void checkIfHighScored() {
