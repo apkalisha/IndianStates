@@ -20,7 +20,7 @@
             android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#e67e22"
+            android:background="@color/colorPrimary"
             app:itemIconTint="@drawable/bottom_navigation_colors"
             app:itemTextColor="@drawable/bottom_navigation_colors"
             android:layout_alignParentBottom="true"
