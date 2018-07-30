@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/login"
+            android:background="@color/colorPrimaryDark"
             android:orientation="vertical"
             android:padding="40dp">
 
