@@ -16,7 +16,7 @@ import java.util.List;
 
 public class AboutFragment extends Fragment {
     View aboutFragment;
-    TextView tv1, tv2, tv3, tv4;
+    TextView tv1, tv2, tv3, tv4,tv;
     private String profile;
 
     public static AboutFragment newInstance() {
@@ -33,15 +33,24 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         aboutFragment = inflater.inflate(R.layout.fragment_about, container, false);
+        tv=aboutFragment.findViewById(R.id.about_tv);
         tv1 = aboutFragment.findViewById(R.id.about_tv1);
         tv2 = aboutFragment.findViewById(R.id.about_tv2);
         tv3 = aboutFragment.findViewById(R.id.about_tv3);
         tv4 = aboutFragment.findViewById(R.id.about_tv4);
 
-        tv1.setText("Alisha Saluja");
+        tv.setText("Devender Singh Bohra(Operational Manager)");
+        tv1.setText("Alisha Saluja(Team Supervisor)");
         tv2.setText("Ayush Singh");
         tv3.setText("Prakash Kumar");
         tv4.setText("Kamesh Kumar Singh");
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile = "devender-singh-bohra";
+                openLinkedn(profile);
+            }
+        });
         tv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
