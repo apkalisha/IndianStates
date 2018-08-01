@@ -38,7 +38,7 @@ public class AboutFragment extends Fragment {
         tv2 = aboutFragment.findViewById(R.id.about_tv2);
         tv3 = aboutFragment.findViewById(R.id.about_tv3);
         tv4 = aboutFragment.findViewById(R.id.about_tv4);
-
+//LinkedIn Links
         tv.setText("Devender Singh Bohra(Operational Manager)");
         tv1.setText("Alisha Saluja(Team Supervisor)");
         tv2.setText("Ayush Singh");
