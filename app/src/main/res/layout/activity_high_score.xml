@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"
-                android:text="Your Highest Score is "
+                android:text="@string/your_highest_score_is"
                 android:fontFamily="sans-serif-light"
                 android:textColor="@color/white"
                 android:textSize="28sp" />
@@ -80,7 +80,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Your Score"
+                        android:text="@string/your_score"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
                     <TextView
@@ -105,7 +105,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Correct Answers"
+                        android:text="@string/correct_answers"
                         android:layout_gravity="center"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/buttonstyle"
-                android:text="Start Quiz"
+                android:text="@string/start_quiz"
                 android:textColor="@color/white" />
 
             <Button
@@ -145,7 +145,7 @@
                 android:layout_margin="16dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/buttonstyle"
-                android:text="Reset the Score"
+                android:text="@string/reset_the_score"
                 android:textColor="@color/white" />
         </LinearLayout>
 

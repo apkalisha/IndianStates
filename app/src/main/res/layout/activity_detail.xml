@@ -536,7 +536,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="18sp"
-                        android:text="According to Census 2011"/>
+                        android:text="@string/according_to_census_2011"/>
                 </LinearLayout>
 
             </LinearLayout>

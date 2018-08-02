@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@+id/quiz_logo"
                 android:layout_alignParentTop="true"
-                android:text="1/10"
+                android:text="@string/_1_10"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:textSize="18sp"
@@ -65,7 +65,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginTop="8dp"
                     android:layout_centerHorizontal="true"
-                    android:text="10"
+                    android:text="@string/_10"
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -74,7 +74,7 @@
                 android:id="@+id/txt_score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Score: 0"
+                android:text="@string/score_0"
                 android:textSize="20sp"
                 android:textColor="@color/white"
                 android:layout_marginTop="8dp"
@@ -94,7 +94,7 @@
                     android:id="@+id/question"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Question goes here like what is the capital of Jharkhand?"
+                    android:text="@string/question_goes_here_like_what_is_the_capital_of_jharkhand"
                     android:textColor="@color/white"
                     android:textSize="18sp"/>
 
@@ -103,7 +103,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Option A"
+                    android:text="@string/option_a"
                     android:textColor="@color/white"
                     android:background="@drawable/background_white_border"/>
                 <Button
@@ -111,7 +111,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Option B"
+                    android:text="@string/option_b"
                     android:textColor="@color/white"
                     android:background="@drawable/background_white_border"/>
                 <Button
@@ -119,7 +119,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Option C"
+                    android:text="@string/option_c"
                     android:textColor="@color/white"
                     android:background="@drawable/background_white_border"/>
                 <Button
@@ -127,7 +127,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Option D"
+                    android:text="@string/option_d"
                     android:textColor="@color/white"
                     android:background="@drawable/background_white_border"/>
 

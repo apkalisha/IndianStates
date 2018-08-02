@@ -276,5 +276,22 @@
     <string name="dzone_Intro">We The D-Zone Team believes in providing opportunities to the potential students and creating a healthy,social and patriotic atmosphere . We aim at the simplicity in an highly orgainzed way to provide our users with the Quality Material on different topics of real concern.</string>
     <string name="contibutors">The contributers to this app are:</string>
     <string name="our_mission">OUR MISSION</string>
+    <string name="your_highest_score_is">Your Highest Score is</string>
+    <string name="your_score">Your Score</string>
+    <string name="correct_answers">Correct Answers</string>
+    <string name="start_quiz">Start Quiz</string>
+    <string name="reset_the_score">Reset the Score</string>
+    <string name="_1_10">1/10</string>
+    <string name="_10">10</string>
+    <string name="score_0">Score: 0</string>
+    <string name="question_goes_here_like_what_is_the_capital_of_jharkhand">Question goes here like what is the capital of Jharkhand?</string>
+    <string name="option_a">Option A</string>
+    <string name="option_b">Option B</string>
+    <string name="option_c">Option C</string>
+    <string name="option_d">Option D</string>
+    <string name="register_to_explore_indian_states_and_the_union_territories">REGISTER TO EXPLORE INDIAN STATES AND THE UNION TERRITORIES</string>
+    <string name="settings">Settings</string>
+    <string name="at_the_d_zone_we_strive_for_the_betterment_of_the_available_resources_in_an_organized_and_strategized_way_for_the_overall_development_of_the_users_the_main_focus_here_is_on_the_youth_to_showcase_their_skills_and_develop_themselves_to_be_portrayed_as_a_resource_for_the_nation_we_believe_in_clarity_and_simplicity_we_work_hard_at_the_ground_level_and_there_s_no_ultimate_limit_our_mission_is_to_provide_opportunities_to_each_and_every_hand_equally_and_to_enhance_the_sense_of_patriotism_and_unity_amongst_the_youth_of_our_nation1">At The D Zone, we strive for the betterment of the available resources in an organized and strategized way for the overall development of the users. The main focus here is on the youth to showcase their skills and develop themselves to be portrayed as a resource for the nation. We believe in clarity and simplicity. We work hard at the ground level and there\'s no ultimate limit. Our mission is to provide opportunities to each and every hand equally and to enhance the sense of patriotism and unity amongst the youth of our nation.</string>
+    <string name="according_to_census_2011">According to Census 2011</string>
 
 </resources>

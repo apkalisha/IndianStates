@@ -60,6 +60,12 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()) {
+                    Snackbar snackbar = Snackbar.make(findViewById(R.id.login_activity), "No Internet Connection", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
                 loginprocess();
 
             }

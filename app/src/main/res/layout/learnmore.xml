@@ -38,7 +38,7 @@
         android:textColor="#2d2d2d"
         android:fontFamily="@font/roboto_slab_light"
         android:lineSpacingExtra="4dp"
-        android:text="At The D Zone, we strive for the betterment of the available resources in an organized and strategized way for the overall development of the users. The main focus here is on the youth to showcase their skills and develop themselves to be portrayed as a resource for the nation. We believe in clarity and simplicity. We work hard at the ground level and there's no ultimate limit. Our mission is to provide opportunities to each and every hand equally and to enhance the sense of patriotism and unity amongst the youth of our nation."
+        android:text="@string/at_the_d_zone_we_strive_for_the_betterment_of_the_available_resources_in_an_organized_and_strategized_way_for_the_overall_development_of_the_users_the_main_focus_here_is_on_the_youth_to_showcase_their_skills_and_develop_themselves_to_be_portrayed_as_a_resource_for_the_nation_we_believe_in_clarity_and_simplicity_we_work_hard_at_the_ground_level_and_there_s_no_ultimate_limit_our_mission_is_to_provide_opportunities_to_each_and_every_hand_equally_and_to_enhance_the_sense_of_patriotism_and_unity_amongst_the_youth_of_our_nation1"
         android:textSize="18sp" />
 
 
