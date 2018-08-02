@@ -60,11 +60,25 @@ public class RegisterActivity extends AppCompatActivity {
         regProgress = findViewById(R.id.reg_progress);
 
 
+        //Connectivity Manager
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()) {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.register_activity), "No Internet Connection", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
+
 
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+                if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()) {
+                    Snackbar snackbar = Snackbar.make(findViewById(R.id.register_activity), "No Internet Connection", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
 
                 //To avoid multiple clicks
                 ctr++;
@@ -86,13 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        //Connectivity Manager
-        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()) {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.register_activity), "No Internet Connection", Snackbar.LENGTH_LONG);
-            snackbar.show();
-        }
+
 
         //Hide Automatic Keyboard Popup
 
