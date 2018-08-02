@@ -276,5 +276,13 @@
     <string name="dzone_Intro">We The D-Zone Team believes in providing opportunities to the potential students and creating a healthy,social and patriotic atmosphere . We aim at the simplicity in an highly orgainzed way to provide our users with the Quality Material on different topics of real concern.</string>
     <string name="contibutors">The contributers to this app are:</string>
     <string name="our_mission">OUR MISSION</string>
+    <string name="score_0">Score: 0</string>
+    <string name="_10">10</string>
+    <string name="_1_10">1/10</string>
 
+    <string name="title">Indian States and UTs</string>
+    <string name="shareLink">Hey check this app at playstore: https://play.google.com/store/apps/details?id=com.indian.states.capitals.indianstates</string>
+    <string name="dzoneMail">dzoneassociation@gmail.com</string>
+    <string name="mailTo">mailto</string>
+    <string name="feedback">Feedback</string>
 </resources>

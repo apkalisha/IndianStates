@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                                 //bottomNavigationView.setVisibility(View.VISIBLE);
                                 index = 0;
                                 setDefaultFragment();
-                                setTitle("Indian States and UTs");
+                                setTitle(R.string.title);
                                 bottomNavigationView.setSelectedItemId(R.id.navigation_home);
                                 break;
                             case R.id.nav_about_us:
@@ -157,15 +157,15 @@ public class MainActivity extends AppCompatActivity {
                                 Intent sendIntent = new Intent();
                                 sendIntent.setAction(Intent.ACTION_SEND);
                                 sendIntent.putExtra(Intent.EXTRA_TEXT,
-                                        "Hey check out my app at playstore: https://play.google.com/store/apps/details?id=com.indian.states.capitals.indianstates");
+                                        getString(R.string.shareLink));
                                 sendIntent.setType("text/plain");
                                 startActivity(sendIntent);
-                                Toast.makeText(MainActivity.this,"Share",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this,getString(R.string.share),Toast.LENGTH_SHORT).show();
                                 break;
                             case R.id.nav_contact_use:
                                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                                        "mailto","dzoneassociation@gmail.com", null));
-                                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback");
+                                        getString(R.string.mailTo),getString(R.string.dzoneMail), null));
+                                emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback));
                                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
                                 break;
                             case R.id.nav_exit:
