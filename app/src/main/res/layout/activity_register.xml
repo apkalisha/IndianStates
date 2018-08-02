@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:id="@+id/register_activity"
         tools:context="com.indian.states.capitals.indianstates.RegisterActivity">
 
         <RelativeLayout

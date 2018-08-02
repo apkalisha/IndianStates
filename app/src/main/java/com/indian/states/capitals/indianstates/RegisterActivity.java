@@ -1,9 +1,13 @@
 package com.indian.states.capitals.indianstates;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Patterns;
 import android.view.View;
@@ -81,6 +85,14 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+
+        //Connectivity Manager
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo == null || !networkInfo.isConnected() || !networkInfo.isAvailable()) {
+            Snackbar snackbar = Snackbar.make(findViewById(R.id.register_activity), "No Internet Connection", Snackbar.LENGTH_LONG);
+            snackbar.show();
+        }
 
         //Hide Automatic Keyboard Popup
 
@@ -180,6 +192,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
     }
+
 
 
 }

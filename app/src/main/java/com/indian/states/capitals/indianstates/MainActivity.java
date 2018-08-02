@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                                 Intent sendIntent = new Intent();
                                 sendIntent.setAction(Intent.ACTION_SEND);
                                 sendIntent.putExtra(Intent.EXTRA_TEXT,
-                                        "Hey check out my app at: PUT GOOGLE PLAY LINK OF APP HERE");
+                                        "Hey check out my app at playstore: https://play.google.com/store/apps/details?id=com.indian.states.capitals.indianstates");
                                 sendIntent.setType("text/plain");
                                 startActivity(sendIntent);
                                 Toast.makeText(MainActivity.this,"Share",Toast.LENGTH_SHORT).show();
