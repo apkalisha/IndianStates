@@ -94,7 +94,6 @@
                     android:id="@+id/question"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/question_goes_here_like_what_is_the_capital_of_jharkhand"
                     android:textColor="@color/white"
                     android:textSize="18sp"/>
 
@@ -103,7 +102,6 @@
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/option_a"
                     android:textColor="@color/white"
                     android:background="@drawable/background_white_border"/>
                 <Button
@@ -111,7 +109,6 @@
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/option_b"
                     android:textColor="@color/white"
                     android:background="@drawable/background_white_border"/>
                 <Button
@@ -119,7 +116,6 @@
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/option_c"
                     android:textColor="@color/white"
                     android:background="@drawable/background_white_border"/>
                 <Button
@@ -127,7 +123,6 @@
                     android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/option_d"
                     android:textColor="@color/white"
                     android:background="@drawable/background_white_border"/>
 
