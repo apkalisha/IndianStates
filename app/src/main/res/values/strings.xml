@@ -292,4 +292,13 @@
     <string name="your_score">Your Score</string>
     <string name="your_highest_score_is">Your Highest Score is</string>
     <string name="register_to_explore_indian_states_and_the_union_territories">REGISTER TO EXPLORE INDIAN STATES AND THE UNION TERRITORIES</string>
+    <string name="settings">Settings</string>
+    <string name="reset_your_password">Reset Your Password</string>
+    <string name="indian_states_and_union_territories1">INDIAN STATES AND UNION TERRITORIES</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="learn_more_about_the_cultures_in_various_parts_of_india">Learn more about the cultures in various parts of India</string>
+    <string name="be_incredible_by_exploring_all_about_india">Be Incredible by exploring all about India</string>
+    <string name="explore_the_famous_places_in_each_part_of_the_country">Explore the famous places in each part of the country</string>
+    <string name="find_out_every_little_things_about_indian_states">Find out every little things about Indian States</string>
+    <string name="email">email</string>
 </resources>

@@ -38,7 +38,8 @@
                     android:text="Jharkhand"
                     android:textAlignment="center"
                     android:textSize="18sp"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:layout_marginLeft="16dp" />
         </LinearLayout>
 
             <ImageView
@@ -49,7 +50,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_bookmark_fav"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:layout_marginRight="16dp"
+                android:layout_alignParentRight="true" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 

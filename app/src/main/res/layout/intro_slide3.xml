@@ -43,7 +43,7 @@
         android:paddingLeft="64dp"
         android:paddingRight="64dp"
         android:textSize="16sp"
-        android:text="Explore the famous places in each part of the country "/>
+        android:text="@string/explore_the_famous_places_in_each_part_of_the_country"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="64dp" />

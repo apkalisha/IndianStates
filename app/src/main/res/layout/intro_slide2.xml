@@ -43,7 +43,7 @@
         android:paddingLeft="64dp"
         android:paddingRight="64dp"
         android:textSize="16sp"
-        android:text="Be Incredible by exploring all about India"/>
+        android:text="@string/be_incredible_by_exploring_all_about_india"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="64dp" />

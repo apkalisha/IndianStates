@@ -28,7 +28,7 @@
         android:layout_marginBottom="98dp"
         android:fontFamily="serif"
         android:gravity="center"
-        android:text="INDIAN STATES AND UNION TERRITORIES"
+        android:text="@string/indian_states_and_union_territories1"
         android:textAllCaps="true"
         android:textColor="#fff"
         android:textSize="18sp"

@@ -43,7 +43,7 @@
         android:gravity="center"
         android:paddingLeft="64dp"
         android:paddingRight="64dp"
-        android:text="Learn more about the cultures in various parts of India"
+        android:text="@string/learn_more_about_the_cultures_in_various_parts_of_india"
         android:textColor="#ffffff"
         android:textSize="16sp" />
 

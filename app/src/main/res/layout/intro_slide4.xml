@@ -44,7 +44,7 @@
         android:paddingLeft="64dp"
         android:paddingRight="64dp"
         android:textSize="16sp"
-        android:text="Find out every little things about Indian States"/>
+        android:text="@string/find_out_every_little_things_about_indian_states"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="64dp" />
